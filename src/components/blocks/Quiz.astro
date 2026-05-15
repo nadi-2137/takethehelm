@@ -1,0 +1,151 @@
+---
+interface Question {
+  q: string
+  options: string[]
+  answerIndex: number
+}
+
+interface QuizResult {
+  successTitle?: string
+  successText?: string
+  retryLabel?: string
+}
+
+interface Props {
+  style?: Record<string, string>
+  title?: string
+  questions?: Question[]
+  result?: QuizResult
+}
+
+const { style, title, questions = [], result = {} } = Astro.props
+const defaultStyle = {
+  root: 'ds-section',
+  inner: 'ds-container max-w-[720px]',
+}
+const s = { ...defaultStyle, ...(style ?? {}) }
+const {
+  successTitle = 'Gratulacje!',
+  successText = 'Dobrze znasz lotnictwo.',
+  retryLabel = 'Spróbuj ponownie',
+} = result
+const quizId = `quiz-${Math.random().toString(36).slice(2, 7)}`
+---
+
+<section class={s.root}>
+  <div class={s.inner}>
+    {title && <h2 class="ds-h2 mb-8">{title}</h2>}
+
+    <div id={quizId} class="grid gap-8">
+      {
+        questions.map((q, qi) => (
+          <div
+            class="quiz-question ds-surface border border-[var(--border-default)] rounded-[var(--r-lg)] p-6"
+            data-question={qi}
+            data-answer={q.answerIndex}
+          >
+            <p class="text-[var(--text-strong)] font-semibold mb-4">
+              <span class="text-[var(--amber-600)] mr-2">{qi + 1}.</span>
+              {q.q}
+            </p>
+            <ul class="grid gap-2 list-none m-0 p-0">
+              {q.options.map((opt, oi) => (
+                <li>
+                  <button
+                    class="quiz-option w-full text-left px-4 py-3 rounded-[var(--r-md)] border border-[var(--border-default)] text-[var(--text-default)] text-sm hover:border-[var(--amber-500)] hover:text-[var(--text-strong)] transition-all"
+                    data-index={oi}
+                  >
+                    {opt}
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <p class="quiz-feedback hidden mt-3 text-sm font-medium" />
+          </div>
+        ))
+      }
+    </div>
+
+    <div
+      id={`${quizId}-result`}
+      class="hidden mt-8 text-center bg-[var(--amber-50)] border border-[var(--amber-200)] rounded-[var(--r-lg)] p-8"
+    >
+      <p class="text-2xl font-bold text-[var(--text-strong)] mb-2">{successTitle}</p>
+      <p class="text-[var(--text-default)] mb-6">{successText}</p>
+      <button id={`${quizId}-retry`} class="ds-btn ds-btn-primary">{retryLabel}</button>
+    </div>
+  </div>
+</section>
+
+<script is:inline define:vars={{ quizId, totalQuestions: questions.length }}>
+  const container = document.getElementById(quizId)
+  const resultEl = document.getElementById(`${quizId}-result`)
+  const retryBtn = document.getElementById(`${quizId}-retry`)
+  if (!container || !resultEl || !retryBtn) return
+
+  let answered = 0
+
+  container.addEventListener('click', (e) => {
+    const btn = e.target.closest('.quiz-option')
+    if (!btn) return
+    const questionEl = btn.closest('.quiz-question')
+    if (!questionEl || questionEl.dataset.done) return
+
+    const correctIndex = parseInt(questionEl.dataset.answer, 10)
+    const chosenIndex = parseInt(btn.dataset.index, 10)
+    const isCorrect = chosenIndex === correctIndex
+
+    questionEl.dataset.done = '1'
+    const feedback = questionEl.querySelector('.quiz-feedback')
+
+    // Style all options
+    questionEl.querySelectorAll('.quiz-option').forEach((b, i) => {
+      b.disabled = true
+      if (i === correctIndex) {
+        b.classList.add('border-emerald-500', 'text-emerald-700', 'bg-emerald-50')
+      } else if (i === chosenIndex && !isCorrect) {
+        b.classList.add('border-red-500', 'text-red-700', 'bg-red-50')
+      }
+    })
+
+    if (feedback) {
+      feedback.classList.remove('hidden')
+      feedback.textContent = isCorrect
+        ? '✓ Dobrze!'
+        : `✗ Poprawna odpowiedź: ${questionEl.querySelectorAll('.quiz-option')[correctIndex]?.textContent?.trim()}`
+      feedback.classList.add(isCorrect ? 'text-emerald-700' : 'text-red-700')
+    }
+
+    answered++
+    if (answered >= totalQuestions) {
+      resultEl.classList.remove('hidden')
+      resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+    }
+  })
+
+  retryBtn.addEventListener('click', () => {
+    answered = 0
+    resultEl.classList.add('hidden')
+    container.querySelectorAll('.quiz-question').forEach((qEl) => {
+      delete qEl.dataset.done
+      qEl.querySelectorAll('.quiz-option').forEach((b) => {
+        b.disabled = false
+        b.classList.remove(
+          'border-emerald-500',
+          'text-emerald-700',
+          'bg-emerald-50',
+          'border-red-500',
+          'text-red-700',
+          'bg-red-50'
+        )
+      })
+      const fb = qEl.querySelector('.quiz-feedback')
+      if (fb) {
+        fb.classList.add('hidden')
+        fb.classList.remove('text-emerald-700', 'text-red-700')
+        fb.textContent = ''
+      }
+    })
+    container.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  })
+</script>

@@ -1,0 +1,52 @@
+---
+interface Props {
+  style?: Record<string, string>
+  title?: string
+  columns?: string[]
+  rows?: string[][]
+}
+
+const { style, title = '', columns = [], rows = [] } = Astro.props
+const defaultStyle = {
+  root: 'ds-section',
+  inner: 'ds-container max-w-[920px]',
+  title: 'ds-h2 mb-4',
+  wrap: 'ds-surface overflow-x-auto',
+  table: 'w-full text-left',
+  th: 'text-sm font-semibold text-[var(--text-strong)] border-b border-[var(--border-default)] p-4',
+  td: 'text-sm text-[var(--text-default)] border-b border-[var(--border-subtle)] p-4',
+}
+const s = { ...defaultStyle, ...(style ?? {}) }
+---
+
+<section class={s.root}>
+  <div class={s.inner}>
+    {title && <h2 class={s.title}>{title}</h2>}
+    <div class={s.wrap}>
+      <table class={s.table}>
+        <thead>
+          <tr>
+            {
+              columns.map((col) => (
+                <th scope="col" class={s.th}>
+                  {col}
+                </th>
+              ))
+            }
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map((row) => (
+              <tr>
+                {row.map((cell) => (
+                  <td class={s.td}>{cell}</td>
+                ))}
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

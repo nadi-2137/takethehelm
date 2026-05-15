@@ -1,0 +1,112 @@
+---
+import { images } from '@/lib/images'
+
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import SectionNavCards from '../../components/blocks/SectionNavCards.astro'
+import Timeline from '../../components/blocks/Timeline.astro'
+import FactsRow from '../../components/blocks/FactsRow.astro'
+import Prose from '../../components/blocks/Prose.astro'
+import SplitCTA from '../../components/blocks/SplitCTA.astro'
+import Footer from '../../components/blocks/Footer.astro'
+
+export const pageMeta = {
+  title: 'Kariera pilotki',
+  description: 'Ścieżka edukacji, szkolenia, licencje i rozwój kariery pilotki.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Wyżej niż szklany sufit"
+    subtitle="Droga od pierwszych kroków do kabiny samolotu pasażerskiego."
+    image={images.topic.career.becomePilot}
+  />
+  <SectionNavCards
+    title="Przewodnik po karierze"
+    cards={[
+      {
+        title: 'Jak zostać pilotką',
+        subtitle: 'Kroki i plan działania',
+        href: 'kariera/jak-zostac/',
+        icon: 'route',
+      },
+      {
+        title: 'Szkolenia',
+        subtitle: 'Teoria + praktyka + symulatory',
+        href: 'kariera/szkolenia/',
+        icon: 'graduationCap',
+      },
+      {
+        title: 'Licencje',
+        subtitle: 'PPL / CPL / ATPL',
+        href: 'kariera/licencje/',
+        icon: 'idCard',
+      },
+      {
+        title: 'Umiejętności',
+        subtitle: 'Co jest kluczowe',
+        href: 'kariera/umiejetnosci/',
+        icon: 'sparkles',
+      },
+    ]}
+  />
+  <Timeline
+    variant="arrowSteps"
+    title="Droga w skrócie"
+    steps={[
+      {
+        label: 'Podstawy',
+      },
+      {
+        label: 'Szkolenie',
+      },
+      {
+        label: 'Licencje',
+      },
+      {
+        label: 'Doświadczenie',
+      },
+    ]}
+    cta={{
+      label: 'Zobacz szczegóły',
+      href: 'kariera/jak-zostac/',
+    }}
+  />
+  <FactsRow
+    title="Co pomaga w tej drodze?"
+    items={[
+      { icon: 'world', label: 'Język angielski — standard w lotnictwie' },
+      { icon: 'check', label: 'Systematyczność — nawyki i procedury' },
+      { icon: 'users', label: 'Współpraca — praca w załodze i z ATC' },
+    ]}
+  />
+  <Prose
+    title="Dla kogo jest ten dział?"
+    lead="Niezależnie od etapu, ten dział pomaga przejść od ogólnego zainteresowania do konkretnego planu działania."
+    sections={[
+      {
+        h: 'Dla uczennic i studentek',
+        p: 'Jeśli dopiero rozważasz lotnictwo, zacznij od „Jak zostać pilotką” i „Checklisty kandydata”. To najszybsza droga do uporządkowania pierwszych kroków.',
+      },
+      {
+        h: 'Dla osób już zdecydowanych',
+        p: 'Jeśli chcesz przejść do działania, skup się na stronach „Szkolenia” i „Licencje”. Zobaczysz pełną sekwencję etapów i wymagania praktyczne.',
+      },
+      {
+        h: 'Dla osób w trakcie nauki',
+        p: 'Jeśli już zaczęłaś szkolenie, strona „Umiejętności” pomoże Ci lepiej trenować obszary, które realnie decydują o jakości pracy w kokpicie.',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Zacznij od planu"
+    subtitle="Najprościej: poznaj kroki, zobacz szkolenia, zrozum licencje — i wiesz, jak wygląda cała ścieżka."
+    image={images.topic.career.becomePilot}
+    action={{ label: 'Jak zostać pilotką', href: 'kariera/jak-zostac/' }}
+  />
+  <Footer />
+</BaseLayout>

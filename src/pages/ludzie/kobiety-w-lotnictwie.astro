@@ -1,0 +1,149 @@
+---
+import { images } from '@/lib/images'
+
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import StoryCards from '../../components/blocks/StoryCards.astro'
+import Checklist from '../../components/blocks/Checklist.astro'
+import QuoteCallout from '../../components/blocks/QuoteCallout.astro'
+import FactsRow from '../../components/blocks/FactsRow.astro'
+import Prose from '../../components/blocks/Prose.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import SplitCTA from '../../components/blocks/SplitCTA.astro'
+import ImageCardGrid from '../../components/blocks/ImageCardGrid.astro'
+import Footer from '../../components/blocks/Footer.astro'
+
+export const pageMeta = {
+  title: 'Kobiety w lotnictwie',
+  description:
+    'Jak wygląda droga kobiet do kokpitu dziś: kompetencje, bariery i realne sposoby wsparcia.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Ludzie"
+    subtitle="Coraz więcej kobiet wybiera lotnictwo zawodowe. Zobacz, co naprawdę pomaga w tej drodze."
+    image={images.topic.people.womenInAviation}
+  />
+  <StoryCards
+    title="Trzy perspektywy"
+    cards={[
+      {
+        title: 'Dziedzictwo pionierek',
+        subtitle: 'Skąd zaczęła się zmiana',
+        image: images.people.pioneer01,
+        href: '#pionierki',
+      },
+      {
+        title: 'Codzienność w kokpicie',
+        subtitle: 'Współczesna praca i standardy',
+        image: images.topic.people.womenInAviationCard,
+        href: '#wspolczesnosc',
+      },
+      {
+        title: 'Droga do zawodu',
+        subtitle: 'Edukacja, trening, konsekwencja',
+        image: images.topic.profession.pilotJob,
+        href: '#dlaczego',
+      },
+    ]}
+  />
+  <Checklist
+    title="Co realnie pomaga przełamywać stereotypy?"
+    items={[
+      'Rozmawiaj o kompetencjach i standardach pracy, nie o stereotypach.',
+      'Pokazuj konkretne ścieżki wejścia do zawodu (nauka, szkolenie, licencje).',
+      'Buduj widoczność mentorek i ekspertek w lotnictwie.',
+      'Wspieraj dziewczyny w przedmiotach technicznych i języku angielskim.',
+      'Traktuj lotnictwo jako zawód zespołowy, oparty na procedurach i odpowiedzialności.',
+    ]}
+  />
+  <QuoteCallout
+    quote="W lotnictwie liczy się nie to, kim jesteś, tylko jak pracujesz: procedury, komunikacja, decyzje."
+    by="Perspektywa kultury bezpieczeństwa"
+  />
+  <FactsRow
+    title="Najważniejsze kompetencje w kokpicie"
+    items={[
+      {
+        icon: 'shield',
+        label: 'Podejmowanie decyzji pod presją i odpowiedzialność za bezpieczeństwo',
+      },
+      { icon: 'users', label: 'Komunikacja i współpraca w załodze (CRM)' },
+      { icon: 'cpu', label: 'Biegłość techniczna i ciągłe doskonalenie' },
+    ]}
+  />
+  <Prose
+    variant="cards"
+    title="Jak wygląda ta droga w praktyce"
+    lead="Za każdą historią sukcesu stoi ten sam fundament: nauka, trening, wsparcie i konsekwencja."
+    sections={[
+      {
+        id: 'pionierki',
+        h: 'Dziedzictwo pionierek',
+        p: 'Pionierki lotnictwa udowodniły, że ograniczenia społeczne można przełamywać kompetencjami i wytrwałością. Ich historie są ważnym punktem odniesienia dla kolejnych pokoleń.',
+      },
+      {
+        id: 'wspolczesnosc',
+        h: 'Współczesność w kokpicie',
+        p: 'Dziś liczy się przede wszystkim standard operacyjny: komunikacja, procedury, CRM i odpowiedzialność. Zespoły lotnicze pracują według tych samych wymagań niezależnie od płci.',
+      },
+      {
+        id: 'dlaczego',
+        h: 'Dlaczego warto iść tą ścieżką',
+        p: 'Lotnictwo łączy technologię, rozwój osobisty i realny wpływ na bezpieczeństwo innych. To zawód wymagający, ale dający satysfakcję i jasną ścieżkę kompetencyjną. Coraz więcej szkół i aeroklubów prowadzi działania mentorskie, które ułatwiają start.',
+      },
+    ]}
+  />
+  <FAQ
+    title="FAQ: kobiety w lotnictwie"
+    items={[
+      {
+        q: 'Czy droga do kokpitu różni się dla kobiet i mężczyzn?',
+        a: 'Nie. Wymagania szkoleniowe, medyczne i licencyjne są takie same. O sukcesie decydują przygotowanie, systematyczność i umiejętności operacyjne.',
+      },
+      {
+        q: 'Co najbardziej pomaga na starcie?',
+        a: 'Mentoring, dobra organizacja nauki, kontakt ze środowiskiem lotniczym i regularne budowanie kompetencji technicznych oraz językowych.',
+      },
+      {
+        q: 'Jak wspierać więcej dziewczyn zainteresowanych lotnictwem?',
+        a: 'Pokazywać realne role modelek, mówić o konkretnych ścieżkach szkolenia i odczarowywać stereotypy przez rzetelną edukację.',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Chcesz zacząć swoją drogę?"
+    subtitle="Zobacz plan krok po kroku: edukacja, szkolenie, licencje i pierwsze doświadczenia."
+    image={images.topic.career.becomePilot}
+    action={{ label: 'Jak zostać pilotką', href: 'kariera/jak-zostac/' }}
+  />
+  <ImageCardGrid
+    title="Następny krok"
+    cards={[
+      {
+        title: 'Pionierki',
+        image: images.stories.one,
+        href: 'ludzie/pionierki/',
+        icon: 'sparkles',
+      },
+      {
+        title: 'Jak zostać pilotką',
+        image: images.topic.career.becomePilot,
+        href: 'kariera/jak-zostac/',
+        icon: 'route',
+      },
+      {
+        title: 'Zawód przyszłości: pilot',
+        image: images.topic.profession.whoIsPilot,
+        href: 'zawod/zawod-przyszlosci/',
+        icon: 'rocket',
+      },
+    ]}
+  />
+  <Footer />
+</BaseLayout>

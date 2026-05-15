@@ -1,0 +1,56 @@
+---
+interface Section {
+  id?: string
+  h: string
+  p: string
+}
+
+interface Props {
+  variant?: 'plain' | 'cards'
+  style?: Record<string, string>
+  title?: string
+  lead?: string
+  sections?: Section[]
+}
+
+const { variant = 'plain', style, title = '', lead = '', sections = [] } = Astro.props
+
+const styleByVariant: Record<string, Record<string, string>> = {
+  plain: {
+    root: 'ds-section',
+    inner: 'ds-container max-w-[920px]',
+    title: 'ds-h2 mb-3',
+    lead: 'ds-muted mb-6',
+    section: 'grid gap-2 mb-6',
+    h: 'text-[18px] font-semibold text-[var(--text-strong)]',
+    p: 'text-[var(--text-default)] leading-7',
+  },
+  cards: {
+    root: 'ds-section',
+    inner: 'ds-container max-w-[980px]',
+    title: 'ds-h2 mb-3',
+    lead: 'ds-muted mb-6',
+    section:
+      'ds-surface border border-[var(--border-default)] rounded-[var(--r-lg)] p-5 md:p-6 grid gap-2 mb-4',
+    h: 'text-[18px] font-semibold text-[var(--text-strong)]',
+    p: 'text-[var(--text-default)] leading-7',
+  },
+}
+
+const s = { ...(styleByVariant[variant] ?? styleByVariant.plain), ...(style ?? {}) }
+---
+
+<section class={s.root}>
+  <div class={s.inner}>
+    {title && <h2 class={s.title}>{title}</h2>}
+    {lead && <p class={s.lead}>{lead}</p>}
+    {
+      sections.map((sec) => (
+        <div class={s.section} id={sec.id}>
+          <h3 class={s.h}>{sec.h}</h3>
+          <p class={s.p}>{sec.p}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>

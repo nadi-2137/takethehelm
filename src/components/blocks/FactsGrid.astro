@@ -1,0 +1,51 @@
+---
+interface Item {
+  icon: string
+  label: string
+}
+
+interface Props {
+  style?: Record<string, string>
+  title?: string
+  items?: Item[]
+}
+
+const { style, title = '', items = [] } = Astro.props
+const defaultStyle = {
+  root: 'ds-section',
+  inner: 'ds-container',
+  title: 'ds-h2 mb-8',
+  grid: 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6',
+  item: 'ds-surface p-6 flex gap-3 items-start',
+}
+const s = { ...defaultStyle, ...(style ?? {}) }
+const iconMap: Record<string, string> = {
+  altitude: '⬆️',
+  speed: '⚡',
+  thermometer: '🌡️',
+  radio: '📡',
+  shield: '🛡️',
+  clock: '⏱️',
+  plane: '✈️',
+  cloud: '☁️',
+  cpu: '🧠',
+}
+---
+
+<section class={s.root}>
+  <div class={s.inner}>
+    {title && <h2 class={s.title}>{title}</h2>}
+    <div class={s.grid}>
+      {
+        items.map((item) => (
+          <div class={s.item}>
+            <div class="ds-iconbox shrink-0">
+              <span class="text-[20px] leading-none">{iconMap[item.icon] ?? '✈️'}</span>
+            </div>
+            <p class="font-medium text-[var(--text-primary)]">{item.label}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

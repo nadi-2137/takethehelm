@@ -1,0 +1,50 @@
+---
+interface Props {
+  style?: Record<string, string>
+  title?: string
+  items?: string[]
+}
+
+const { style, title = '', items = [] } = Astro.props
+const defaultStyle = {
+  root: 'ds-section',
+  inner: 'ds-container',
+  title: 'ds-h2 mb-4',
+  list: 'grid gap-3',
+  item: 'flex gap-3 items-start ds-surface-muted rounded-[var(--r-md)] border border-[var(--border-default)] p-4',
+  icon: 'mt-[2px]',
+}
+const s = { ...defaultStyle, ...(style ?? {}) }
+---
+
+<section class={s.root}>
+  <div class={s.inner}>
+    {title && <h2 class={s.title}>{title}</h2>}
+    <ul class={s.list} role="list">
+      {
+        items.map((item) => (
+          <li class={s.item}>
+            <span
+              class="w-6 h-6 rounded-full bg-[var(--amber-500)] flex items-center justify-center shrink-0 mt-0.5"
+              aria-hidden="true"
+            >
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+                fill="none"
+                stroke="white"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="2,6 5,9 10,3" />
+              </svg>
+            </span>
+            <span class="text-[var(--text-default)]">{item}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

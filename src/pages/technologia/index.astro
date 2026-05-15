@@ -1,0 +1,133 @@
+---
+import { images } from '@/lib/images'
+
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import SectionNavCards from '../../components/blocks/SectionNavCards.astro'
+import ImageCardGrid from '../../components/blocks/ImageCardGrid.astro'
+import FeatureSection from '../../components/blocks/FeatureSection.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import SplitCTA from '../../components/blocks/SplitCTA.astro'
+import Footer from '../../components/blocks/Footer.astro'
+
+export const pageMeta = {
+  title: 'Technologia w lotnictwie',
+  description: 'Kokpit, autopilot, nawigacja i bezpieczeństwo — jak technologia wspiera pilota.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Wyżej niż szklany sufit"
+    subtitle="Nowoczesny kokpit to komputerowe centrum dowodzenia — ale decyzje nadal należą do pilota."
+    image={{ ...images.topic.technology.cockpit, position: 'center center' }}
+  />
+  <SectionNavCards
+    title="W tym dziale"
+    cards={[
+      {
+        title: 'Kokpit',
+        subtitle: 'Ekrany, wskaźniki, ergonomia',
+        href: 'technologia/kokpit/',
+        icon: 'monitor',
+      },
+      {
+        title: 'Autopilot',
+        subtitle: 'Wsparcie, nie zamiennik',
+        href: 'technologia/autopilot/',
+        icon: 'settings',
+      },
+      {
+        title: 'Nawigacja',
+        subtitle: 'Trasa, procedury, ATC',
+        href: 'technologia/nawigacja/',
+        icon: 'map',
+      },
+      {
+        title: 'Bezpieczeństwo',
+        subtitle: 'Redundancja i standardy',
+        href: 'technologia/bezpieczenstwo/',
+        icon: 'shield',
+      },
+    ]}
+  />
+  <ImageCardGrid
+    layout="grid4"
+    title="Najważniejsze obszary"
+    cards={[
+      {
+        title: 'Kokpit samolotu',
+        image: images.topic.technology.cockpitCard,
+        href: 'technologia/kokpit/',
+        icon: 'monitor',
+      },
+      {
+        title: 'Systemy nawigacji',
+        image: images.topic.technology.navigation,
+        href: 'technologia/nawigacja/',
+        icon: 'map',
+      },
+      {
+        title: 'Autopilot',
+        image: images.topic.technology.autopilot,
+        href: 'technologia/autopilot/',
+        icon: 'settings',
+      },
+      {
+        title: 'Bezpieczeństwo lotów',
+        image: images.topic.technology.safety,
+        imagePosition: 'center 20%',
+        href: 'technologia/bezpieczenstwo/',
+        icon: 'shield',
+      },
+    ]}
+  />
+  <FeatureSection
+    title="Dlaczego technologia jest tak ważna?"
+    lead="Systemy pokładowe zwiększają świadomość sytuacyjną i pomagają podejmować lepsze decyzje — szczególnie w złożonych warunkach."
+    features={[
+      {
+        title: 'Świadomość sytuacyjna',
+        text: 'Ekrany avioniki pokazują parametry lotu, nawigację i informacje potrzebne do decyzji.',
+        icon: 'eye',
+      },
+      {
+        title: 'Automatyzacja rutyny',
+        text: 'Autopilot wspiera utrzymanie parametrów lotu, ale nie zwalnia z nadzoru.',
+        icon: 'settings',
+      },
+      {
+        title: 'Bezpieczeństwo systemów',
+        text: 'Redundancja i procedury minimalizują ryzyko — lotnictwo uczy się na danych i standardach.',
+        icon: 'shield',
+      },
+    ]}
+  />
+  <FAQ
+    title="FAQ: technologia w praktyce lotu"
+    items={[
+      {
+        q: 'Czy autopilot oznacza, że pilot nie jest potrzebny?',
+        a: 'Nie. Systemy pomagają w rutynie, ale decyzje i odpowiedzialność zawsze są po stronie załogi.',
+      },
+      {
+        q: 'Po co tyle ekranów w kokpicie?',
+        a: 'Żeby szybciej i czytelniej pokazać to, co ważne: parametry lotu, nawigację i sytuację operacyjną.',
+      },
+      {
+        q: 'Co najbardziej wpływa na bezpieczeństwo?',
+        a: 'Połączenie: technologia + procedury + wyszkolenie i praca zespołowa.',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Zobacz technologię „w akcji”"
+    subtitle="W galerii znajdziesz zdjęcia kokpitu, samolotów i lotnisk — łatwiej wtedy wyobrazić sobie, jak wygląda praca pilota."
+    image={images.site.gallery}
+    action={{ label: 'Przejdź do galerii', href: 'galeria/' }}
+  />
+  <Footer />
+</BaseLayout>

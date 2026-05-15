@@ -1,0 +1,264 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Navbar from '../components/blocks/Navbar.astro'
+import PageHero from '../components/blocks/PageHero.astro'
+import SectionNavCards from '../components/blocks/SectionNavCards.astro'
+import MediaGallery from '../components/blocks/MediaGallery.astro'
+import Checklist from '../components/blocks/Checklist.astro'
+import Prose from '../components/blocks/Prose.astro'
+import FactsRow from '../components/blocks/FactsRow.astro'
+import SplitCTA from '../components/blocks/SplitCTA.astro'
+import ImageCardGrid from '../components/blocks/ImageCardGrid.astro'
+import FAQ from '../components/blocks/FAQ.astro'
+import Footer from '../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Galeria',
+  description: 'Samoloty, kokpit, lotniska — zdjęcia i inspiracje.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Wyżej niż szklany sufit"
+    subtitle="Zobacz lotnictwo z bliska: samoloty, kokpit i lotniska."
+    image={images.site.galleryCover}
+  />
+  <SectionNavCards
+    title="Kategorie"
+    cards={[
+      {
+        title: 'Samoloty',
+        subtitle: 'Pasażerskie, cargo, specjalistyczne',
+        href: '#samoloty',
+        icon: 'plane',
+      },
+      {
+        title: 'Kokpit',
+        subtitle: 'Glass cockpit i instrumenty',
+        href: '#kokpit',
+        icon: 'monitor',
+      },
+      {
+        title: 'Lotniska',
+        subtitle: 'Pas, terminal, operacje naziemne',
+        href: '#lotniska',
+        icon: 'mapPin',
+      },
+      { title: 'Technologia', subtitle: 'Poznaj systemy', href: 'technologia/', icon: 'cpu' },
+    ]}
+  />
+  <Prose
+    variant="cards"
+    title="Jak czytać tę galerię"
+    lead="To nie tylko zdjęcia: każda kategoria pokazuje inny fragment świata lotnictwa i pomaga osadzić teorię w praktyce."
+    sections={[
+      {
+        id: 'samoloty',
+        h: 'Samoloty',
+        p: 'Zwróć uwagę na różnice konstrukcyjne i przeznaczenie maszyn: loty pasażerskie, cargo czy operacje specjalistyczne mają inne wymagania operacyjne.',
+      },
+      {
+        id: 'kokpit',
+        h: 'Kokpit',
+        p: 'W tej kategorii najlepiej widać, jak pracują systemy pokładowe i dlaczego załoga musi stale łączyć dane z różnych ekranów i procedur.',
+      },
+      {
+        id: 'lotniska',
+        h: 'Lotniska',
+        p: 'Pas startowy, płyta i terminal tworzą środowisko operacyjne, w którym decyzje pilota i kontrolera muszą być skoordynowane co do sekundy.',
+      },
+    ]}
+  />
+  <MediaGallery
+    tabs={[
+      { label: 'Samoloty', key: 'planes' },
+      { label: 'Kokpit', key: 'cockpit' },
+      { label: 'Lotniska', key: 'airports' },
+    ]}
+    items={[
+      {
+        image: images.gallery.aircraftPassenger,
+        tag: 'planes',
+        caption:
+          'Samolot pasażerski dalekiego zasięgu. Takie maszyny optymalizuje się pod bezpieczeństwo, ekonomię i komfort lotu.',
+      },
+      {
+        image: images.gallery.aircraftCargo,
+        tag: 'planes',
+        caption:
+          'Lot cargo ma inną logistykę niż rejs pasażerski: liczy się masa ładunku, balans i precyzyjny harmonogram naziemny.',
+      },
+      {
+        image: images.roles.airline,
+        tag: 'planes',
+        caption:
+          'Postój przy terminalu to intensywna koordynacja zespołów: załoga, obsługa naziemna, tankowanie i przygotowanie rejsu.',
+      },
+      {
+        image: images.roles.military,
+        tag: 'planes',
+        caption:
+          'Lotnictwo wojskowe działa w innym profilu misji, ale fundamenty pilotażu, procedur i bezpieczeństwa pozostają wspólne.',
+      },
+      {
+        image: images.roles.rescue,
+        tag: 'planes',
+        caption:
+          'Loty ratownicze wymagają błyskawicznej gotowości i świetnej koordynacji załogi z zespołami naziemnymi.',
+      },
+      {
+        image: images.roles.fire,
+        tag: 'planes',
+        caption:
+          'Operacje gaśnicze to przykład lotnictwa specjalistycznego, gdzie czas reakcji i precyzja wykonania mają kluczowe znaczenie.',
+      },
+      {
+        image: images.roles.heli,
+        tag: 'planes',
+        caption:
+          'Śmigłowce pracują tam, gdzie potrzebna jest elastyczność i możliwość lądowania w trudniejszych warunkach terenowych.',
+      },
+      {
+        image: images.gallery.cockpitGlass,
+        tag: 'cockpit',
+        caption:
+          'Glass cockpit łączy dane z wielu systemów w jednym miejscu, dzięki czemu załoga szybciej ocenia sytuację operacyjną.',
+      },
+      {
+        image: images.gallery.cockpitControls,
+        tag: 'cockpit',
+        caption:
+          'Każdy przełącznik ma zdefiniowaną funkcję proceduralną. Dlatego checklisty i standardowe callouty są tak ważne.',
+      },
+      {
+        image: images.topic.technology.autopilotPanel,
+        tag: 'cockpit',
+        caption:
+          'Autopilot wspiera pilota, ale go nie zastepuje. Zaloga stale monitoruje tryby pracy i gotowosc do przejecia sterowania.',
+      },
+      {
+        image: images.topic.technology.navigationPanel,
+        tag: 'cockpit',
+        caption:
+          'Systemy nawigacji integruja plan lotu, pozycje i ograniczenia przestrzeni powietrznej, pomagajac utrzymac bezpieczny profil trasy.',
+      },
+      {
+        image: images.topic.technology.weatherRadarPanel,
+        tag: 'cockpit',
+        caption:
+          'Radar pogodowy pomaga omijac strefy opadow i burz, zanim staną się zagrozeniem operacyjnym.',
+      },
+      {
+        image: images.topic.technology.safetyPanel,
+        tag: 'cockpit',
+        caption:
+          'Widoki systemow bezpieczenstwa przypominaja, ze najwazniejsza decyzja w kokpicie to decyzja przewidywalna i zgodna z procedura.',
+      },
+      {
+        image: images.topic.technology.cockpit,
+        tag: 'cockpit',
+        caption:
+          'Nowoczesny kokpit łączy ergonomię pracy z czytelną prezentacją danych potrzebnych do podejmowania decyzji.',
+      },
+      {
+        image: images.gallery.airportRunway,
+        tag: 'airports',
+        caption:
+          'Pas startowy to strefa krytyczna operacyjnie: kluczowe są procedury wejścia, separacji i koordynacji z kontrolą ruchu.',
+      },
+      {
+        image: images.gallery.airportTerminal,
+        tag: 'airports',
+        caption:
+          'Terminal i płyta lotniska pokazują skalę operacji. Każde opóźnienie na ziemi wpływa na punktualność całej siatki połączeń.',
+      },
+      {
+        image: images.backgrounds.bgAirportNight,
+        tag: 'airports',
+        caption:
+          'Operacje nocne opieraja sie na precyzji swiatel nawigacyjnych, procedur i dyscyplinie pracy zalogi.',
+      },
+      {
+        image: images.people.atc,
+        tag: 'airports',
+        caption:
+          'Wieza kontroli lotow i zespoly naziemne wspoltworza bezpieczny rytm operacji lotniskowych.',
+      },
+      {
+        image: images.people.pilotByAircraft,
+        tag: 'airports',
+        caption:
+          'Przygotowanie do lotu zaczyna się na ziemi: briefing, sprawdzenie dokumentacji i koordynacja działań operacyjnych.',
+      },
+    ]}
+  />
+  <FactsRow
+    title="Na co warto zwrócić uwagę na zdjęciach?"
+    items={[
+      { icon: 'cpu', label: 'Układ ekranów i paneli w kokpicie' },
+      { icon: 'radio', label: 'Kontekst komunikacji i procedur lotniskowych' },
+      { icon: 'shield', label: 'Elementy związane z bezpieczeństwem operacji' },
+    ]}
+  />
+  <Checklist
+    title="Checklista: co warto obejrzeć w galerii"
+    items={[
+      'Kokpit: ekrany i układ przyrządów',
+      'Samoloty: pasażerskie i cargo',
+      'Lotniska: pas, terminal, płyta postojowa',
+      'Detale: przełączniki i panele',
+      'Ujęcia w locie: chmury i horyzont',
+    ]}
+  />
+  <SplitCTA
+    title="Chcesz zrozumieć, co widzisz w kokpicie?"
+    subtitle="W dziale Technologia opisujemy autopilota, nawigację, radar pogodowy i bezpieczeństwo lotów."
+    image={images.topic.technology.cockpit}
+    action={{ label: 'Przejdź do technologii', href: 'technologia/' }}
+  />
+  <ImageCardGrid
+    title="Zobacz też"
+    cards={[
+      {
+        title: 'Kokpit',
+        image: images.topic.technology.cockpit,
+        href: 'technologia/kokpit/',
+        icon: 'monitor',
+      },
+      {
+        title: 'Słownik',
+        image: images.people.atc,
+        href: 'wiedza/slownik/',
+        icon: 'bookOpen',
+      },
+      {
+        title: 'Dzień pracy',
+        image: images.topic.profession.workDayHero,
+        href: 'zawod/dzien-pracy/',
+        icon: 'calendar',
+      },
+    ]}
+  />
+  <FAQ
+    title="FAQ: oglądanie i korzystanie z galerii"
+    items={[
+      {
+        q: 'Dlaczego galeria jest ważna?',
+        a: 'Pomaga wyobrazić sobie środowisko pracy pilota i zrozumieć technologię kokpitu.',
+      },
+      {
+        q: 'Co najbardziej warto zobaczyć?',
+        a: 'Kokpit (glass cockpit) i ujęcia z lotniska — tam widać najwięcej detali.',
+      },
+      {
+        q: 'Czy galeria łączy się z treściami?',
+        a: 'Tak — wiele zdjęć prowadzi do działów Technologia i Zawód.',
+      },
+    ]}
+  />
+  <Footer />
+</BaseLayout>

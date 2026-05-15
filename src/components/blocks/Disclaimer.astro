@@ -1,0 +1,66 @@
+---
+// Disclaimer popup — contest notice with localStorage "don't show again"
+---
+
+<div
+  id="disclaimer-popup"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="disclaimer-heading"
+  class="fixed bottom-4 right-4 z-50 max-w-sm w-full bg-white rounded-2xl shadow-2xl border border-gray-200 p-5 flex flex-col gap-3"
+  style="display:none"
+>
+  <div class="flex items-start justify-between gap-3">
+    <h2 id="disclaimer-heading" class="text-sm font-semibold text-gray-900 leading-snug">
+      Strona konkursowa
+    </h2>
+    <button
+      id="disclaimer-close"
+      aria-label="Zamknij informację"
+      class="text-gray-400 hover:text-gray-700 flex-shrink-0 text-xl leading-none"
+    >
+      &times;
+    </button>
+  </div>
+
+  <p class="text-xs text-gray-600 leading-relaxed">
+    Ta strona została przygotowana na konkurs <strong>Zawód Przyszłości</strong>. Prezentowane
+    treści mają charakter edukacyjny i mogą być nieaktualne lub uproszczone. Autorka nie ponosi
+    odpowiedzialności za decyzje podjęte na podstawie informacji zawartych w serwisie.
+  </p>
+
+  <label class="flex items-center gap-2 cursor-pointer select-none">
+    <input type="checkbox" id="disclaimer-no-show" class="w-4 h-4 accent-blue-600 cursor-pointer" />
+    <span class="text-xs text-gray-500">Nie pokazuj ponownie</span>
+  </label>
+</div>
+
+<script>
+  const KEY = 'disclaimer-dismissed'
+  const params = new URLSearchParams(window.location.search)
+  const hideByQuery = ['1', 'true', 'yes'].includes(
+    (params.get('hideContestNotice') ?? '').toLowerCase()
+  )
+  const popup = document.getElementById('disclaimer-popup') as HTMLElement
+  const closeBtn = document.getElementById('disclaimer-close') as HTMLButtonElement
+  const checkbox = document.getElementById('disclaimer-no-show') as HTMLInputElement
+
+  if (!hideByQuery && popup && !localStorage.getItem(KEY)) {
+    popup.style.display = 'flex'
+    popup.style.flexDirection = 'column'
+  }
+
+  function dismiss() {
+    if (!popup) return
+    popup.style.display = 'none'
+    if (checkbox?.checked) {
+      localStorage.setItem(KEY, '1')
+    }
+  }
+
+  closeBtn?.addEventListener('click', dismiss)
+  checkbox?.addEventListener('change', () => {
+    if (checkbox.checked) localStorage.setItem(KEY, '1')
+    else localStorage.removeItem(KEY)
+  })
+</script>

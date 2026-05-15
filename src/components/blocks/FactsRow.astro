@@ -1,0 +1,84 @@
+---
+interface Item {
+  icon: string
+  label: string
+}
+
+interface Props {
+  style?: Record<string, string>
+  title?: string
+  items?: Item[]
+}
+
+const { style, title = '', items = [] } = Astro.props
+const defaultStyle = {
+  root: 'ds-section',
+  inner: 'ds-container',
+  title: 'ds-h2 text-center mb-8',
+  row: 'grid grid-cols-1 md:grid-cols-3 gap-6',
+  item: 'ds-surface p-6',
+}
+const s = { ...defaultStyle, ...(style ?? {}) }
+
+const iconEmoji: Record<string, string> = {
+  altitude: '✈',
+  world: '🌍',
+  speed: '⚡',
+  clock: '🕐',
+  shield: '🛡',
+  radio: '📡',
+  thermometer: '🌡',
+  check: '✓',
+  users: '👥',
+  cloud: '🌤',
+  map: '🗺',
+  cpu: '🖥',
+  list: '☑',
+  layers: '🧩',
+  wind: '💨',
+  target: '🎯',
+  settings: '⚙',
+  graduationCap: '🎓',
+}
+
+const iconColor: Record<string, string> = {
+  altitude: 'bg-[var(--navy-100)] text-[var(--navy-700)]',
+  world: 'bg-green-100 text-green-700',
+  speed: 'bg-amber-100 text-amber-700',
+  clock: 'bg-blue-100 text-blue-700',
+  shield: 'bg-indigo-100 text-indigo-700',
+  radio: 'bg-purple-100 text-purple-700',
+  thermometer: 'bg-red-100 text-red-700',
+  check: 'bg-emerald-100 text-emerald-700',
+  users: 'bg-violet-100 text-violet-700',
+  cloud: 'bg-sky-100 text-sky-700',
+  map: 'bg-cyan-100 text-cyan-700',
+  cpu: 'bg-slate-100 text-slate-700',
+  list: 'bg-amber-100 text-amber-700',
+  layers: 'bg-indigo-100 text-indigo-700',
+  wind: 'bg-blue-100 text-blue-700',
+  target: 'bg-rose-100 text-rose-700',
+  settings: 'bg-zinc-100 text-zinc-700',
+  graduationCap: 'bg-fuchsia-100 text-fuchsia-700',
+}
+---
+
+<section class={s.root}>
+  <div class={s.inner}>
+    {title && <h2 class={s.title}>{title}</h2>}
+    <div class={s.row}>
+      {
+        items.map((item) => (
+          <div class={`${s.item} flex items-center gap-4`}>
+            <div
+              class={`w-12 h-12 rounded-[var(--r-lg)] flex items-center justify-center text-2xl shrink-0 ${iconColor[item.icon] ?? 'bg-[var(--navy-100)] text-[var(--navy-700)]'}`}
+            >
+              {iconEmoji[item.icon] ?? '✈'}
+            </div>
+            <p class="font-medium text-[var(--text-strong)] text-sm leading-snug">{item.label}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

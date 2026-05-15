@@ -1,0 +1,148 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import Timeline from '../../components/blocks/Timeline.astro'
+import FeatureSection from '../../components/blocks/FeatureSection.astro'
+import Checklist from '../../components/blocks/Checklist.astro'
+import ImageCardGrid from '../../components/blocks/ImageCardGrid.astro'
+import Prose from '../../components/blocks/Prose.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import Footer from '../../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Szkolenia lotnicze',
+  description: 'Jak wygląda szkolenie pilota? Teoria, praktyka i symulator — krok po kroku.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Kariera"
+    subtitle="Teoria, praktyka i symulator — trzy filary dobrego szkolenia pilota."
+    image={images.topic.career.becomePilot}
+  />
+  <Timeline
+    variant="arrowSteps"
+    title="Etapy szkolenia"
+    steps={[
+      {
+        label: 'Teoria: wiedza lotnicza i regulacje',
+      },
+      {
+        label: 'Szkolenie naziemne i procedury',
+      },
+      {
+        label: 'Loty szkolne na samolocie',
+      },
+      {
+        label: 'Symulator: trudne sytuacje i CRM',
+      },
+      {
+        label: 'Egzaminy i licencja',
+      },
+    ]}
+    cta={{
+      label: 'Ścieżka kariery',
+      href: 'kariera/',
+    }}
+  />
+  <FeatureSection
+    title="Trzy filary szkolenia"
+    lead="Każdy etap buduje umiejętności i nawyki niezbędne w kokpicie."
+    features={[
+      {
+        icon: 'checkSquare',
+        title: 'Teoria',
+        text: 'Wiedza lotnicza, meteorologia, nawigacja i prawo lotnicze — fundament każdego pilota.',
+      },
+      {
+        icon: 'plane',
+        title: 'Praktyka',
+        text: 'Loty szkolne pod okiem instruktora — od pierwszego startu do samodzielnych lotów nawigacyjnych.',
+      },
+      {
+        icon: 'cpu',
+        title: 'Symulator',
+        text: 'Bezpieczne ćwiczenie trudnych sytuacji, procedur awaryjnych i pracy zespołowej (CRM).',
+      },
+    ]}
+  />
+  <Checklist
+    title="Checklista: jak się przygotować do szkolenia"
+    items={[
+      'Zadbaj o angielski — to język lotnictwa',
+      'Poznaj podstawy fizyki, matematyki i meteorologii',
+      'Wybierz szkołę z certyfikatem ATO',
+      'Planuj czas na teorię — naukę prowadź systematycznie',
+      'Traktuj symulator jako równie ważny jak lot',
+    ]}
+  />
+  <Prose
+    variant="cards"
+    title="Case study: tydzień, który porządkuje naukę"
+    lead="Przykład pokazuje, jak połączyć teorię, praktykę i symulator bez chaosu."
+    sections={[
+      {
+        h: 'Punkt wyjścia',
+        p: 'Kandydatka ma dużo materiału i mało pewności, od czego zacząć. Nauka „zrywami” sprawiała, że wiedza szybko uciekała.',
+      },
+      {
+        h: 'Nowy układ pracy',
+        p: 'Plan tygodnia dzieli naukę na krótkie bloki: teoria, procedury i jedna sesja symulatora. Każdy dzień kończy się krótkim podsumowaniem.',
+      },
+      {
+        h: 'Efekt po kilku tygodniach',
+        p: 'Po kilku tygodniach maleje liczba pomyłek, rośnie jakość komunikacji i tempo reakcji. To efekt regularności, nie „talentu z dnia na dzień”.',
+      },
+    ]}
+  />
+  <ImageCardGrid
+    title="Co dalej po szkoleniu?"
+    cards={[
+      {
+        title: 'Licencje lotnicze',
+        image: images.topic.career.pilotLicense,
+        href: 'kariera/licencje/',
+        icon: 'idCard',
+      },
+      {
+        title: 'Wymagane umiejętności',
+        image: images.topic.career.pilotSkills,
+        href: 'kariera/umiejetnosci/',
+        icon: 'sparkles',
+      },
+      {
+        title: 'Dzień pracy pilota',
+        image: images.topic.profession.workDay,
+        href: 'zawod/dzien-pracy/',
+        icon: 'calendar',
+      },
+    ]}
+  />
+  <FAQ
+    title="FAQ: szkolenia lotnicze"
+    items={[
+      {
+        q: 'Ile trwa szkolenie na licencję PPL?',
+        a: 'Minimalnie to kilkadziesiąt godzin lotu, ale w praktyce czas zależy od regularności, instruktora i pogody. Najszybciej postępują osoby ćwiczące co tydzień.',
+      },
+      {
+        q: 'Czy symulator zastępuje loty?',
+        a: 'Nie. Symulator nie zastępuje realnego lotu, ale świetnie uzupełnia trening: pozwala bezpiecznie ćwiczyć procedury awaryjne, komunikację i decyzje pod presją.',
+      },
+      {
+        q: 'Jak wybrać dobrą szkołę lotniczą?',
+        a: 'Szukaj certyfikowanego ATO. Sprawdź instruktorów, kulturę bezpieczeństwa, dostępność samolotów i symulatora oraz przejrzysty plan szkolenia.',
+      },
+      {
+        q: 'Co najczęściej spowalnia postęp w szkoleniu?',
+        a: 'Brak rytmu nauki, długie przerwy i skupienie tylko na „odhaczaniu godzin”. Lepszy efekt daje stały plan pracy i domykanie słabych punktów po każdym etapie.',
+      },
+    ]}
+  />
+  <Footer />
+</BaseLayout>

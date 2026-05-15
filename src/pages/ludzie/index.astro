@@ -1,0 +1,127 @@
+---
+import { images } from '@/lib/images'
+
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import SectionNavCards from '../../components/blocks/SectionNavCards.astro'
+import FactsRow from '../../components/blocks/FactsRow.astro'
+import Prose from '../../components/blocks/Prose.astro'
+import ImageCardGrid from '../../components/blocks/ImageCardGrid.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import SplitCTA from '../../components/blocks/SplitCTA.astro'
+import Footer from '../../components/blocks/Footer.astro'
+
+export const pageMeta = {
+  title: 'Ludzie lotnictwa',
+  description: 'Pilotki, pionierki i inspirujące historie.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Wyżej niż szklany sufit"
+    subtitle="Historie, które inspirują — i pokazują, że w kokpicie liczą się umiejętności."
+    image={images.topic.people.womenInAviation}
+  />
+  <SectionNavCards
+    title="W tym dziale"
+    cards={[
+      {
+        title: 'Kobiety w lotnictwie',
+        subtitle: 'Współczesność i inspiracje',
+        href: 'ludzie/kobiety-w-lotnictwie/',
+        icon: 'users',
+      },
+      {
+        title: 'Pionierki',
+        subtitle: 'Droga przecierania szlaków',
+        href: 'ludzie/pionierki/',
+        icon: 'sparkles',
+      },
+      {
+        title: 'Zawód przyszłości',
+        subtitle: 'Dlaczego to ma sens',
+        href: 'zawod/zawod-przyszlosci/',
+        icon: 'rocket',
+      },
+      { title: 'Kariera', subtitle: 'Jak zacząć', href: 'kariera/', icon: 'briefcase' },
+    ]}
+  />
+  <FactsRow
+    title="Co buduje silne historie w lotnictwie?"
+    items={[
+      { icon: 'graduationCap', label: 'Edukacja i regularny trening' },
+      { icon: 'users', label: 'Mentoring i wsparcie środowiska' },
+      { icon: 'shield', label: 'Kompetencje operacyjne i odpowiedzialność' },
+    ]}
+  />
+  <Prose
+    variant="cards"
+    title="Dlaczego ten dział jest ważny"
+    lead="Historie ludzi lotnictwa porządkują fakty, inspirują i pokazują praktyczne drogi rozwoju."
+    sections={[
+      {
+        h: 'Widoczność i role modele',
+        p: 'Kiedy widzimy konkretne historie i ścieżki kariery, łatwiej uwierzyć, że wejście do lotnictwa jest możliwe i realne.',
+      },
+      {
+        h: 'Realne kompetencje zamiast stereotypów',
+        p: 'W kokpicie liczą się procedury, komunikacja i odpowiedzialność. Ten dział pokazuje właśnie te elementy, które naprawdę decydują o jakości pracy.',
+      },
+      {
+        h: 'Inspiracja przekuta w plan',
+        p: 'Po przeczytaniu historii łatwiej przejść do działania: wybrać szkolenie, zaplanować naukę i świadomie rozwijać kompetencje potrzebne w zawodzie.',
+      },
+    ]}
+  />
+  <FAQ
+    title="FAQ: ludzie i kariery w lotnictwie"
+    items={[
+      {
+        q: 'Czy historie pionierek mają dziś praktyczne znaczenie?',
+        a: 'Tak. Pokazują, jak konsekwencja, trening i dobre decyzje przekładają się na realny rozwój w zawodzie.',
+      },
+      {
+        q: 'Co najbardziej pomaga młodym osobom wejść do lotnictwa?',
+        a: 'Kontakt z praktykami, jasny plan nauki i rozumienie wymagań szkoleniowych krok po kroku.',
+      },
+      {
+        q: 'Czy ten dział to tylko inspiracja?',
+        a: 'Nie. To także konkretne wskazówki, gdzie dalej szukać wiedzy o ścieżce kariery i codziennej pracy w kokpicie.',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Chcesz przejść od inspiracji do planu działania?"
+    subtitle="Sprawdź praktyczną ścieżkę: edukacja, szkolenie, licencje i pierwsze doświadczenia."
+    image={images.topic.career.becomePilot}
+    action={{ label: 'Zobacz dział Kariera', href: 'kariera/' }}
+  />
+  <ImageCardGrid
+    title="Polecane strony"
+    cards={[
+      {
+        title: 'Kobiety w lotnictwie',
+        image: images.topic.people.womenInAviation,
+        href: 'ludzie/kobiety-w-lotnictwie/',
+        icon: 'users',
+      },
+      {
+        title: 'Pionierki lotnictwa',
+        image: images.stories.one,
+        href: 'ludzie/pionierki/',
+        icon: 'sparkles',
+      },
+      {
+        title: 'Jak zostać pilotką',
+        image: images.topic.career.becomePilot,
+        href: 'kariera/jak-zostac/',
+        icon: 'route',
+      },
+    ]}
+  />
+  <Footer />
+</BaseLayout>

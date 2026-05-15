@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import ImageCardGrid from '../../components/blocks/ImageCardGrid.astro'
+import FactsRow from '../../components/blocks/FactsRow.astro'
+import Prose from '../../components/blocks/Prose.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import SplitCTA from '../../components/blocks/SplitCTA.astro'
+import Footer from '../../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Kokpit samolotu',
+  description: 'Glass cockpit, ekrany, autopilot — centrum dowodzenia lotu.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Technologia"
+    subtitle="Centrum dowodzenia lotu"
+    image={images.topic.technology.cockpit}
+    primaryAction={{
+      label: 'Autopilot',
+      href: 'technologia/autopilot/',
+    }}
+    secondaryAction={{
+      label: 'Systemy nawigacji',
+      href: 'technologia/nawigacja/',
+    }}
+  />
+  <ImageCardGrid
+    layout="grid4"
+    title="Co widać w nowoczesnym kokpicie?"
+    cards={[
+      {
+        title: 'Ekrany avioniki',
+        image: images.gallery.cockpitGlass,
+        href: 'technologia/kokpit/',
+        icon: 'monitor',
+      },
+      {
+        title: 'Panel autopilota',
+        image: images.topic.technology.autopilot,
+        href: 'technologia/autopilot/',
+        icon: 'settings',
+      },
+      {
+        title: 'Nawigacja',
+        image: images.topic.technology.navigation,
+        href: 'technologia/nawigacja/',
+        icon: 'map',
+      },
+      {
+        title: 'Radar pogodowy',
+        image: images.topic.technology.weatherRadar,
+        href: 'technologia/radar-pogodowy/',
+        icon: 'cloud',
+      },
+    ]}
+  />
+  <FactsRow
+    title="Dlaczego „glass cockpit”?"
+    items={[
+      { icon: 'cpu', label: 'Więcej danych — w czytelnej formie' },
+      { icon: 'shield', label: 'Redundancja — systemy zapasowe' },
+      { icon: 'check', label: 'Procedury i checklisty są standardem' },
+    ]}
+  />
+  <Prose
+    variant="cards"
+    title="Kokpit w praktyce: technologia i ergonomia"
+    lead="Nowoczesny kokpit to środowisko pracy zaprojektowane pod szybkie odczytywanie danych, komunikację i bezpieczne podejmowanie decyzji."
+    sections={[
+      {
+        h: 'Czytelny obraz sytuacji',
+        p: 'Ekrany skupiają kluczowe informacje o locie, silnikach i nawigacji w jednym miejscu. Dzięki temu załoga szybciej zauważa odchylenia i sprawniej reaguje.',
+      },
+      {
+        h: 'Podział ról i cross-check',
+        p: 'Pilot Flying i Pilot Monitoring wzajemnie się uzupełniają. Jeden prowadzi lot, drugi kontroluje parametry, radio i poprawność działań zgodnie z procedurami.',
+      },
+      {
+        h: 'Automatyzacja pod kontrolą',
+        p: 'Autopilot i systemy wspomagające odciążają w zadaniach rutynowych, ale załoga musi stale wiedzieć, jaki tryb jest aktywny i jak zachowa się system po zmianie warunków.',
+      },
+    ]}
+  />
+  <FAQ
+    title="FAQ: kokpit bez tajemnic"
+    items={[
+      {
+        q: 'Czy nowoczesny kokpit jest trudniejszy od „analogowego”?',
+        a: 'Jest inny. Wymaga dobrego zrozumienia systemów, ale daje lepszą czytelność danych i większe wsparcie decyzyjne.',
+      },
+      {
+        q: 'Po co dwie osoby w kokpicie?',
+        a: 'Dla bezpieczeństwa i jakości decyzji. Praca zespołowa, wzajemna kontrola i podział zadań redukują ryzyko błędu.',
+      },
+      {
+        q: 'Czy technologia eliminuje potrzebę procedur?',
+        a: 'Nie. Im bardziej zaawansowane systemy, tym większe znaczenie mają standardy, checklisty i dobra komunikacja załogi.',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Technologia nie zastępuje pilota"
+    subtitle="Systemy pomagają w rutynie, ale decyzje i odpowiedzialność nadal są po stronie człowieka — szczególnie w sytuacjach nietypowych."
+    image={images.topic.technology.safety}
+    action={{ label: 'Bezpieczeństwo lotów', href: 'technologia/bezpieczenstwo/' }}
+  />
+  <Footer />
+</BaseLayout>

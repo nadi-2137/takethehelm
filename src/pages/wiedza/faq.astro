@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import ImageCardGrid from '../../components/blocks/ImageCardGrid.astro'
+import SplitCTA from '../../components/blocks/SplitCTA.astro'
+import Footer from '../../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'FAQ',
+  description: 'Najczęstsze pytania o lotnictwo, pilotów i technologię — z konkretnymi odpowiedziami i przykładami.',
+}
+
+const faqItems = [
+  {
+    q: 'Czy autopilot lata sam?',
+    a: 'Autopilot pomaga utrzymywać parametry lotu (np. kurs i wysokość), ale nie zastępuje załogi. Piloci stale monitorują sytuację, konfigurują tryby pracy i podejmują decyzje operacyjne.',
+  },
+  {
+    q: 'Czy turbulencje są groźne?',
+    a: 'Najczęściej są nieprzyjemne, ale nie niebezpieczne dla konstrukcji samolotu. Załoga omija najsilniejsze strefy, korzysta z danych pogodowych i odpowiednich procedur.',
+  },
+  {
+    q: 'Czy pilot zawsze steruje ręcznie?',
+    a: 'Nie zawsze. Część zadań przejmuje automatyka, ale odpowiedzialność za lot pozostaje po stronie załogi, która nadzoruje systemy i reaguje na zmiany warunków.',
+  },
+  {
+    q: 'Po co checklisty, skoro piloci mają duże doświadczenie?',
+    a: 'Checklisty porządkują działania i ograniczają ryzyko pominięcia krytycznych kroków. To fundament standaryzacji i bezpieczeństwa w lotnictwie.',
+  },
+  {
+    q: 'Czy pogoda wpływa na lot nowoczesnego samolotu?',
+    a: 'Tak, zdecydowanie. Pogoda wpływa na trasę, zużycie paliwa, wysokość lotu, komfort i punktualność. Analiza meteo to stała część pracy załogi.',
+  },
+  {
+    q: 'Czy pilot musi być świetny z matematyki i fizyki?',
+    a: 'Podstawy są bardzo pomocne, ale kluczowe są systematyczna nauka, dyscyplina, umiejętność pracy proceduralnej i rozwijanie kompetencji operacyjnych.',
+  },
+  {
+    q: 'Czy znajomość angielskiego jest naprawdę konieczna?',
+    a: 'Tak. Angielski to standard komunikacji lotniczej międzynarodowej: ATC, dokumentacja operacyjna i współpraca między załogami.',
+  },
+  {
+    q: 'Co robi pilot przed startem?',
+    a: 'Sprawdza dokumentację, trasę, pogodę, masę i wyważenie samolotu, wykonuje checklisty oraz briefingi z załogą i personelem operacyjnym.',
+  },
+  {
+    q: 'Czy każdy lot jest taki sam?',
+    a: 'Nie. Każdy lot ma inny kontekst operacyjny: warunki pogodowe, natężenie ruchu, ograniczenia przestrzeni i decyzje taktyczne.',
+  },
+  {
+    q: 'Jak ważna jest współpraca w kokpicie?',
+    a: 'Kluczowa. CRM (Crew Resource Management) to komunikacja, cross-check i podział ról, które bezpośrednio wpływają na bezpieczeństwo.',
+  },
+  {
+    q: 'Czy da się przygotować do lotnictwa już w szkole?',
+    a: 'Tak. Warto wzmacniać angielski, matematykę, fizykę, nawyki systematycznej pracy i poznawać środowisko lotnicze przez materiały edukacyjne.',
+  },
+  {
+    q: 'Co jest ważniejsze: punktualność czy bezpieczeństwo?',
+    a: 'Bezpieczeństwo. Punktualność ma znaczenie operacyjne, ale nigdy nie może być stawiana ponad standardy bezpieczeństwa.',
+  },
+]
+
+const shuffledFaqItems = [...faqItems].sort(() => Math.random() - 0.5)
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Wiedza"
+    subtitle="Krótko, jasno, bez trudnych słów."
+    image={images.topic.knowledge.factsAndMyths}
+  />
+  <FAQ
+    title="Najczęstsze pytania"
+    items={shuffledFaqItems}
+  />
+  <SplitCTA
+    title="Masz już podstawy? Sprawdź się w quizie"
+    subtitle="Przejdź do quizu lotniczego i zobacz, ile zapamiętałaś z FAQ, technologii i zasad bezpieczeństwa."
+    image={images.topic.knowledge.factsAndMyths}
+    action={{ label: 'Przejdź do quizu', href: 'wiedza/quiz/' }}
+  />
+  <ImageCardGrid
+    title="Zobacz też"
+    cards={[
+      {
+        title: 'Mity i fakty',
+        image: images.topic.knowledge.factsAndMyths,
+        href: 'wiedza/mity-i-fakty/',
+        icon: 'layers',
+      },
+      {
+        title: 'Autopilot',
+        image: images.topic.technology.autopilot,
+        href: 'technologia/autopilot/',
+        icon: 'settings',
+      },
+      {
+        title: 'Radar pogodowy',
+        image: images.topic.technology.weatherRadar,
+        href: 'technologia/radar-pogodowy/',
+        icon: 'cloud',
+      },
+    ]}
+  />
+  <Footer />
+</BaseLayout>

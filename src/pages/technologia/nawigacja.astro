@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import ImageCardGrid from '../../components/blocks/ImageCardGrid.astro'
+import FactsRow from '../../components/blocks/FactsRow.astro'
+import Prose from '../../components/blocks/Prose.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import SplitCTA from '../../components/blocks/SplitCTA.astro'
+import Footer from '../../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Systemy nawigacyjne',
+  description:
+    'Trasa, punkty nawigacyjne, współpraca z kontrolą ruchu — jak samolot „wie”, dokąd leci.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Technologia"
+    subtitle="Trasa, procedury i precyzja"
+    image={images.topic.technology.navigation}
+    primaryAction={{
+      label: 'Kokpit samolotu',
+      href: 'technologia/kokpit/',
+    }}
+    secondaryAction={{
+      label: 'Autopilot',
+      href: 'technologia/autopilot/',
+    }}
+  />
+  <ImageCardGrid
+    layout="grid4"
+    title="Co składa się na nawigację?"
+    cards={[
+      {
+        title: 'Plan lotu',
+        image: images.topic.career.pilotLicense,
+        href: 'kariera/licencje/',
+        icon: 'file',
+      },
+      {
+        title: 'Punkty trasy',
+        image: images.gallery.airportRunway,
+        href: 'technologia/nawigacja/#trasa',
+        icon: 'map',
+      },
+      {
+        title: 'Komunikacja z ATC',
+        image: images.people.atc,
+        href: 'zawod/kim-jest-pilot/',
+        icon: 'radio',
+      },
+      {
+        title: 'Bezpieczeństwo',
+        image: images.topic.technology.safety,
+        href: 'technologia/bezpieczenstwo/',
+        icon: 'shield',
+      },
+    ]}
+  />
+  <FactsRow
+    title="Dlaczego nawigacja jest kluczowa?"
+    items={[
+      { icon: 'check', label: 'Porządek w przestrzeni powietrznej — wszyscy mają procedury' },
+      { icon: 'world', label: 'Loty międzynarodowe — standardy i język lotniczy' },
+      { icon: 'cloud', label: 'Pogoda wpływa na trasę — pilot analizuje i wybiera' },
+    ]}
+  />
+  <Prose
+    variant="cards"
+    title="Nawigacja to więcej niż „linia na mapie”"
+    lead="W praktyce nawigacja łączy plan lotu, procedury lotniskowe, komunikację z ATC i bieżącą ocenę warunków."
+    sections={[
+      {
+        id: 'trasa',
+        h: 'Plan lotu i punkty nawigacyjne',
+        p: 'Trasa składa się z odcinków i punktów kontrolnych. Załoga nadzoruje ich realizację, weryfikuje zgodność z planem oraz przygotowuje alternatywy na wypadek zmian operacyjnych.',
+      },
+      {
+        h: 'Współpraca z ATC',
+        p: 'Kontrola ruchu lotniczego porządkuje przepływ samolotów i może wydawać zmiany kursu lub wysokości. Piloci potwierdzają instrukcje, aktualizują ustawienia i monitorują wpływ zmian na całą trasę.',
+      },
+      {
+        h: 'Warunki dynamiczne',
+        p: 'Pogoda, natężenie ruchu i ograniczenia przestrzeni mogą wymagać korekt. Dobra nawigacja oznacza elastyczność przy zachowaniu procedur i marginesów bezpieczeństwa.',
+      },
+    ]}
+  />
+  <FAQ
+    title="FAQ: nawigacja podczas lotu"
+    items={[
+      {
+        q: 'Czy trasa jest „zamrożona” po starcie?',
+        a: 'Nie. Trasa może się zmieniać w odpowiedzi na pogodę, ruch i decyzje ATC, a załoga stale ocenia najlepszy wariant.',
+      },
+      {
+        q: 'Po co pilotowi nawigacja, skoro jest GPS?',
+        a: 'GPS to tylko część systemu. Bezpieczna nawigacja opiera się też na procedurach, komunikacji i kontroli poprawności danych.',
+      },
+      {
+        q: 'Czy nawigacja ma wpływ na zużycie paliwa?',
+        a: 'Tak. Dobrze zaplanowana i realizowana trasa pomaga ograniczyć opóźnienia, niepotrzebne odchylenia i dodatkowe spalanie.',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Gdy pogoda się zmienia"
+    subtitle="Radar pogodowy i nawigacja współpracują, ale decyzja o ominięciu burz należy do załogi."
+    image={images.topic.technology.weatherRadar}
+    action={{ label: 'Radar pogodowy', href: 'technologia/radar-pogodowy/' }}
+  />
+  <Footer />
+</BaseLayout>

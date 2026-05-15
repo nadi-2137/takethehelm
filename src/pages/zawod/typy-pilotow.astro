@@ -1,0 +1,235 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import ImageCardGrid from '../../components/blocks/ImageCardGrid.astro'
+import Checklist from '../../components/blocks/Checklist.astro'
+import Table from '../../components/blocks/Table.astro'
+import Prose from '../../components/blocks/Prose.astro'
+import SplitCTA from '../../components/blocks/SplitCTA.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import Footer from '../../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Typy pilotów',
+  description: 'Pilot liniowy, cargo, wojskowy, ratowniczy i inni — czym się różnią?',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Zawód"
+    subtitle="Różne środowiska pracy, różne statki powietrzne — jedna wspólna cecha: odpowiedzialność."
+    image={images.topic.profession.whoIsPilot}
+  />
+  <ImageCardGrid
+    style={{
+      root: 'ds-section pt-10 pb-10 md:pt-12 md:pb-12',
+    }}
+    layout="grid6"
+    enableLightbox={true}
+    title="Najpopularniejsze ścieżki"
+    cards={[
+      {
+        title: 'Pilot liniowy',
+        image: images.roles.airline,
+        href: '#liniowy',
+        icon: 'plane',
+      },
+      { title: 'Pilot cargo', image: images.roles.cargo, href: '#cargo', icon: 'package' },
+      {
+        title: 'Pilot wojskowy',
+        image: images.roles.military,
+        href: '#wojskowy',
+        icon: 'shield',
+      },
+      {
+        title: 'Pilot śmigłowca',
+        image: images.roles.heli,
+        href: '#smiglowiec',
+        icon: 'helicopter',
+      },
+      {
+        title: 'Pilot ratowniczy',
+        image: images.roles.rescue,
+        href: '#ratowniczy',
+        icon: 'lifeBuoy',
+      },
+      { title: 'Pilot gaśniczy', image: images.roles.fire, href: '#gasniczy', icon: 'flame' },
+    ]}
+  />
+  <Checklist
+    style={{
+      root: 'ds-section pt-10 pb-10 md:pt-12 md:pb-12',
+    }}
+    title="Checklista: jak wybrać ścieżkę?"
+    items={[
+      'Czy wolisz loty pasażerskie, cargo czy specjalistyczne misje?',
+      'Czy lubisz rutynę i rozkład (linie), czy zmienność (np. ratownictwo)?',
+      'Jaką rolę ma dla Ciebie technologia i praca zespołowa?',
+      'Czy wolisz samolot czy śmigłowiec?',
+      'Czy odpowiada Ci praca w niestandardowych godzinach (np. cargo)?',
+    ]}
+  />
+  <Table
+    style={{
+      root: 'ds-section pt-10 pb-10 md:pt-12 md:pb-12',
+    }}
+    title="Skrót porównawczy"
+    columns={['Typ pilota', 'Co robi?', 'Jakie środowisko pracy?']}
+    rows={[
+      ['Liniowy', 'Loty pasażerskie według rozkładu', 'Linie lotnicze, lotniska międzynarodowe'],
+      ['Cargo', 'Transport towarów i logistyka', 'Często nocne trasy, różne porty cargo'],
+      ['Wojskowy', 'Misje i szkolenia specjalistyczne', 'Lotnictwo wojskowe i procedury taktyczne'],
+      ['Śmigłowca', 'Loty krótkie, precyzyjne operacje', 'Różne miejsca, często blisko ziemi'],
+      ['Ratowniczy', 'Akcje pomocy, ewakuacje', 'Trudne warunki, presja czasu'],
+      ['Gaśniczy', 'Gaszenie pożarów z powietrza', 'Wysokie ryzyko, bardzo wymagające manewry'],
+    ]}
+  />
+  <section class="ds-section pt-10 pb-10 md:pt-12 md:pb-12">
+    <div class="ds-container max-w-[920px] grid gap-6">
+      <h2 class="ds-h2">Charakterystyka ścieżek w praktyce</h2>
+      <div
+        id="liniowy"
+        class="ds-surface border border-[var(--border-default)] rounded-[var(--r-lg)] p-5 md:p-6 grid gap-2"
+      >
+        <h3 class="text-[18px] font-semibold text-[var(--text-strong)]">Pilot liniowy</h3>
+        <p class="text-[var(--text-default)] leading-7">
+          Najbardziej przewidywalna ścieżka pod kątem standardów operacyjnych i pracy zespołowej.
+          Dobra opcja dla osób, które lubią procedury, rytm i środowisko międzynarodowe.
+        </p>
+      </div>
+      <div
+        id="cargo"
+        class="ds-surface border border-[var(--border-default)] rounded-[var(--r-lg)] p-5 md:p-6 grid gap-2"
+      >
+        <h3 class="text-[18px] font-semibold text-[var(--text-strong)]">Pilot cargo</h3>
+        <p class="text-[var(--text-default)] leading-7">
+          Duży nacisk na logistykę i elastyczność operacyjną. Częstsze loty nocne oraz różnorodne
+          kierunki wymagają dobrej organizacji i odporności na zmianę planu.
+        </p>
+      </div>
+      <div
+        id="wojskowy"
+        class="ds-surface border border-[var(--border-default)] rounded-[var(--r-lg)] p-5 md:p-6 grid gap-2"
+      >
+        <h3 class="text-[18px] font-semibold text-[var(--text-strong)]">Pilot wojskowy</h3>
+        <p class="text-[var(--text-default)] leading-7">
+          Środowisko o wysokiej dyscyplinie, intensywnym treningu i specjalistycznych procedurach.
+          To ścieżka dla osób gotowych na wymagające warunki i dużą odpowiedzialność.
+        </p>
+      </div>
+      <div
+        id="smiglowiec"
+        class="ds-surface border border-[var(--border-default)] rounded-[var(--r-lg)] p-5 md:p-6 grid gap-2"
+      >
+        <h3 class="text-[18px] font-semibold text-[var(--text-strong)]">Pilot śmigłowca</h3>
+        <p class="text-[var(--text-default)] leading-7">
+          Praca bliżej terenu, często w zadaniach wymagających precyzji manewru i szybkiego
+          podejmowania decyzji. Liczy się bardzo dobra orientacja przestrzenna.
+        </p>
+      </div>
+      <div
+        id="ratowniczy"
+        class="ds-surface border border-[var(--border-default)] rounded-[var(--r-lg)] p-5 md:p-6 grid gap-2"
+      >
+        <h3 class="text-[18px] font-semibold text-[var(--text-strong)]">Pilot ratowniczy</h3>
+        <p class="text-[var(--text-default)] leading-7">
+          Operacje pod presją czasu i w trudnych warunkach. Kluczowe są komunikacja, współpraca z
+          zespołami naziemnymi i gotowość do działania w sytuacjach krytycznych.
+        </p>
+      </div>
+      <div
+        id="gasniczy"
+        class="ds-surface border border-[var(--border-default)] rounded-[var(--r-lg)] p-5 md:p-6 grid gap-2"
+      >
+        <h3 class="text-[18px] font-semibold text-[var(--text-strong)]">Pilot gaśniczy</h3>
+        <p class="text-[var(--text-default)] leading-7">
+          Bardzo wymagająca specjalizacja: niskie loty, dynamiczna sytuacja i wysoka
+          odpowiedzialność operacyjna. Wymaga dojrzałości i świetnej oceny ryzyka.
+        </p>
+      </div>
+    </div>
+  </section>
+  <Prose
+    variant="cards"
+    style={{
+      root: 'ds-section pt-10 pb-10 md:pt-12 md:pb-12',
+    }}
+    title="Co je łączy?"
+    lead="Niezależnie od typu lotnictwa, fundament jest wspólny: szkolenie, procedury i kultura bezpieczeństwa."
+    sections={[
+      {
+        h: 'Szkolenie i nawyki',
+        p: 'Piloci uczą się powtarzalnych procedur i pracy zespołowej. To buduje bezpieczeństwo w każdej specjalizacji.',
+      },
+      {
+        h: 'Technologia',
+        p: 'Systemy kokpitu wspierają decyzje. Jednak pilot zawsze nadzoruje, analizuje i wybiera najlepsze rozwiązanie.',
+      },
+      {
+        h: 'Odpowiedzialność',
+        p: 'W każdej ścieżce priorytetem jest bezpieczeństwo — przed czasem, planem i „wygodą”.',
+      },
+    ]}
+  />
+  <ImageCardGrid
+    style={{
+      root: 'ds-section pt-10 pb-10 md:pt-12 md:pb-12',
+    }}
+    title="Zobacz też"
+    cards={[
+      {
+        title: 'Jak zostać pilotką',
+        image: images.topic.career.becomePilotCard,
+        href: 'kariera/jak-zostac/',
+        icon: 'route',
+      },
+      {
+        title: 'Dzień pracy pilota',
+        image: images.topic.profession.workDay,
+        href: 'zawod/dzien-pracy/',
+        icon: 'calendar',
+      },
+      {
+        title: 'Technologia w lotnictwie',
+        image: images.topic.technology.cockpitCard,
+        href: 'technologia/',
+        icon: 'cpu',
+      },
+    ]}
+  />
+  <SplitCTA
+    style={{
+      root: 'ds-section pt-10 pb-10 md:pt-12 md:pb-12',
+    }}
+    title="Wybierz swoją ścieżkę"
+    subtitle="Zobacz plan krok po kroku: edukacja, szkolenie, licencje i budowanie doświadczenia."
+    image={images.topic.career.becomePilot}
+    action={{ label: 'Jak zostać pilotką', href: 'kariera/jak-zostac/' }}
+  />
+  <FAQ
+    style={{
+      root: 'ds-section pt-10 pb-10 md:pt-12 md:pb-12',
+    }}
+    title="FAQ: wybór ścieżki pilota"
+    items={[
+      {
+        q: 'Czy typ pilota wpływa na szkolenie?',
+        a: 'Tak. Fundament szkolenia jest wspólny (procedury, bezpieczeństwo, komunikacja), ale każda specjalizacja dokłada własne wymagania operacyjne i scenariusze treningowe.',
+      },
+      {
+        q: 'Czy można zmienić specjalizację?',
+        a: 'W wielu przypadkach tak, ale zwykle wymaga to dodatkowych uprawnień, treningu i czasu na zdobycie doświadczenia w nowym środowisku pracy.',
+      },
+      {
+        q: 'Czy każda praca pilota wygląda tak samo?',
+        a: 'Nie. Inne są rytm pracy, rodzaj misji, poziom presji czasu i profile tras. Wspólny pozostaje standard: procedury, współpraca i bezpieczeństwo.',
+      },
+    ]}
+  />
+  <Footer />
+</BaseLayout>

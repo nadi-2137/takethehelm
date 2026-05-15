@@ -1,0 +1,96 @@
+---
+import { type AppImage } from '@/lib/images'
+import { Image } from 'astro:assets'
+
+interface Card {
+  title: string
+  subtitle?: string
+  image?: AppImage
+  imagePosition?: string
+  href: string
+  icon?: string
+}
+
+interface Props {
+  style?: Record<string, string>
+  cards?: Card[]
+}
+
+const { style, cards = [] } = Astro.props
+const defaultStyle = {
+  root: 'relative z-10 -mt-12 md:-mt-20 pb-[56px] md:pb-[80px]',
+  inner: 'ds-container grid grid-cols-1 md:grid-cols-4 gap-6',
+  card: 'ds-surface ds-card-hover overflow-hidden',
+}
+const s = { ...defaultStyle, ...(style ?? {}) }
+
+const iconEmoji: Record<string, string> = {
+  plane: '✈',
+  briefcase: '💼',
+  cpu: '🖥',
+  users: '👩‍✈️',
+  shield: '🛡',
+  map: '🗺',
+  settings: '⚙',
+  cloud: '🌤',
+}
+---
+
+<section class={s.root}>
+  <div class={s.inner}>
+    {
+      cards.map((card) => {
+        return (
+          <a href={card.href} class={s.card}>
+            {/* Image */}
+            <div class="aspect-video overflow-hidden bg-gradient-to-br from-[var(--navy-700)] to-[var(--navy-950)]">
+              {card.image && (
+                <Image
+                  src={card.image.src}
+                  alt={card.title || card.image?.alt || ''}
+                  class="w-full h-full object-cover"
+                  widths={[300, 420, 560, 720]}
+                  sizes="(min-width: 1280px) 282px, (min-width: 768px) 25vw, 100vw"
+                  loading="lazy"
+                  style={card.imagePosition ? `object-position: ${card.imagePosition}` : undefined}
+                />
+              )}
+            </div>
+            {/* Info strip */}
+            <div class="p-4 flex flex-col gap-3">
+              <div class="flex items-start gap-3">
+                <div class="w-9 h-9 rounded-[var(--r-sm)] bg-[var(--navy-50)] flex items-center justify-center text-lg shrink-0">
+                  {card.icon ? (iconEmoji[card.icon] ?? '✈') : '✈'}
+                </div>
+                <div>
+                  <p class="font-semibold text-[var(--text-strong)] text-sm leading-snug">
+                    {card.title}
+                  </p>
+                  {card.subtitle && (
+                    <p class="text-[var(--text-muted)] text-sm mt-0.5 leading-snug">
+                      {card.subtitle}
+                    </p>
+                  )}
+                </div>
+              </div>
+              <span class="text-sm font-semibold text-[var(--amber-600)] flex items-center gap-1">
+                Dowiedz się więcej
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <path d="M2 6h8M7 3l3 3-3 3" />
+                </svg>
+              </span>
+            </div>
+          </a>
+        )
+      })
+    }
+  </div>
+</section>

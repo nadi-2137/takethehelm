@@ -1,0 +1,66 @@
+---
+interface Feature {
+  title: string
+  text: string
+  icon?: string
+}
+
+interface Props {
+  style?: Record<string, string>
+  title?: string
+  lead?: string
+  features?: Feature[]
+}
+
+const { style, title = '', lead = '', features = [] } = Astro.props
+const defaultStyle = {
+  root: 'ds-section',
+  inner: 'ds-container grid grid-cols-1 lg:grid-cols-12 gap-8 items-start',
+  aside: 'lg:col-span-4',
+  main: 'lg:col-span-8',
+  title: 'ds-h2 mb-4',
+  lead: 'ds-muted',
+  cards: 'grid grid-cols-1 md:grid-cols-3 gap-6',
+  card: 'ds-surface',
+}
+const s = { ...defaultStyle, ...(style ?? {}) }
+
+const iconEmoji: Record<string, string> = {
+  cpu: '🖥',
+  checkSquare: '☑',
+  users: '👥',
+  route: '🗺',
+  plane: '✈',
+  radio: '📡',
+  shield: '🛡',
+  star: '⭐',
+}
+---
+
+<section class={s.root}>
+  <div class={s.inner}>
+    <div class={s.aside}>
+      <h2 class={s.title}>{title}</h2>
+      {lead && <p class={s.lead}>{lead}</p>}
+    </div>
+    <div class={s.main}>
+      <div class={s.cards}>
+        {
+          features.map((feature) => (
+            <div class={`${s.card} p-5 flex flex-col gap-3`}>
+              <div class="w-11 h-11 rounded-[var(--r-md)] bg-[var(--navy-50)] flex items-center justify-center text-xl">
+                {feature.icon ? (iconEmoji[feature.icon] ?? '✈') : '✈'}
+              </div>
+              <div>
+                <h3 class="font-semibold text-[var(--text-strong)] mb-1 text-sm">
+                  {feature.title}
+                </h3>
+                <p class="ds-muted text-sm leading-relaxed">{feature.text}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

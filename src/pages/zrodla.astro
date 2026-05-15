@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Navbar from '../components/blocks/Navbar.astro'
+import PageHero from '../components/blocks/PageHero.astro'
+import Prose from '../components/blocks/Prose.astro'
+import LinkList from '../components/blocks/LinkList.astro'
+import SplitCTA from '../components/blocks/SplitCTA.astro'
+import FAQ from '../components/blocks/FAQ.astro'
+import Footer from '../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Źródła',
+  subtitle: 'Przejrzystość i rzetelność informacji.',
+  description:
+    'Źródła merytoryczne projektu oraz zasady rzetelnego korzystania z informacji lotniczych.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Projekt"
+    subtitle={pageMeta.subtitle}
+    image={images.site.sources}
+  />
+  <Prose
+    title="Zasady korzystania ze źródeł"
+    lead="Zależy nam na rzetelności i przejrzystości. Poniżej znajdziesz źródła oraz zasady, według których przygotowano treści."
+    sections={[
+      {
+        h: 'Co tu znajdziesz?',
+        p: 'Źródła instytucjonalne (standardy i bezpieczeństwo), materiały edukacyjne oraz odnośniki do działów, w których pojęcia są objaśnione językiem przystępnym dla uczniów i studentów.',
+      },
+      {
+        h: 'Jak pracowaliśmy ze źródłami?',
+        p: 'Najpierw wybieraliśmy źródła instytucjonalne i dokumenty o charakterze standardów, następnie upraszczaliśmy język bez zmiany sensu merytorycznego. Tam, gdzie treść ma charakter orientacyjny, zaznaczamy to wprost.',
+      },
+      {
+        h: 'Odpowiedzialne korzystanie z treści',
+        p: 'Ta strona ma charakter edukacyjny i popularyzatorski. Nie zastępuje szkolenia lotniczego, dokumentacji operacyjnej ani konsultacji z certyfikowanymi instruktorami i instytucjami.',
+      },
+      {
+        h: 'Grafiki i materiały wizualne',
+        p: 'Elementy wizualne przygotowane specjalnie do projektu traktujemy jako część autorskiej oprawy edukacyjnej. W przypadku materiałów zewnętrznych należy uzupełnić licencje i bezpośrednie odnośniki.',
+      },
+    ]}
+  />
+  <LinkList
+    title="Źródła instytucjonalne i standardy"
+    items={[
+      { label: 'Urząd Lotnictwa Cywilnego (ULC)', href: 'https://www.ulc.gov.pl' },
+      { label: 'EASA — European Union Aviation Safety Agency', href: 'https://www.easa.europa.eu' },
+      { label: 'ICAO — International Civil Aviation Organization', href: 'https://www.icao.int' },
+      {
+        label: 'EUROCONTROL — European Air Traffic Management',
+        href: 'https://www.eurocontrol.int',
+      },
+    ]}
+  />
+  <LinkList
+    title="Gdzie zobaczyć te pojęcia w praktyce?"
+    items={[
+      { label: 'Słownik pojęć na stronie', href: 'wiedza/slownik/' },
+      { label: 'Technologia w lotnictwie', href: 'technologia/' },
+      { label: 'Bezpieczeństwo lotów', href: 'technologia/bezpieczenstwo/' },
+      { label: 'Dzień pracy pilota', href: 'zawod/dzien-pracy/' },
+    ]}
+  />
+  <LinkList
+    title="Materiały historyczne — pionierki lotnictwa"
+    items={[
+      {
+        label: 'Amelia Earhart (National Portrait Gallery, Smithsonian, CC0, NPG.75.82)',
+        href: 'https://npg.si.edu/object/npg_NPG.75.82',
+      },
+      {
+        label: 'Raymonde de Laroche (Wikimedia Commons)',
+        href: 'https://commons.wikimedia.org/wiki/File:Raymonde_de_LaRoche_Head.jpg',
+      },
+      {
+        label: 'Sabiha Gökçen (Wikimedia Commons)',
+        href: 'https://commons.wikimedia.org/wiki/File:Sabiha_gokcen3.jpg',
+      },
+    ]}
+  />
+  <FAQ
+    title="FAQ: rzetelność i źródła"
+    items={[
+      {
+        q: 'Czy te treści zastępują oficjalne szkolenie lotnicze?',
+        a: 'Nie. To materiał edukacyjny. W sprawach operacyjnych i licencyjnych zawsze należy opierać się na oficjalnych dokumentach oraz instruktorach.',
+      },
+      {
+        q: 'Jak weryfikować informacje lotnicze?',
+        a: 'W pierwszej kolejności przez źródła instytucjonalne (ULC, EASA, ICAO, EUROCONTROL) i aktualne publikacje branżowe.',
+      },
+      {
+        q: 'Co robić, gdy treść na stronie wymaga aktualizacji?',
+        a: 'Najlepiej zaktualizować sekcję tematyczną oraz sprawdzić powiązane linki, aby cała ścieżka użytkownika pozostała spójna.',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Chcesz przejść od teorii do praktyki?"
+    subtitle="Najpierw zajrzyj do działu Wiedza, potem do Technologii — tak najłatwiej zobaczyć, jak standardy przekładają się na realne decyzje w kokpicie."
+    image={images.site.knowledge}
+    action={{ label: 'Przejdź do działu Wiedza', href: 'wiedza/' }}
+  />
+  <Footer />
+</BaseLayout>

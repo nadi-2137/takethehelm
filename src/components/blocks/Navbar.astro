@@ -1,0 +1,164 @@
+---
+import { navigation } from '../../lib/navigation'
+
+interface Props {
+  style?: Record<string, string>
+}
+
+const { style } = Astro.props
+const defaultStyle = {
+  root: 'ds-nav',
+  inner: 'ds-container h-[72px] flex items-center justify-between',
+  menu: 'hidden md:flex items-center gap-8',
+  mobile: 'md:hidden',
+}
+const s = { ...defaultStyle, ...(style ?? {}) }
+const brand = navigation.brand
+const items = navigation.navbar.items
+type NavItem = (typeof items)[number]
+function hasChildren(item: NavItem): item is NavItem & { children: readonly NavItem[] } {
+  return 'children' in item && Array.isArray(item.children) && item.children.length > 0
+}
+---
+
+<nav class={s.root} style="position:sticky;top:0;z-index:100;" aria-label="Nawigacja główna">
+  <div class={s.inner}>
+    <!-- Brand -->
+    <a
+      href={brand.homeHref}
+      class="flex items-center gap-3.5 shrink-0"
+      aria-label={`${brand.name} — strona główna`}
+    >
+      <img
+        src="brand/logo.png"
+        alt={`${brand.name} logo`}
+        width="48"
+        height="48"
+        class="w-12 h-12 rounded-md object-contain"
+        loading="eager"
+        decoding="async"
+      />
+      <span class="leading-none pt-0.5">
+        <span class="text-white text-[18px] font-normal tracking-[0.05em] block leading-[1.05]"
+          >{brand.name}</span
+        >
+        <span
+          class="text-white/70 text-[11px] font-light tracking-[0.02em] block leading-[1.15] mt-1"
+          >{brand.tagline}</span
+        >
+      </span>
+    </a>
+
+    <!-- Desktop nav -->
+    <ul class="hidden md:flex items-center gap-1 list-none m-0 p-0" role="list">
+      {
+        items.map((item) => (
+          <li class="relative group">
+            <a
+              href={item.href}
+              class="flex items-center gap-1 px-3 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+            >
+              {item.label}
+              {hasChildren(item) && (
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="currentColor"
+                  class="opacity-60 group-hover:rotate-180 transition-transform duration-200"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2 4l4 4 4-4"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    fill="none"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              )}
+            </a>
+            {hasChildren(item) && (
+              <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 absolute top-full left-0 pt-2 z-50 min-w-[220px] transition-all duration-150 pointer-events-none group-hover:pointer-events-auto">
+                <div class="bg-[var(--navy-950)] rounded-[var(--r-lg)] border border-white/10 py-2 shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
+                  {item.children.map((child: NavItem) => (
+                    <a
+                      href={child.href}
+                      class="block px-4 py-2.5 text-sm text-white/75 hover:text-white hover:bg-white/8 transition-colors"
+                    >
+                      {child.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- Mobile hamburger -->
+    <div class="md:hidden">
+      <label class="cursor-pointer text-white block" aria-label="Otwórz menu nawigacyjne">
+        <input type="checkbox" class="sr-only peer" id="nav-toggle" aria-label="Przełącz menu" />
+        <span class="block peer-checked:hidden" aria-hidden="true">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"
+            ></line><line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </span>
+        <span class="hidden peer-checked:block" aria-hidden="true">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="4" y1="4" x2="20" y2="20"></line><line x1="20" y1="4" x2="4" y2="20"></line>
+          </svg>
+        </span>
+        <div
+          class="hidden peer-checked:block fixed left-0 right-0 top-[72px] bottom-0 bg-[var(--navy-950)] z-50 overflow-y-auto border-t border-white/10"
+        >
+          <nav class="p-6 grid gap-1">
+            {
+              items.map((item) => (
+                <div>
+                  <a
+                    href={item.href}
+                    class="flex items-center justify-between py-3 px-4 text-white font-semibold rounded-lg hover:bg-white/8"
+                  >
+                    {item.label}
+                  </a>
+                  {hasChildren(item) && (
+                    <div class="pl-4 pb-2 grid gap-0.5">
+                      {item.children.map((child: NavItem) => (
+                        <a
+                          href={child.href}
+                          class="block py-2 px-4 text-sm text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                        >
+                          {child.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))
+            }
+          </nav>
+        </div>
+      </label>
+    </div>
+  </div>
+</nav>
+<!-- Skip-link target: skip to main content -->
+<div id="main-content" tabindex="-1" style="outline:none"></div>

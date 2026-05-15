@@ -1,0 +1,36 @@
+---
+interface Props {
+  variant?: 'hero' | 'pilot'
+  style?: Record<string, string>
+  quote?: string
+  by?: string
+}
+
+const { variant = 'hero', style, quote = '', by = '' } = Astro.props
+const styleByVariant: Record<NonNullable<Props['variant']>, Record<string, string>> = {
+  hero: {
+    root: 'ds-section',
+    inner: 'ds-container',
+    card: 'rounded-[var(--r-xl)] p-8 bg-[var(--navy-950)] text-white',
+    quote: 'text-[20px] md:text-[22px] italic',
+    by: 'text-white/70 mt-4',
+  },
+  pilot: {
+    root: 'ds-section',
+    inner: 'ds-container max-w-[920px]',
+    card: 'ds-surface p-6 border-l-4 border-[var(--accent-500)]',
+    quote: 'text-[18px] italic text-[var(--text-strong)]',
+    by: 'ds-muted mt-3',
+  },
+}
+const s = { ...styleByVariant[variant], ...(style ?? {}) }
+---
+
+<section class={s.root}>
+  <div class={s.inner}>
+    <blockquote class={s.card}>
+      <p class={s.quote}>„{quote}"</p>
+      {by && <footer class={s.by}>— {by}</footer>}
+    </blockquote>
+  </div>
+</section>

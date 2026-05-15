@@ -1,0 +1,225 @@
+---
+import { type AppImage } from '@/lib/images'
+import { Image } from 'astro:assets'
+
+interface Card {
+  title: string
+  image?: AppImage
+  imagePosition?: string
+  href?: string
+  icon?: string
+}
+
+interface Props {
+  layout?: 'grid3' | 'grid4' | 'grid6'
+  style?: Record<string, string>
+  title?: string
+  cards?: Card[]
+  enableLightbox?: boolean
+}
+
+const { layout = 'grid3', style, title = '', cards = [], enableLightbox = false } = Astro.props
+const gridByLayout: Record<NonNullable<Props['layout']>, string> = {
+  grid3: 'grid grid-cols-1 md:grid-cols-3 gap-6',
+  grid4: 'grid grid-cols-1 md:grid-cols-4 gap-6',
+  grid6: 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6',
+}
+const defaultStyle = {
+  root: 'ds-section',
+  inner: 'ds-container',
+  title: 'ds-h2 mb-8',
+  grid: gridByLayout[layout],
+  card: 'ds-surface ds-card-hover overflow-hidden',
+}
+const s = { ...defaultStyle, ...(style ?? {}) }
+const imageSizesByLayout: Record<NonNullable<Props['layout']>, string> = {
+  grid3: '(min-width: 1280px) 384px, (min-width: 768px) 33vw, 100vw',
+  grid4: '(min-width: 1280px) 282px, (min-width: 768px) 25vw, 100vw',
+  grid6: '(min-width: 1280px) 384px, (min-width: 640px) 50vw, 100vw',
+}
+
+const iconEmoji: Record<string, string> = {
+  settings: '⚙',
+  map: '🗺',
+  cloud: '🌤',
+  shield: '🛡',
+  plane: '✈',
+  package: '📦',
+  building2: '🏢',
+  monitor: '🖥',
+  helicopter: '🚁',
+  lifeBuoy: '🛟',
+  flame: '🔥',
+}
+const transparentPixel = 'data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA='
+---
+
+<section class={s.root}>
+  <div class={s.inner}>
+    {title && <h2 class={s.title}>{title}</h2>}
+    <div class={s.grid}>
+      {
+        cards.map((card, idx) => {
+          return (
+          <a
+            href={enableLightbox ? '#' : (card.href ? card.href : '#')}
+            class={s.card}
+            data-lightbox-open={enableLightbox ? 'true' : undefined}
+            data-index={enableLightbox ? idx : undefined}
+            data-src={enableLightbox && card.image ? card.image.src.src : undefined}
+            data-alt={enableLightbox ? card.image?.alt || card.title : undefined}
+            data-caption={enableLightbox ? card.title : undefined}
+          >
+            {/* Photo */}
+            <div class="aspect-video overflow-hidden bg-gradient-to-br from-[var(--navy-600)] to-[var(--navy-900)]">
+            {
+              card.image && (
+                <Image
+                  src={card.image.src}
+                  alt={card.image.alt || card.title}
+                  class="w-full h-full object-cover"
+                  widths={[360, 540, 720, 960, 1200]}
+                  sizes={imageSizesByLayout[layout]}
+                  loading="lazy"
+                  style={card.imagePosition ? `object-position: ${card.imagePosition}` : undefined}
+                />
+              )
+            }
+            </div>
+            {/* Info bar */}
+            <div class="px-4 py-3 flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-[var(--r-sm)] bg-[var(--navy-50)] flex items-center justify-center text-sm shrink-0">
+                  {card.icon ? (iconEmoji[card.icon] ?? '✈') : '✈'}
+                </div>
+                <p class="font-semibold text-[var(--text-strong)] text-[15px] leading-snug">
+                  {card.title}
+                </p>
+              </div>
+              <svg
+                class="text-[var(--amber-500)] shrink-0"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path d="M3 8h10M9 4l4 4-4 4" />
+              </svg>
+            </div>
+          </a>
+        )})
+      }
+    </div>
+  </div>
+</section>
+
+{
+  enableLightbox && (
+    <div
+      id="image-card-grid-lightbox"
+      class="fixed inset-0 z-[130] hidden bg-black/85 p-4 sm:p-6"
+      aria-hidden="true"
+      role="dialog"
+      aria-label="Podgląd zdjęcia"
+    >
+      <div class="h-full w-full flex flex-col items-center justify-center gap-4">
+        <button
+          type="button"
+          id="image-card-grid-lightbox-close"
+          class="self-end text-white/80 hover:text-white text-sm px-3 py-2 rounded-md bg-white/10"
+        >
+          Zamknij
+        </button>
+        <img
+          id="image-card-grid-lightbox-image"
+          src={transparentPixel}
+          alt=""
+          class="max-h-[72vh] w-auto max-w-full object-contain rounded-lg shadow-2xl"
+          loading="eager"
+          decoding="async"
+          width="1200"
+          height="675"
+        />
+        <p
+          id="image-card-grid-lightbox-caption"
+          class="max-w-4xl text-center text-white/90 text-sm sm:text-base leading-relaxed"
+        ></p>
+      </div>
+    </div>
+  )
+}
+
+{
+  enableLightbox && (
+    <script>
+      const openButtons = document.querySelectorAll<HTMLAnchorElement>(
+        '[data-lightbox-open="true"]'
+      )
+      const lightbox = document.getElementById('image-card-grid-lightbox')
+      const closeButton = document.getElementById('image-card-grid-lightbox-close')
+      const lightboxImage = document.getElementById(
+        'image-card-grid-lightbox-image'
+      ) as HTMLImageElement | null
+      const lightboxCaption = document.getElementById('image-card-grid-lightbox-caption')
+      let activeIndex = 0
+
+      const updateLightbox = (index: number) => {
+        const btn = openButtons[index]
+        if (!btn || !lightboxImage || !lightboxCaption) return
+        lightboxImage.src = btn.dataset.src ?? ''
+        lightboxImage.alt = btn.dataset.alt ?? ''
+        lightboxCaption.textContent = btn.dataset.caption ?? btn.dataset.alt ?? ''
+        activeIndex = index
+      }
+
+      const openLightbox = (index: number) => {
+        if (!lightbox) return
+        updateLightbox(index)
+        lightbox.classList.remove('hidden')
+        lightbox.setAttribute('aria-hidden', 'false')
+        document.body.style.overflow = 'hidden'
+      }
+
+      const closeLightbox = () => {
+        if (!lightbox) return
+        lightbox.classList.add('hidden')
+        lightbox.setAttribute('aria-hidden', 'true')
+        document.body.style.overflow = ''
+      }
+
+      const nextImage = () => {
+        if (openButtons.length === 0) return
+        const next = (activeIndex + 1) % openButtons.length
+        updateLightbox(next)
+      }
+
+      const prevImage = () => {
+        if (openButtons.length === 0) return
+        const prev = (activeIndex - 1 + openButtons.length) % openButtons.length
+        updateLightbox(prev)
+      }
+
+      openButtons.forEach((button, idx) => {
+        button.addEventListener('click', (event) => {
+          event.preventDefault()
+          openLightbox(idx)
+        })
+      })
+
+      closeButton?.addEventListener('click', closeLightbox)
+      lightbox?.addEventListener('click', (event) => {
+        if (event.target === lightbox) closeLightbox()
+      })
+
+      document.addEventListener('keydown', (event) => {
+        if (!lightbox || lightbox.classList.contains('hidden')) return
+        if (event.key === 'Escape') closeLightbox()
+        if (event.key === 'ArrowRight') nextImage()
+        if (event.key === 'ArrowLeft') prevImage()
+      })
+    </script>
+  )
+}

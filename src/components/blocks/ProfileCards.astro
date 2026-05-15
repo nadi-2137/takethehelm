@@ -1,0 +1,83 @@
+---
+import { type AppImage } from '@/lib/images'
+import { Image } from 'astro:assets'
+
+interface ProfileCard {
+  name: string
+  subtitle?: string
+  image?: AppImage
+  href?: string
+}
+
+interface Props {
+  style?: Record<string, string>
+  title?: string
+  cards?: ProfileCard[]
+}
+
+const { style, title, cards = [] } = Astro.props
+const defaultStyle = {
+  root: 'ds-section',
+  inner: 'ds-container',
+  grid: 'grid grid-cols-1 md:grid-cols-3 gap-8 mt-2',
+}
+const s = { ...defaultStyle, ...(style ?? {}) }
+---
+
+<section class={s.root}>
+  <div class={s.inner}>
+    {title && <h2 class="ds-h2 mb-8 text-[var(--text-strong)]">{title}</h2>}
+    <ul class={s.grid}>
+      {
+        cards.map((card) => (
+          <li class="list-none">
+            {(() => {
+              return card.href ? (
+                <a
+                  href={card.href}
+                  class="group block bg-white border border-[var(--border-default)] rounded-[var(--r-lg)] overflow-hidden hover:border-[var(--amber-500)]/40 transition-colors"
+                >
+                  <div class="aspect-[4/5] overflow-hidden bg-gradient-to-br from-[var(--navy-800)] to-[var(--navy-950)]">
+                    {card.image && (
+                      <Image
+                        src={card.image.src}
+                        alt={card.image.alt ?? card.name}
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        widths={[320, 480, 640, 800]}
+                        sizes="(min-width: 1280px) 384px, (min-width: 768px) 33vw, 100vw"
+                        loading="lazy"
+                      />
+                    )}
+                  </div>
+                  <div class="p-5">
+                    <p class="text-[var(--text-strong)] font-semibold text-base mb-1">{card.name}</p>
+                    {card.subtitle && <p class="text-[var(--text-default)] text-sm">{card.subtitle}</p>}
+                  </div>
+                </a>
+              ) : (
+                <div class="bg-white border border-[var(--border-default)] rounded-[var(--r-lg)] overflow-hidden">
+                  <div class="aspect-[4/5] overflow-hidden bg-gradient-to-br from-[var(--navy-800)] to-[var(--navy-950)]">
+                    {card.image && (
+                      <Image
+                        src={card.image.src}
+                        alt={card.image.alt ?? card.name}
+                        class="w-full h-full object-cover"
+                        widths={[320, 480, 640, 800]}
+                        sizes="(min-width: 1280px) 384px, (min-width: 768px) 33vw, 100vw"
+                        loading="lazy"
+                      />
+                    )}
+                  </div>
+                  <div class="p-5">
+                    <p class="text-[var(--text-strong)] font-semibold text-base mb-1">{card.name}</p>
+                    {card.subtitle && <p class="text-[var(--text-default)] text-sm">{card.subtitle}</p>}
+                  </div>
+                </div>
+              )
+            })()}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

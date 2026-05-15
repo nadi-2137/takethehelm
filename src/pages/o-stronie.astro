@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Navbar from '../components/blocks/Navbar.astro'
+import PageHero from '../components/blocks/PageHero.astro'
+import Prose from '../components/blocks/Prose.astro'
+import SectionNavCards from '../components/blocks/SectionNavCards.astro'
+import FactsRow from '../components/blocks/FactsRow.astro'
+import SplitCTA from '../components/blocks/SplitCTA.astro'
+import FAQ from '../components/blocks/FAQ.astro'
+import Footer from '../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'O stronie',
+  subtitle:
+    'Edukacyjny serwis o lotnictwie przygotowany z myślą o uczniach, studentach i osobach rozważających karierę pilota.',
+  description:
+    'Założenia projektu, sposób opracowania treści oraz wskazówki, jak korzystać z serwisu.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Projekt"
+    subtitle={pageMeta.subtitle}
+    image={images.site.home}
+  />
+  <Prose
+    title="Założenia projektu"
+    lead="Celem serwisu jest rzetelne i zrozumiałe pokazanie zawodu pilota: od codziennej pracy, przez ścieżkę kariery, po technologię i kulturę bezpieczeństwa."
+    sections={[
+      {
+        h: 'Dla kogo jest ta strona?',
+        p: 'Dla uczniów i studentów, którzy chcą zrozumieć lotnictwo „od środka”, a także dla osób rozważających ścieżkę pilota i szukających uporządkowanego punktu startowego.',
+      },
+      {
+        h: 'Jak zbudowana jest treść?',
+        p: 'Serwis prowadzi od podstaw do praktyki: najpierw „co to jest”, potem „jak działa”, a na końcu „jak wygląda w kokpicie”.',
+      },
+      {
+        h: 'Dlaczego akcent na kobiety w lotnictwie?',
+        p: 'W lotnictwie rośnie udział kobiet, ale nadal działają stereotypy. Dlatego stawiamy na perspektywę kompetencji i odpowiedzialności.',
+      },
+      {
+        h: 'Co dalej po przeczytaniu?',
+        p: 'Najlepiej wybrać jedną ścieżkę: „Kariera” (jeśli myślisz o zawodzie), „Technologia” (jeśli chcesz zrozumieć systemy), albo „Wiedza” (jeśli chcesz szybciej utrwalić podstawy).',
+      },
+    ]}
+  />
+  <SectionNavCards
+    title="Najlepsze ścieżki startu"
+    cards={[
+      {
+        title: 'Zawód pilota',
+        subtitle: 'Obowiązki i odpowiedzialność',
+        href: 'zawod/',
+        icon: 'plane',
+      },
+      { title: 'Kariera', subtitle: 'Jak zostać pilotką', href: 'kariera/', icon: 'briefcase' },
+      { title: 'Technologia', subtitle: 'Kokpit i systemy', href: 'technologia/', icon: 'cpu' },
+      { title: 'Źródła', subtitle: 'Rzetelność informacji', href: 'zrodla/', icon: 'link' },
+    ]}
+  />
+  <FactsRow
+    title="Co wyróżnia ten serwis?"
+    items={[
+      { icon: 'check', label: 'Jasna mapa treści: zawód, kariera, technologia, wiedza, ludzie' },
+      { icon: 'cpu', label: 'Połączenie prostego języka z realiami pracy i systemów lotniczych' },
+      {
+        icon: 'users',
+        label: 'Nacisk na kompetencje, odpowiedzialność i przełamywanie stereotypów',
+      },
+    ]}
+  />
+  <FAQ
+    title="FAQ: o projekcie"
+    items={[
+      {
+        q: 'Czy to strona szkoleniowa dla pilotów?',
+        a: 'Nie. To serwis edukacyjny i popularyzatorski, który porządkuje podstawy zawodu, technologii i ścieżek rozwoju.',
+      },
+      {
+        q: 'Jak aktualizować treści?',
+        a: 'Najlepiej działać działami tematycznymi i dbać o spójność: najpierw treść, potem linkowanie między stronami, a na końcu przegląd wizualny.',
+      },
+      {
+        q: 'Gdzie sprawdzić wiarygodność informacji?',
+        a: 'W dziale Źródła znajdziesz instytucje i standardy, które stanowią punkt odniesienia dla materiałów na stronie.',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Zacznij od celu, nie od przypadku"
+    subtitle="Jeśli chcesz iść krok po kroku: najpierw „Zawód”, potem „Kariera”, a następnie „Technologia”. Taki układ daje najszybsze zrozumienie całego tematu."
+    image={images.topic.profession.whoIsPilot}
+    action={{ label: 'Przejdź do działu Zawód', href: 'zawod/' }}
+  />
+  <Footer />
+</BaseLayout>

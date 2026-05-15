@@ -1,0 +1,48 @@
+---
+interface Props {
+  style?: Record<string, string>
+  title?: string
+  subtitle?: string
+  action?: { label: string; href: string }
+}
+
+const { style, title = '', subtitle = '', action } = Astro.props
+const defaultStyle = {
+  root: 'ds-section',
+  inner: 'ds-container',
+  card: 'rounded-[var(--r-xl)] p-6 md:p-8 bg-gradient-to-r from-[var(--navy-800)] to-[var(--navy-950)] text-white flex flex-col md:flex-row gap-6 md:items-center md:justify-between',
+  title: 'text-[22px] font-semibold',
+  subtitle: 'text-white/80 mt-1',
+  action: '',
+}
+const s = { ...defaultStyle, ...(style ?? {}) }
+---
+
+<section class={s.root}>
+  <div class={s.inner}>
+    <div class={s.card}>
+      <div class="flex-1">
+        <p class={s.title}>{title}</p>
+        {subtitle && <p class={s.subtitle}>{subtitle}</p>}
+      </div>
+      {
+        action && (
+          <a href={action.href} class="ds-btn ds-btn-primary shrink-0 whitespace-nowrap">
+            {action.label}
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
+          </a>
+        )
+      }
+    </div>
+  </div>
+</section>

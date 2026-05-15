@@ -1,0 +1,131 @@
+---
+import { images } from '@/lib/images'
+
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import Timeline from '../../components/blocks/Timeline.astro'
+import Checklist from '../../components/blocks/Checklist.astro'
+import Table from '../../components/blocks/Table.astro'
+import ImageCardGrid from '../../components/blocks/ImageCardGrid.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import Footer from '../../components/blocks/Footer.astro'
+
+export const pageMeta = {
+  title: 'Jak zostać pilotką',
+  description: 'Plan krok po kroku: edukacja, szkolenie, licencje i pierwsze doświadczenia.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Kariera"
+    subtitle="Praktyczny przewodnik krok po kroku."
+    image={images.topic.career.becomePilot}
+  />
+  <Timeline
+    variant="arrowSteps"
+    title="Ścieżka w skrócie"
+    steps={[
+      {
+        label: 'Podstawy (szkoła + angielski)',
+      },
+      {
+        label: 'Szkolenie teoretyczne',
+      },
+      {
+        label: 'Loty szkolne + nalot',
+      },
+      {
+        label: 'Licencje i egzaminy',
+      },
+      {
+        label: 'Doświadczenie i procedury',
+      },
+      {
+        label: 'Praca w lotnictwie',
+      },
+    ]}
+    cta={{
+      label: 'Zobacz szkolenia',
+      href: 'kariera/szkolenia/',
+    }}
+  />
+  <Checklist
+    title="Checklista: plan startowy"
+    items={[
+      'Ustal cel: rekreacja czy ścieżka zawodowa',
+      'Wzmocnij angielski i podstawy (mat/fiz)',
+      'Poznaj pojęcia (słownik) i zasady bezpieczeństwa',
+      'Zaplanuj naukę: teoria → praktyka → symulator',
+      'Śledź swoje postępy i ucz się systematycznie',
+    ]}
+  />
+  <Checklist
+    title="Kroki do zawodu"
+    items={[
+      'Zadbaj o matematykę, fizykę i język angielski.',
+      'Poznaj podstawy lotnictwa i zasady bezpieczeństwa.',
+      'Wybierz szkolenie lotnicze (teoria + praktyka).',
+      'Zdobądź licencje i buduj nalot (godziny).',
+      'Rozwijaj kompetencje: koncentracja, komunikacja, odporność na stres.',
+      'Ćwicz procedury i nawyki — to one budują bezpieczeństwo.',
+    ]}
+  />
+  <Table
+    title="Licencje w skrócie"
+    columns={['Licencja', 'Co pozwala?', 'Dla kogo?']}
+    rows={[
+      ['PPL', 'Latanie rekreacyjne', 'Początek drogi'],
+      ['CPL', 'Latanie zawodowe', 'Praca pilota'],
+      ['ATPL', 'Pilot liniowy', 'Linie lotnicze'],
+    ]}
+  />
+  <ImageCardGrid
+    title="Co warto przeczytać dalej?"
+    cards={[
+      {
+        title: 'Szkolenia lotnicze',
+        image: images.topic.career.flightTraining,
+        href: 'kariera/szkolenia/',
+        icon: 'graduationCap',
+      },
+      {
+        title: 'Licencje lotnicze',
+        image: images.topic.career.pilotLicense,
+        href: 'kariera/licencje/',
+        icon: 'idCard',
+      },
+      {
+        title: 'Wymagane umiejętności',
+        image: images.topic.career.pilotSkills,
+        href: 'kariera/umiejetnosci/',
+        icon: 'sparkles',
+      },
+    ]}
+  />
+  <FAQ
+    title="Najczęstsze pytania"
+    items={[
+      {
+        q: 'Czy trzeba być świetnym z matematyki i fizyki?',
+        a: 'Podstawy pomagają, szczególnie na początku. Kluczowe są jednak regularna nauka, zrozumienie procedur i praktyczne utrwalanie wiedzy.',
+      },
+      {
+        q: 'Czy to droga tylko dla wybranych?',
+        a: 'To droga dla osób konsekwentnych. Umiejętności buduje się etapami: teoria, praktyka, symulator, nalot i doświadczenie operacyjne.',
+      },
+      {
+        q: 'Co jest kluczowe w szkoleniu?',
+        a: 'Połączenie teorii, praktyki i symulatora, a także nawyk pracy według checklist, komunikacji i współpracy w załodze.',
+      },
+      {
+        q: 'Od czego najlepiej zacząć już dziś?',
+        a: 'Od uporządkowania celu, planu nauki i angielskiego lotniczego. Następnie przejdź przez szkolenia i licencje krok po kroku.',
+      },
+    ]}
+  />
+  <Footer />
+</BaseLayout>

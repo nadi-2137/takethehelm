@@ -1,0 +1,10 @@
+node_modules
+dist
+.astro
+
+# Local generated screenshots (root only)
+/screenshots
+
+# Keep tooling screenshots in repo
+!tools/screenshots/
+!tools/screenshots/**

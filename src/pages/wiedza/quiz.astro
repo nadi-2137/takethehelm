@@ -1,0 +1,160 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import Quiz from '../../components/blocks/Quiz.astro'
+import ImageCardGrid from '../../components/blocks/ImageCardGrid.astro'
+import Footer from '../../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Quiz',
+  description: 'Sprawdź swoją wiedzę o lotnictwie i pracy pilota.',
+}
+
+const quizQuestions = [
+  {
+    q: 'Na jakiej wysokości zwykle latają samoloty pasażerskie?',
+    options: ['1–2 km', '10–12 km', '30 km'],
+    answerIndex: 1,
+  },
+  {
+    q: 'Czy autopilot zastępuje pilota?',
+    options: ['Tak', 'Nie — wspiera, ale wymaga nadzoru', 'Zależy od pogody'],
+    answerIndex: 1,
+  },
+  {
+    q: 'Po co stosuje się checklisty?',
+    options: ['Żeby było szybciej', 'Żeby ograniczyć ryzyko błędów', 'Tylko dla formalności'],
+    answerIndex: 1,
+  },
+  {
+    q: 'Co pokazuje radar pogodowy?',
+    options: ['Temperaturę w kabinie', 'Warunki pogodowe na trasie', 'Poziom paliwa'],
+    answerIndex: 1,
+  },
+  {
+    q: 'Kto pomaga pilotom w porządku w przestrzeni powietrznej?',
+    options: ['ATC', 'Mechanik', 'Pilot innych samolotów'],
+    answerIndex: 0,
+  },
+  {
+    q: 'Co jest priorytetem w lotnictwie?',
+    options: ['Punktualność', 'Bezpieczeństwo', 'Szybkość'],
+    answerIndex: 1,
+  },
+  {
+    q: 'Jak nazywa się nowoczesny kokpit z ekranami?',
+    options: ['Glass cockpit', 'Paper cockpit', 'Silent cockpit'],
+    answerIndex: 0,
+  },
+  {
+    q: 'Czy turbulencje zwykle są groźne?',
+    options: ['Zwykle nie', 'Zawsze tak', 'Tylko nocą'],
+    answerIndex: 0,
+  },
+  {
+    q: 'Jaką rolę odgrywa praca zespołowa w kokpicie?',
+    options: ['Drugorzędną', 'Kluczową (CRM)', 'Nie ma znaczenia'],
+    answerIndex: 1,
+  },
+  {
+    q: 'Dlaczego technologia jest ważna w kokpicie?',
+    options: [
+      'Dla wyglądu',
+      'Dla świadomości sytuacyjnej i wsparcia decyzji',
+      'Żeby skrócić lot',
+    ],
+    answerIndex: 1,
+  },
+  {
+    q: 'Co oznacza skrót CRM?',
+    options: [
+      'Crew Resource Management',
+      'Central Radar Module',
+      'Control Route Method',
+    ],
+    answerIndex: 0,
+  },
+  {
+    q: 'Kiedy załoga planuje lotnisko zapasowe?',
+    options: ['Dopiero po starcie', 'Na etapie planowania lotu', 'Tylko przy złej pogodzie'],
+    answerIndex: 1,
+  },
+  {
+    q: 'Za co odpowiada autopilot w praktyce?',
+    options: ['Za wszystkie decyzje', 'Za utrzymanie parametrów lotu', 'Za kontakt z ATC'],
+    answerIndex: 1,
+  },
+  {
+    q: 'Czy nowoczesne samoloty mają systemy zapasowe?',
+    options: ['Nie', 'Tak, to standard bezpieczeństwa', 'Tylko wojskowe'],
+    answerIndex: 1,
+  },
+  {
+    q: 'Język standardowej komunikacji lotniczej międzynarodowej to:',
+    options: ['Polski', 'Niemiecki', 'Angielski'],
+    answerIndex: 2,
+  },
+  {
+    q: 'Co może wpłynąć na zmianę trasy lotu?',
+    options: ['Tylko ilość pasażerów', 'Pogoda i ruch lotniczy', 'Kolor samolotu'],
+    answerIndex: 1,
+  },
+  {
+    q: 'Co oznacza „cross-check” w załodze?',
+    options: ['Wspólne sprawdzanie krytycznych czynności', 'Zmiana miejsc pilotów', 'Test głośników'],
+    answerIndex: 0,
+  },
+  {
+    q: 'Czy punktualność może być ważniejsza niż bezpieczeństwo?',
+    options: ['Tak, przy krótkich lotach', 'Nie, bezpieczeństwo jest zawsze pierwsze', 'To zależy od linii'],
+    answerIndex: 1,
+  },
+]
+
+const shuffledQuizQuestions = [...quizQuestions].sort(() => Math.random() - 0.5)
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Wiedza"
+    subtitle="Duży zestaw pytań — zobacz ile pamiętasz."
+    image={images.topic.knowledge.factsAndMyths}
+  />
+  <Quiz
+    title="Quiz o lotnictwie"
+    questions={shuffledQuizQuestions}
+    result={{
+      successTitle: 'Super!',
+      successText: 'Masz solidne podstawy lotnicze.',
+      retryLabel: 'Spróbuj ponownie',
+    }}
+  />
+  <ImageCardGrid
+    title="Chcesz poprawić wynik?"
+    cards={[
+      {
+        title: 'FAQ',
+        image: images.topic.knowledge.factsAndMyths,
+        href: 'wiedza/faq/',
+        icon: 'helpCircle',
+      },
+      {
+        title: 'Mity i fakty',
+        image: images.topic.knowledge.mythsAndFactsCard,
+        href: 'wiedza/mity-i-fakty/',
+        icon: 'layers',
+      },
+      {
+        title: 'Technologia',
+        image: images.topic.technology.cockpitCard,
+        href: 'technologia/',
+        icon: 'cpu',
+      },
+    ]}
+  />
+  <Footer />
+</BaseLayout>

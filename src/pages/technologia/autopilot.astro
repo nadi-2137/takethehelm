@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import QuickCards from '../../components/blocks/QuickCards.astro'
+import FactsRow from '../../components/blocks/FactsRow.astro'
+import Prose from '../../components/blocks/Prose.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import SplitCTA from '../../components/blocks/SplitCTA.astro'
+import Footer from '../../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Autopilot',
+  description: 'Jak działa autopilot i dlaczego pilot nadal jest niezbędny.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Technologia"
+    subtitle="Wsparcie pilota — nie jego zamiennik"
+    image={images.topic.technology.autopilot}
+    primaryAction={{
+      label: 'Kokpit samolotu',
+      href: 'technologia/kokpit/',
+    }}
+    secondaryAction={{
+      label: 'Bezpieczeństwo lotów',
+      href: 'technologia/bezpieczenstwo/',
+    }}
+  />
+  <QuickCards
+    cards={[
+      {
+        title: 'Stabilizacja lotu',
+        subtitle: 'Utrzymanie kursu i wysokości',
+        image: images.gallery.cockpitControls,
+        href: 'technologia/autopilot/#stabilizacja',
+        icon: 'target',
+      },
+      {
+        title: 'Zarządzanie trasą',
+        subtitle: 'Współpraca z nawigacją',
+        image: images.topic.technology.navigation,
+        href: 'technologia/nawigacja/',
+        icon: 'map',
+      },
+      {
+        title: 'Tryby pracy',
+        subtitle: 'Różne fazy lotu',
+        image: images.gallery.cockpitGlass,
+        href: 'technologia/autopilot/#tryby',
+        icon: 'settings',
+      },
+      {
+        title: 'Nadzór pilota',
+        subtitle: 'Decyzje zawsze po stronie człowieka',
+        image: images.topic.technology.safety,
+        href: 'technologia/bezpieczenstwo/',
+        icon: 'shield',
+      },
+    ]}
+  />
+  <FactsRow
+    title="Mity i fakty"
+    items={[
+      { icon: 'check', label: 'Autopilot pomaga w rutynie, ale wymaga nadzoru' },
+      { icon: 'users', label: 'Załoga podejmuje decyzje — system nie „odczuwa” ryzyka' },
+      { icon: 'cloud', label: 'Warunki pogodowe i nietypowe sytuacje to rola człowieka' },
+    ]}
+  />
+  <Prose
+    variant="cards"
+    title="Jak autopilot realnie wspiera lot"
+    lead="Autopilot nie „lata sam”. Załoga wybiera tryb, monitoruje parametry i decyduje, kiedy automatykę włączyć albo odłączyć."
+    sections={[
+      {
+        id: 'stabilizacja',
+        h: 'Stabilizacja lotu',
+        p: 'Autopilot pomaga utrzymać zadany kurs, wysokość i prędkość. To odciąża pilota w dłuższych odcinkach lotu, ale wymaga stałego monitorowania i gotowości do szybkiej reakcji.',
+      },
+      {
+        h: 'Współpraca z nawigacją',
+        p: 'System korzysta z planu lotu i punktów nawigacyjnych, aby prowadzić samolot po zaplanowanej trasie. Gdy warunki się zmieniają, załoga aktualizuje decyzję i zatwierdza nowy przebieg lotu.',
+      },
+      {
+        id: 'tryby',
+        h: 'Tryby pracy autopilota',
+        p: 'W praktyce używa się różnych trybów: m.in. utrzymania wysokości, kursu czy podejścia. Kluczowe jest rozumienie, który tryb jest aktywny i jakie ma ograniczenia w danej fazie lotu.',
+      },
+    ]}
+  />
+  <FAQ
+    title="FAQ: autopilot bez mitów"
+    items={[
+      {
+        q: 'Czy autopilot może zastąpić pilota?',
+        a: 'Nie. Autopilot wykonuje zadania zgodnie z wybranym trybem, ale nie przejmuje odpowiedzialności za sytuację operacyjną i decyzje.',
+      },
+      {
+        q: 'Kiedy załoga odłącza autopilota?',
+        a: 'Zawsze, gdy wymaga tego sytuacja, faza lotu lub procedura. Piloci ćwiczą takie przejścia regularnie podczas szkoleń i sesji symulatorowych.',
+      },
+      {
+        q: 'Czy automatyka zmniejsza bezpieczeństwo przez „uśpienie czujności”?',
+        a: 'Dobrze używana automatyka je zwiększa, ale wymaga dyscypliny: cross-checku, komunikacji i jasnego podziału ról w kokpicie.',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Autopilot + radar pogodowy"
+    subtitle="Piloci łączą dane z wielu systemów, aby wybrać najbezpieczniejszą trasę i decyzję."
+    image={images.topic.technology.weatherRadar}
+    action={{ label: 'Radar pogodowy', href: 'technologia/radar-pogodowy/' }}
+  />
+  <Footer />
+</BaseLayout>

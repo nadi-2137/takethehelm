@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import QuickCards from '../../components/blocks/QuickCards.astro'
+import FactsRow from '../../components/blocks/FactsRow.astro'
+import Prose from '../../components/blocks/Prose.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import SplitCTA from '../../components/blocks/SplitCTA.astro'
+import Footer from '../../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Radar pogodowy',
+  description: 'Pogoda w lotnictwie to nie ciekawostka — to klucz do bezpiecznej trasy.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Technologia"
+    subtitle="Bezpieczna trasa zaczyna się od danych"
+    image={images.topic.technology.weatherRadar}
+    primaryAction={{
+      label: 'Systemy nawigacyjne',
+      href: 'technologia/nawigacja/',
+    }}
+    secondaryAction={{
+      label: 'Bezpieczeństwo lotów',
+      href: 'technologia/bezpieczenstwo/',
+    }}
+  />
+  <QuickCards
+    cards={[
+      {
+        title: 'Burze',
+        subtitle: 'Unikanie stref niebezpiecznych',
+        image: images.topic.technology.weatherRadar,
+        href: 'technologia/radar-pogodowy/#burze',
+        icon: 'cloud',
+      },
+      {
+        title: 'Turbulencje',
+        subtitle: 'Komfort i bezpieczeństwo',
+        image: images.topic.technology.safety,
+        href: 'technologia/radar-pogodowy/#turbulencje',
+        icon: 'wind',
+      },
+      {
+        title: 'Decyzje załogi',
+        subtitle: 'Pilot wybiera najlepszą opcję',
+        image: images.site.knowledge,
+        href: 'zawod/odpowiedzialnosc/',
+        icon: 'shield',
+      },
+      {
+        title: 'Procedury',
+        subtitle: 'Standardy w powietrzu',
+        image: images.topic.profession.responsibility,
+        href: 'zawod/odpowiedzialnosc/',
+        icon: 'list',
+      },
+    ]}
+  />
+  <FactsRow
+    title="Najważniejsze zasady"
+    items={[
+      { icon: 'check', label: 'Pilot planuje trasę z uwzględnieniem pogody' },
+      { icon: 'map', label: 'Trasa może się zmienić w locie — bezpieczeństwo jest priorytetem' },
+      { icon: 'users', label: 'Załoga współpracuje i podejmuje decyzje wspólnie' },
+    ]}
+  />
+  <Prose
+    variant="cards"
+    title="Jak radar pogodowy wspiera decyzje załogi"
+    lead="Radar to narzędzie do oceny ryzyka na trasie: pokazuje, gdzie mogą pojawić się strefy wymagające ominięcia lub zmiany planu."
+    sections={[
+      {
+        id: 'burze',
+        h: 'Burze i strefy konwekcyjne',
+        p: 'Silne opady i chmury burzowe mogą oznaczać niebezpieczne warunki. Załoga analizuje obraz radaru, konsultuje się z ATC i wybiera obejście, które zachowuje margines bezpieczeństwa.',
+      },
+      {
+        id: 'turbulencje',
+        h: 'Turbulencje i komfort pasażerów',
+        p: 'Nie każda turbulencja jest groźna, ale każda wymaga właściwej reakcji. Piloci dobierają wysokość i trasę tak, aby ograniczyć ryzyko oraz poprawić komfort lotu.',
+      },
+      {
+        h: 'Decyzja zawsze po stronie człowieka',
+        p: 'System dostarcza dane, ale nie ocenia całego kontekstu operacyjnego. Ostateczna decyzja uwzględnia pogodę, paliwo, ruch, procedury lotniska i sytuację załogi.',
+      },
+    ]}
+  />
+  <FAQ
+    title="FAQ: radar i pogoda w praktyce"
+    items={[
+      {
+        q: 'Czy radar „widzi wszystko”?',
+        a: 'Nie. Radar ma ograniczenia interpretacyjne, dlatego dane z radaru łączy się z prognozami, raportami pogodowymi i doświadczeniem załogi.',
+      },
+      {
+        q: 'Czy trasa może zmienić się w trakcie lotu?',
+        a: 'Tak. To standardowa praktyka, gdy warunki pogodowe lub operacyjne wymagają bezpieczniejszego wariantu.',
+      },
+      {
+        q: 'Dlaczego czasem samolot leci „naokoło”?',
+        a: 'Omijanie stref burzowych to świadomy wybór bezpieczeństwa. Czas lotu może się wydłużyć, ale priorytetem pozostaje bezpieczny przelot.',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Pogoda + nawigacja"
+    subtitle="Radar pogodowy daje obraz sytuacji, a systemy nawigacyjne pomagają zaplanować obejście stref burzowych."
+    image={images.topic.technology.navigation}
+    action={{ label: 'Systemy nawigacyjne', href: 'technologia/nawigacja/' }}
+  />
+  <Footer />
+</BaseLayout>

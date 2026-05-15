@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import SectionNavCards from '../../components/blocks/SectionNavCards.astro'
+import ImageCardGrid from '../../components/blocks/ImageCardGrid.astro'
+import SplitCTA from '../../components/blocks/SplitCTA.astro'
+import Footer from '../../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Wiedza',
+  description: 'Ciekawostki, słownik, FAQ, mity i fakty oraz quiz.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Wyżej niż szklany sufit"
+    subtitle="Szybko, prosto i po ludzku: pojęcia, fakty i sprawdzian wiedzy."
+    image={images.site.knowledge}
+  />
+  <SectionNavCards
+    title="Co wybierasz?"
+    cards={[
+      {
+        title: 'Ciekawostki',
+        subtitle: 'Liczby i fakty',
+        href: 'wiedza/ciekawostki/',
+        icon: 'sparkles',
+      },
+      {
+        title: 'Słownik',
+        subtitle: 'ATC, checklisty, avionika',
+        href: 'wiedza/slownik/',
+        icon: 'bookOpen',
+      },
+      { title: 'FAQ', subtitle: 'Najczęstsze pytania', href: 'wiedza/faq/', icon: 'helpCircle' },
+      { title: 'Quiz', subtitle: 'Sprawdź się!', href: 'wiedza/quiz/', icon: 'check' },
+    ]}
+  />
+  <ImageCardGrid
+    layout="grid4"
+    title="Wiedza, która prowadzi dalej"
+    cards={[
+      {
+        title: 'Mity i fakty',
+        image: images.topic.knowledge.mythsAndFactsCard,
+        href: 'wiedza/mity-i-fakty/',
+        icon: 'layers',
+      },
+      {
+        title: 'Technologia',
+        image: images.topic.technology.cockpit,
+        href: 'technologia/',
+        icon: 'cpu',
+      },
+      {
+        title: 'Zawód',
+        image: images.topic.profession.whoIsPilot,
+        href: 'zawod/',
+        icon: 'plane',
+      },
+      { title: 'Galeria', image: images.site.gallery, href: 'galeria/', icon: 'image' },
+    ]}
+  />
+  <SectionNavCards
+    title="Szybkie przejścia"
+    cards={[
+      {
+        title: 'Mity vs fakty',
+        subtitle: 'Obal lotnicze skróty myślowe',
+        href: 'wiedza/mity-i-fakty/',
+        icon: 'layers',
+      },
+      {
+        title: 'FAQ',
+        subtitle: 'Najczęstsze pytania i odpowiedzi',
+        href: 'wiedza/faq/',
+        icon: 'helpCircle',
+      },
+      {
+        title: 'Słownik',
+        subtitle: 'Terminologia bez żargonu',
+        href: 'wiedza/slownik/',
+        icon: 'bookOpen',
+      },
+      {
+        title: 'Quiz',
+        subtitle: 'Sprawdź się w praktyce',
+        href: 'wiedza/quiz/',
+        icon: 'check',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Zamień teorię w praktykę"
+    subtitle="Najpierw FAQ i słownik, potem quiz. Taki układ najszybciej porządkuje podstawy lotnictwa."
+    image={images.topic.knowledge.factsAndMyths}
+    action={{ label: 'Start: FAQ', href: 'wiedza/faq/' }}
+  />
+  <Footer />
+</BaseLayout>

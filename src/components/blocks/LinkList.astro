@@ -1,0 +1,50 @@
+---
+interface LinkItem {
+  label: string
+  href: string
+}
+
+interface Props {
+  style?: Record<string, string>
+  title?: string
+  items?: LinkItem[]
+}
+
+const { style, title = '', items = [] } = Astro.props
+const defaultStyle = {
+  root: 'ds-section',
+  inner: 'ds-container max-w-[920px]',
+  title: 'ds-h2 mb-4',
+  list: 'grid gap-3',
+  item: 'ds-surface p-4 flex items-center justify-between',
+}
+const s = { ...defaultStyle, ...(style ?? {}) }
+
+function isExternal(href: string) {
+  return href.startsWith('http://') || href.startsWith('https://')
+}
+---
+
+<section class={s.root}>
+  <div class={s.inner}>
+    {title && <h2 class={s.title}>{title}</h2>}
+    <ul class={s.list} role="list">
+      {
+        items.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class={s.item}
+              {...(isExternal(item.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
+              <span>{item.label}</span>
+              <span class="text-[var(--navy-600)]" aria-hidden="true">
+                {isExternal(item.href) ? '↗' : '→'}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

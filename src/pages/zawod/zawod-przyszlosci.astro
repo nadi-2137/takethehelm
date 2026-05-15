@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import FeatureSection from '../../components/blocks/FeatureSection.astro'
+import FactsRow from '../../components/blocks/FactsRow.astro'
+import ImageCardGrid from '../../components/blocks/ImageCardGrid.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import SplitCTA from '../../components/blocks/SplitCTA.astro'
+import Checklist from '../../components/blocks/Checklist.astro'
+import Footer from '../../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Zawód przyszłości: pilotka',
+  description:
+    'Dlaczego pilot/pilotka to zawód przyszłości: technologia, bezpieczeństwo, kompetencje i rozwój lotnictwa.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Zawód"
+    subtitle="Technologia przyspiesza — a rola człowieka w kokpicie staje się jeszcze bardziej strategiczna."
+    image={images.topic.profession.whoIsPilot}
+  />
+  <FeatureSection
+    title="3 powody, dla których to zawód przyszłości"
+    lead="Nowoczesne lotnictwo łączy technologię, bezpieczeństwo i pracę zespołową w środowisku międzynarodowym."
+    features={[
+      {
+        title: 'Technologia',
+        text: 'Kokpit to zaawansowane systemy wspierające decyzje: nawigacja, autopilot, radar pogodowy.',
+        icon: 'cpu',
+      },
+      {
+        title: 'Bezpieczeństwo',
+        text: 'Standardy, redundancja, checklisty i symulatory sprawiają, że lotnictwo jest bardzo bezpieczne.',
+        icon: 'shield',
+      },
+      {
+        title: 'Kompetencje',
+        text: 'Pilot to lider w zespole: komunikacja, CRM, koncentracja i praca pod presją.',
+        icon: 'users',
+      },
+    ]}
+  />
+  <FactsRow
+    title="Co realnie zmienia się w lotnictwie?"
+    items={[
+      { icon: 'cpu', label: 'Więcej automatyzacji zadań rutynowych i pracy na danych' },
+      {
+        icon: 'shield',
+        label: 'Coraz wyższe wymagania w zakresie procedur i zarządzania ryzykiem',
+      },
+      {
+        icon: 'world',
+        label: 'Silniejszy nacisk na kompetencje językowe i współpracę międzynarodową',
+      },
+    ]}
+  />
+  <Checklist
+    title="Jak przygotować się do zawodu przyszłości?"
+    items={[
+      'Buduj solidne podstawy: matematyka, fizyka, język angielski.',
+      'Ćwicz kompetencje decyzyjne i komunikacyjne, nie tylko „latanie”.',
+      'Ucz się pracy z technologią: avionika, nawigacja, świadomość sytuacyjna.',
+      'Traktuj bezpieczeństwo jako nawyk, a nie jednorazowy temat.',
+      'Przygotuj długofalowy plan: szkolenie, licencje, nalot, rozwój.',
+    ]}
+  />
+  <ImageCardGrid
+    title="Zobacz konkretne obszary"
+    cards={[
+      {
+        title: 'Technologia',
+        image: images.topic.technology.cockpit,
+        href: 'technologia/',
+        icon: 'cpu',
+      },
+      {
+        title: 'Kariera',
+        image: images.topic.career.airlineCareer,
+        href: 'kariera/',
+        icon: 'briefcase',
+      },
+      {
+        title: 'Odpowiedzialność',
+        image: images.topic.profession.responsibility,
+        href: 'zawod/odpowiedzialnosc/',
+        icon: 'shield',
+      },
+    ]}
+  />
+  <FAQ
+    title="Najczęstsze pytania"
+    items={[
+      {
+        q: 'Czy automatyzacja zastąpi pilotów?',
+        a: 'Nie w przewidywalnej przyszłości. Automatyzacja przejmuje rutynę, ale decyzje i odpowiedzialność w sytuacjach niestandardowych nadal należą do załogi.',
+      },
+      {
+        q: 'Jakie kompetencje będą najcenniejsze?',
+        a: 'Najwięcej daje połączenie techniki i kompetencji miękkich: praca na danych, komunikacja, CRM i spokojne działanie pod presją.',
+      },
+      {
+        q: 'Dlaczego to zawód przyszłości?',
+        a: 'Bo łączy nowoczesną technologię, odpowiedzialność i środowisko globalne. Im bardziej złożone operacje, tym większa rola dobrze wyszkolonej załogi.',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Chcesz zacząć tę drogę?"
+    subtitle="Zobacz plan krok po kroku: edukacja, szkolenia, licencje i umiejętności."
+    image={images.topic.career.airlineCareer}
+    action={{ label: 'Jak zostać pilotką', href: 'kariera/jak-zostac/' }}
+  />
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,271 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import ArticleLayout from '../../components/blocks/ArticleLayout.astro'
+import FeatureSection from '../../components/blocks/FeatureSection.astro'
+import Checklist from '../../components/blocks/Checklist.astro'
+import ImageCardGrid from '../../components/blocks/ImageCardGrid.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import BannerCTA from '../../components/blocks/BannerCTA.astro'
+import Footer from '../../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Kim jest pilot?',
+  description: 'Czym zajmuje się pilot, jakie ma obowiązki oraz gdzie może pracować.',
+}
+
+const articleData = {
+  aside: {
+    card: {
+      title: 'Szybkie skróty',
+      items: [
+        {
+          label: 'Czym zajmuje się pilot?',
+          href: '#czym-zajmuje',
+        },
+        {
+          label: 'Obowiązki',
+          href: '#obowiazki',
+        },
+        {
+          label: 'Kapitan i Pierwszy Oficer',
+          href: '#role',
+        },
+        {
+          label: 'Gdzie pracuje?',
+          href: '#gdzie-pracuje',
+        },
+      ],
+      cta: {
+        label: 'Dzień pracy pilota',
+        href: 'zawod/dzien-pracy/',
+      },
+    },
+    media: {
+      src: images.people.pilotByAircraft.src,
+      alt: images.people.pilotByAircraft.alt,
+    },
+  },
+  content: [
+    {
+      type: 'FeatureSection',
+      variant: '3cards',
+      props: {
+        style: {
+          root: 'ds-section pt-10 pb-10 md:pt-12 md:pb-12',
+        },
+        title: 'Czym zajmuje się pilot?',
+        lead: 'Pilot odpowiada za prowadzenie samolotu oraz bezpieczeństwo pasażerów i załogi.',
+        features: [
+          {
+            title: 'Planowanie lotu',
+            text: 'Trasa, paliwo, pogoda i alternatywy.',
+            icon: 'route',
+          },
+          {
+            title: 'Sterowanie i nadzór',
+            text: 'Start, lot i lądowanie zgodnie z procedurami.',
+            icon: 'plane',
+          },
+          {
+            title: 'Komunikacja i checklisty',
+            text: 'Kontakt z ATC, praca zespołowa i standardy.',
+            icon: 'radio',
+          },
+        ],
+      },
+    },
+    {
+      type: 'Checklist',
+      variant: 'ticks',
+      props: {
+        style: {
+          root: 'ds-section pt-10 pb-10 md:pt-12 md:pb-12',
+        },
+        title: 'Obowiązki pilota (przykłady)',
+        items: [
+          'Wykonywanie lotu według planu i procedur operacyjnych.',
+          'Monitorowanie systemów pokładowych i reagowanie na nieprawidłowości.',
+          'Stała komunikacja z kontrolą ruchu lotniczego (ATC).',
+          'Współpraca z drugim pilotem i załogą pokładową.',
+          'Podejmowanie decyzji operacyjnych z priorytetem bezpieczeństwa.',
+        ],
+      },
+    },
+    {
+      type: 'FeatureSection',
+      variant: '3cards',
+      props: {
+        style: {
+          root: 'ds-section pt-10 pb-10 md:pt-12 md:pb-12',
+        },
+        title: 'Kapitan i Pierwszy Oficer',
+        lead: 'W kokpicie zawsze pracuje zespół. Role są jasno podzielone, a najważniejsza jest współpraca.',
+        features: [
+          {
+            title: 'Kapitan',
+            text: 'Odpowiada za lot i podejmowanie decyzji operacyjnych.',
+            icon: 'shield',
+          },
+          {
+            title: 'Pierwszy Oficer',
+            text: 'Wspiera dowodzenie, wykonuje procedury i prowadzi lot zgodnie z podziałem ról.',
+            icon: 'users',
+          },
+          {
+            title: 'CRM',
+            text: 'Crew Resource Management: komunikacja, współpraca, świadomość sytuacyjna.',
+            icon: 'messageSquare',
+          },
+        ],
+      },
+    },
+    {
+      type: 'Checklist',
+      variant: 'ticks',
+      props: {
+        style: {
+          root: 'ds-section pt-10 pb-10 md:pt-12 md:pb-12',
+        },
+        title: 'Checklista: co robi pilot?',
+        items: [
+          'Plan lotu i analiza pogody',
+          'Briefing i podział ról w kokpicie',
+          'Checklisty przed startem',
+          'Komunikacja z ATC',
+          'Nadzór nad systemami w locie',
+          'Procedury podejścia i lądowania',
+        ],
+      },
+    },
+    {
+      type: 'ImageCardGrid',
+      variant: 'grid3',
+      props: {
+        style: {
+          root: 'ds-section pt-10 pb-10 md:pt-12 md:pb-12',
+        },
+        title: 'Gdzie pracują piloci?',
+        cards: [
+          {
+            title: 'Linie lotnicze',
+            image: images.roles.airline,
+            href: 'zawod/typy-pilotow/#liniowy',
+            icon: 'building2',
+          },
+          {
+            title: 'Lotnictwo wojskowe',
+            image: images.roles.military,
+            href: 'zawod/typy-pilotow/#wojskowy',
+            icon: 'shield',
+          },
+          {
+            title: 'Transport i cargo',
+            image: images.roles.cargo,
+            href: 'zawod/typy-pilotow/#cargo',
+            icon: 'package',
+          },
+          // TODO: dodać więcej typów - zgodnie z tym co jest dostępne w assets
+        ],
+      },
+    },
+    {
+      type: 'FAQ',
+      variant: 'accordion',
+      props: {
+        style: {
+          root: 'ds-section pt-10 pb-10 md:pt-12 md:pb-12',
+        },
+        title: 'Najczęstsze pytania',
+        items: [
+          {
+            q: 'Czy pilot to zawód „tylko dla mężczyzn”?',
+            a: 'Nie. W kokpicie liczą się umiejętności, trening, procedury i praca zespołowa — płeć nie ma znaczenia.',
+          },
+          {
+            q: 'Czy pilot jest potrzebny, skoro jest autopilot?',
+            a: 'Tak. Systemy wspierają lot, ale decyzje, odpowiedzialność i reakcje w sytuacjach nietypowych należą do załogi.',
+          },
+          {
+            q: 'Co jest najważniejsze w pracy pilota?',
+            a: 'Bezpieczeństwo, procedury, komunikacja i współpraca — to fundament lotnictwa.',
+          },
+          {
+            q: 'Czy każda decyzja w kokpicie jest indywidualna?',
+            a: 'Nie. Decyzje opierają się na procedurach, współpracy załogi i komunikacji z ATC. To praca zespołowa, nie „solowy styl”.',
+          },
+        ],
+      },
+    },
+    {
+      type: 'BannerCTA',
+      variant: 'gradient',
+      props: {
+        style: {
+          root: 'ds-section pt-10 pb-10 md:pt-12 md:pb-12',
+        },
+        title: 'Chcesz zobaczyć jak wygląda dzień pracy pilota?',
+        subtitle: 'Zajrzyj do przewodnika krok po kroku — briefing, start, lot i lądowanie.',
+        action: {
+          label: 'Dzień pracy pilota',
+          href: 'zawod/dzien-pracy/',
+        },
+      },
+    },
+  ],
+}
+const articleContent = articleData.content
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Zawód"
+    subtitle="Technologia, pasja, podróże po świecie — i ogromna odpowiedzialność."
+    image={images.topic.profession.whoIsPilot}
+    primaryAction={{
+      label: 'Zawód pilota',
+      href: 'zawod/',
+    }}
+    secondaryAction={{
+      label: 'Jak zostać pilotką',
+      href: 'kariera/jak-zostac/',
+    }}
+  />
+  <ArticleLayout variant="withAsideCard" aside={articleData.aside}>
+    <div id="czym-zajmuje"><FeatureSection {...articleContent[0].props} /></div>
+  </ArticleLayout>
+  <div id="obowiazki"><Checklist {...articleContent[1].props as any} /></div>
+  <div id="role"><FeatureSection {...articleContent[2].props} /></div>
+  <Checklist {...articleContent[3].props as any} />
+  <div id="gdzie-pracuje"><ImageCardGrid {...articleContent[4].props} /></div>
+  <FAQ {...articleContent[5].props as any} />
+  <BannerCTA {...articleContent[6].props} />
+  <ImageCardGrid
+    title="Zobacz też"
+    cards={[
+      {
+        title: 'Dzień pracy',
+        image: images.topic.profession.workDay,
+        href: 'zawod/dzien-pracy/',
+        icon: 'calendar',
+      },
+      {
+        title: 'Odpowiedzialność',
+        image: images.topic.profession.responsibilityCard,
+        href: 'zawod/odpowiedzialnosc/',
+        icon: 'shield',
+      },
+      {
+        title: 'Technologia',
+        image: images.topic.technology.cockpitCard,
+        href: 'technologia/',
+        icon: 'cpu',
+      },
+    ]}
+  />
+  <Footer />
+</BaseLayout>

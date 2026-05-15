@@ -1,0 +1,45 @@
+---
+interface FAQItem {
+  q: string
+  a: string
+}
+
+interface Props {
+  style?: Record<string, string>
+  title?: string
+  items?: FAQItem[]
+}
+
+const { style, title = '', items = [] } = Astro.props
+const defaultStyle = {
+  root: 'ds-section',
+  inner: 'ds-container max-w-[920px]',
+  title: 'ds-h2 mb-6',
+  item: 'ds-surface p-5',
+  q: 'font-semibold text-[var(--text-strong)]',
+  a: 'ds-muted mt-2 leading-7',
+}
+const s = { ...defaultStyle, ...(style ?? {}) }
+---
+
+<section class={s.root}>
+  <div class={s.inner}>
+    {title && <h2 class={s.title}>{title}</h2>}
+    <div class="grid gap-3">
+      {
+        items.map((item) => (
+          <details class={s.item}>
+            <summary class={`${s.q} flex justify-between items-center cursor-pointer list-none`}>
+              <span>{item.q}</span>
+              <span
+                class="faq-icon ml-4 text-[var(--navy-600)] font-bold text-xl select-none"
+                aria-hidden="true"
+              />
+            </summary>
+            <p class={s.a}>{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

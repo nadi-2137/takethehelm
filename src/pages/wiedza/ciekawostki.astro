@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import SectionNavCards from '../../components/blocks/SectionNavCards.astro'
+import FactsGrid from '../../components/blocks/FactsGrid.astro'
+import Checklist from '../../components/blocks/Checklist.astro'
+import Prose from '../../components/blocks/Prose.astro'
+import ImageCardGrid from '../../components/blocks/ImageCardGrid.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import SplitCTA from '../../components/blocks/SplitCTA.astro'
+import Footer from '../../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Ciekawostki o lotnictwie',
+  description: 'Fakty, liczby i ciekawostki o samolotach, lotach i pracy pilota.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Wiedza"
+    subtitle="Szybkie fakty, które robią wrażenie — i pomagają zrozumieć, jak działa latanie."
+    image={images.topic.knowledge.factsAndMyths}
+  />
+  <SectionNavCards
+    title="Co chcesz zobaczyć?"
+    cards={[
+      {
+        title: 'Liczby i fakty',
+        subtitle: 'Wysokość, prędkość, warunki',
+        href: '#liczby',
+        icon: 'barChart3',
+      },
+      {
+        title: 'Technologia',
+        subtitle: 'Autopilot, radar, kokpit',
+        href: 'technologia/',
+        icon: 'cpu',
+      },
+      { title: 'Zawód pilota', subtitle: 'Jak wygląda praca', href: 'zawod/', icon: 'plane' },
+      {
+        title: 'Słownik pojęć',
+        subtitle: 'ATC, checklisty, avionika',
+        href: 'wiedza/slownik/',
+        icon: 'bookOpen',
+      },
+    ]}
+  />
+  <Prose
+    variant="cards"
+    title="Jak czytać te liczby?"
+    lead="Same liczby są punktem startu. Najważniejsze jest, co z nich wynika dla planowania lotu i bezpieczeństwa."
+    sections={[
+      {
+        id: 'liczby',
+        h: 'Liczby w kontekście operacyjnym',
+        p: 'Wysokość, prędkość i temperatura nie są ciekawostką samą w sobie. To parametry, które wpływają na decyzje załogi dotyczące trasy, zużycia paliwa i marginesów bezpieczeństwa.',
+      },
+      {
+        h: 'Dlaczego to ważne dla początkujących',
+        p: 'Rozumienie podstawowych parametrów lotu pomaga szybciej przyswoić pojęcia ze słownika i lepiej zrozumieć, jak działają systemy pokładowe.',
+      },
+    ]}
+  />
+  <FactsGrid
+    items={[
+      { icon: 'altitude', label: 'Typowa wysokość lotu: 10–12 km' },
+      { icon: 'speed', label: 'Prędkość przelotowa: ok. 900 km/h' },
+      { icon: 'thermometer', label: 'Na dużej wysokości bywa: poniżej 0°C' },
+      { icon: 'radio', label: 'Stała komunikacja z ATC to standard' },
+      { icon: 'shield', label: 'Bezpieczeństwo: redundancja systemów' },
+      { icon: 'clock', label: 'Trening: dużo godzin w symulatorze' },
+      { icon: 'plane', label: 'Nowoczesne samoloty mają wiele niezależnych systemów zapasowych' },
+      { icon: 'cloud', label: 'Załoga stale monitoruje pogodę przed lotem i w trakcie trasy' },
+      { icon: 'cpu', label: 'Autopilot utrzymuje parametry lotu, ale decyzje zawsze należą do ludzi' },
+    ]}
+    title="Liczby i fakty (krótko i konkretnie)"
+  />
+  <Checklist
+    title="Checklista: 5 faktów do zapamiętania"
+    items={[
+      'Typowa wysokość lotu pasażerskiego: 10–12 km',
+      'Prędkość przelotowa: ok. 900 km/h',
+      'W kabinie utrzymuje się ciśnienie i temperaturę bezpieczne dla pasażerów',
+      'Procedury i checklisty są podstawą bezpieczeństwa',
+      'Pogoda realnie wpływa na lot i decyzje',
+      'Autopilot wspiera, ale nie zastępuje pilota',
+      'Każdy lot to praca zespołowa: piloci, ATC, obsługa naziemna',
+    ]}
+  />
+  <ImageCardGrid
+    layout="grid4"
+    title="Ciekawostki, które prowadzą dalej"
+    cards={[
+      {
+        title: 'Autopilot',
+        image: images.topic.technology.autopilot,
+        href: 'technologia/autopilot/',
+        icon: 'settings',
+      },
+      {
+        title: 'Radar pogodowy',
+        image: images.topic.technology.weatherRadar,
+        href: 'technologia/radar-pogodowy/',
+        icon: 'cloud',
+      },
+      {
+        title: 'Bezpieczeństwo lotów',
+        image: images.topic.technology.safety,
+        href: 'technologia/bezpieczenstwo/',
+        icon: 'shield',
+      },
+      {
+        title: 'Dzień pracy pilota',
+        image: images.topic.profession.workDay,
+        href: 'zawod/dzien-pracy/',
+        icon: 'calendar',
+      },
+    ]}
+  />
+  <FAQ
+    title="Najczęstsze pytania do tych ciekawostek"
+    items={[
+      {
+        q: 'Czy autopilot „lata sam”?',
+        a: 'Autopilot pomaga utrzymywać parametry lotu, ale piloci cały czas nadzorują sytuację i podejmują decyzje.',
+      },
+      {
+        q: 'Dlaczego w lotnictwie jest tyle procedur?',
+        a: 'Bo procedury i checklisty zmniejszają ryzyko błędów — to podstawa kultury bezpieczeństwa.',
+      },
+      {
+        q: 'Czy pogoda ma znaczenie, skoro samolot jest nowoczesny?',
+        a: 'Tak — pogoda wpływa na trasę, komfort i bezpieczeństwo, dlatego załoga stale analizuje warunki.',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Jak pogłębić tę wiedzę?"
+    subtitle="Najpierw technologia (jak działają systemy), potem zawód (jak wyglądają decyzje w praktyce)."
+    image={images.topic.technology.cockpit}
+    action={{ label: 'Przejdź do technologii', href: 'technologia/' }}
+  />
+  <ImageCardGrid
+    title="Polecane następne kroki"
+    cards={[
+      {
+        title: 'Quiz',
+        image: images.topic.knowledge.factsAndMyths,
+        href: 'wiedza/quiz/',
+        icon: 'check',
+      },
+      {
+        title: 'Mity i fakty',
+        image: images.topic.knowledge.mythsAndFactsCard,
+        href: 'wiedza/mity-i-fakty/',
+        icon: 'layers',
+      },
+      {
+        title: 'Technologia',
+        image: images.topic.technology.cockpit,
+        href: 'technologia/',
+        icon: 'cpu',
+      },
+    ]}
+  />
+  <Footer />
+</BaseLayout>

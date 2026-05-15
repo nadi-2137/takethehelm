@@ -1,0 +1,65 @@
+---
+import { Image } from 'astro:assets'
+import { type AppImage } from '@/lib/images'
+
+interface Card {
+  title: string
+  subtitle?: string
+  image?: AppImage
+  href?: string
+}
+
+interface Props {
+  style?: Record<string, string>
+  title?: string
+  cards?: Card[]
+}
+
+const { style, title = '', cards = [] } = Astro.props
+const defaultStyle = {
+  root: 'ds-section',
+  inner: 'ds-container',
+  title: 'ds-h2 mb-8',
+  grid: 'grid grid-cols-1 md:grid-cols-3 gap-6',
+  card: 'ds-surface ds-card-hover overflow-hidden',
+}
+const s = { ...defaultStyle, ...(style ?? {}) }
+const currentPath = Astro.url.pathname
+
+function resolveHref(href?: string) {
+  if (!href) return '#'
+  if (href.startsWith('#')) return `${currentPath}${href}`
+  return href
+}
+---
+
+<section class={s.root}>
+  <div class={s.inner}>
+    {title && <h2 class={s.title}>{title}</h2>}
+    <div class={s.grid}>
+      {
+        cards.map((card) => (
+          <a href={resolveHref(card.href)} class={s.card}>
+            <div class="aspect-video overflow-hidden bg-gradient-to-br from-[var(--navy-700)] to-[var(--navy-950)]">
+              {(() => {
+                return card.image ? (
+                  <Image
+                    src={card.image?.src}
+                    alt={card.image?.alt ?? card.title}
+                    class="w-full h-full object-cover"
+                    widths={[360, 540, 720, 960]}
+                    sizes="(min-width: 1280px) 384px, (min-width: 768px) 33vw, 100vw"
+                  />
+                ) : null
+              })()}
+            </div>
+            <div class="p-4">
+              <p class="font-semibold text-[var(--text-primary)]">{card.title}</p>
+              {card.subtitle && <p class="ds-muted text-sm mt-1">{card.subtitle}</p>}
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

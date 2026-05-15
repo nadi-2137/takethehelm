@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import SectionNavCards from '../../components/blocks/SectionNavCards.astro'
+import ImageCardGrid from '../../components/blocks/ImageCardGrid.astro'
+import Prose from '../../components/blocks/Prose.astro'
+import SplitCTA from '../../components/blocks/SplitCTA.astro'
+import Footer from '../../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Zawód pilota',
+  description:
+    'Kim jest pilot, jak wygląda jego praca i co sprawia, że to jeden z najtrudniejszych zawodów na świecie.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Wyżej niż szklany sufit"
+    subtitle="Kim jest pilot, jak wygląda jego praca i co sprawia, że to jeden z najtrudniejszych i najpiękniejszych zawodów na świecie."
+    image={images.topic.profession.whoIsPilot}
+  />
+  <SectionNavCards
+    title="Poznaj zawód pilota"
+    cards={[
+      {
+        title: 'Kim jest pilot?',
+        subtitle: 'Rola, odpowiedzialność, umiejętności',
+        href: 'zawod/kim-jest-pilot/',
+        icon: 'user',
+      },
+      {
+        title: 'Dzień pracy',
+        subtitle: 'Od briefingu do lądowania',
+        href: 'zawod/dzien-pracy/',
+        icon: 'calendar',
+      },
+      {
+        title: 'Odpowiedzialność',
+        subtitle: 'Procedury, decyzje i bezpieczeństwo',
+        href: 'zawod/odpowiedzialnosc/',
+        icon: 'shield',
+      },
+      {
+        title: 'Typy pilotów',
+        subtitle: 'Liniowy, cargo, wojskowy i inni',
+        href: 'zawod/typy-pilotow/',
+        icon: 'plane',
+      },
+    ]}
+  />
+  <Prose
+    title="Dla kogo jest ten dział?"
+    lead="Ten dział pomaga szybko znaleźć właściwy punkt startowy, niezależnie od tego, czy chcesz tylko poznać realia pracy, czy planujesz karierę."
+    sections={[
+      {
+        h: 'Dla osób rozważających karierę',
+        p: 'Jeśli chcesz sprawdzić, czy to ścieżka dla Ciebie, zacznij od stron „Kim jest pilot?” i „Dzień pracy”. Zobaczysz codzienne obowiązki, rytm pracy i wymagania.',
+      },
+      {
+        h: 'Dla uczniów i studentów',
+        p: 'Jeśli interesuje Cię lotnictwo od strony praktycznej, przejdź do „Typy pilotów” i „Zawód przyszłości”. Te strony porządkują możliwości rozwoju i specjalizacji.',
+      },
+      {
+        h: 'Dla osób, które chcą zrozumieć odpowiedzialność',
+        p: 'Jeśli najważniejsze są dla Ciebie bezpieczeństwo i decyzje, przejdź do strony „Odpowiedzialność”. To tam najlepiej widać, jak działa załoga kokpitowa i procedury.',
+      },
+    ]}
+  />
+  <ImageCardGrid
+    title="Odkryj więcej"
+    cards={[
+      {
+        title: 'Kim jest pilot?',
+        image: images.topic.profession.whoIsPilotCard,
+        href: 'zawod/kim-jest-pilot/',
+        icon: 'user',
+      },
+      {
+        title: 'Zawód przyszłości',
+        image: images.topic.profession.pilotTypes,
+        href: 'zawod/zawod-przyszlosci/',
+        icon: 'rocket',
+      },
+      {
+        title: 'Dzień pracy pilota',
+        image: images.topic.profession.workDay,
+        href: 'zawod/dzien-pracy/',
+        icon: 'calendar',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Chcesz zostać pilotką?"
+    subtitle="Dowiedz się, jak wygląda ścieżka edukacji, szkolenia i licencji — krok po kroku."
+    image={images.topic.career.becomePilot}
+    action={{ label: 'Kariera pilotki', href: 'kariera/' }}
+  />
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import SectionNavCards from '../../components/blocks/SectionNavCards.astro'
+import Timeline from '../../components/blocks/Timeline.astro'
+import Checklist from '../../components/blocks/Checklist.astro'
+import FactsRow from '../../components/blocks/FactsRow.astro'
+import ImageCardGrid from '../../components/blocks/ImageCardGrid.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import SplitCTA from '../../components/blocks/SplitCTA.astro'
+import Footer from '../../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Dzień pracy pilota',
+  description: 'Jak wygląda typowy dzień pilota: przygotowanie, briefing, lot i procedury.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Zawód"
+    subtitle="Od przygotowania i briefingu po lądowanie — krok po kroku."
+    image={images.topic.profession.whoIsPilot}
+  />
+  <SectionNavCards
+    title="Szybkie skróty"
+    cards={[
+      {
+        title: 'Przebieg dnia',
+        subtitle: 'Timeline krok po kroku',
+        href: '#timeline',
+        icon: 'route',
+      },
+      {
+        title: 'Procedury',
+        subtitle: 'Checklisty i standardy',
+        href: 'zawod/odpowiedzialnosc/',
+        icon: 'list',
+      },
+      {
+        title: 'Technologia',
+        subtitle: 'Systemy wspierające lot',
+        href: 'technologia/',
+        icon: 'cpu',
+      },
+      { title: 'FAQ', subtitle: 'Najczęstsze pytania', href: '#faq', icon: 'helpCircle' },
+    ]}
+  />
+  <Timeline
+    variant="verticalSteps"
+    title="Przebieg dnia"
+    steps={[
+      {
+        label: 'Przygotowanie',
+        desc: 'Dokumenty lotu, pogoda, paliwo, plan trasy i alternatywy.',
+      },
+      {
+        label: 'Briefing',
+        desc: 'Ustalenie ról, procedur, priorytetów i decyzji operacyjnych.',
+      },
+      {
+        label: 'Pre-flight',
+        desc: 'Sprawdzenie samolotu, cockpit setup i checklisty.',
+      },
+      {
+        label: 'Start',
+        desc: 'Kołowanie, zgody ATC, procedury startowe i monitorowanie parametrów.',
+      },
+      {
+        label: 'Lot',
+        desc: 'Nawigacja, monitorowanie systemów, komunikacja i aktualna analiza pogody.',
+      },
+      {
+        label: 'Lądowanie',
+        desc: 'Podejście, decyzje, procedury, zakończenie lotu i raportowanie.',
+      },
+    ]}
+  />
+  <Checklist
+    title="Checklista: dzień pracy w skrócie"
+    items={[
+      'Przed lotem: plan, pogoda, paliwo, briefing',
+      'Pre-flight: ustawienia kokpitu + checklisty',
+      'Start: zgody ATC, procedury startowe',
+      'Lot: nadzór, komunikacja, analiza pogody',
+      'Lądowanie: podejście, decyzje, procedury',
+      'Po locie: czynności końcowe i raportowanie',
+    ]}
+  />
+  <FactsRow
+    title="3 zasady, które trzymają standard"
+    items={[
+      { icon: 'shield', label: 'Bezpieczeństwo zawsze przed punktualnością' },
+      { icon: 'list', label: 'Checklisty i procedury — zamiast improwizacji' },
+      { icon: 'radio', label: 'Komunikacja: załoga + ATC = wspólna sytuacyjna świadomość' },
+    ]}
+  />
+  <ImageCardGrid
+    title="Co wspiera pilota w trakcie dnia?"
+    cards={[
+      {
+        title: 'Autopilot',
+        image: images.topic.technology.autopilot,
+        href: 'technologia/autopilot/',
+        icon: 'settings',
+      },
+      {
+        title: 'Systemy nawigacyjne',
+        image: images.topic.technology.navigation,
+        href: 'technologia/nawigacja/',
+        icon: 'map',
+      },
+      {
+        title: 'Radar pogodowy',
+        image: images.topic.technology.weatherRadar,
+        href: 'technologia/radar-pogodowy/',
+        icon: 'cloud',
+      },
+    ]}
+  />
+  <FAQ
+    title="Najczęstsze pytania"
+    items={[
+      {
+        q: 'Czy pilot cały czas steruje samolotem ręcznie?',
+        a: 'Nie. Wiele etapów wspiera automatyka, ale piloci stale monitorują parametry lotu, pogodę i sytuację operacyjną.',
+      },
+      {
+        q: 'Co jest najważniejsze w pracy pilota?',
+        a: 'Bezpieczeństwo i standard pracy: procedury, komunikacja, współpraca załogi oraz świadome decyzje pod presją czasu.',
+      },
+      {
+        q: 'Czy praca jest stresująca?',
+        a: 'Bywa. Dlatego ważne są treningi sytuacyjne, symulator, checklisty i podział ról, które porządkują działanie pod presją.',
+      },
+      {
+        q: 'Co dzieje się po lądowaniu?',
+        a: 'Po locie załoga wykonuje czynności końcowe, raportowanie operacyjne i przygotowuje samolot/plan do kolejnego odcinka lub odpoczynku.',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Odpowiedzialność w praktyce"
+    subtitle="Dzień pracy to seria decyzji: pogoda, procedury, współpraca. Zobacz, co oznacza odpowiedzialność w lotnictwie."
+    image={images.topic.profession.responsibility}
+    action={{ label: 'Odpowiedzialność pilota', href: 'zawod/odpowiedzialnosc/' }}
+  />
+  <Footer />
+</BaseLayout>

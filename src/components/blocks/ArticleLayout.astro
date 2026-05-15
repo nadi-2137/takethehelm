@@ -1,0 +1,108 @@
+---
+import type { ImageMetadata } from 'astro'
+import { Image } from 'astro:assets'
+
+interface AsideCard {
+  title: string
+  items: { label: string; href: string }[]
+  cta?: { label: string; href: string }
+}
+
+interface Props {
+  variant: string
+  style?: Record<string, string>
+  aside?: {
+    card: AsideCard
+    media?: { src: ImageMetadata; alt: string }
+  }
+}
+
+const { variant, style, aside } = Astro.props
+const styleByVariant: Record<string, Record<string, string>> = {
+  withAsideCard: {
+    root: 'ds-section',
+    inner: 'ds-container grid grid-cols-1 lg:grid-cols-12 gap-8 items-start',
+    aside: 'lg:col-span-4 grid gap-6',
+    main: 'lg:col-span-8 grid gap-8',
+  },
+  simple: {
+    root: 'ds-section',
+    inner: 'ds-container grid grid-cols-1 gap-8 max-w-[1080px]',
+  },
+}
+const s = { ...(styleByVariant[variant] ?? styleByVariant.simple), ...(style ?? {}) }
+---
+
+{
+  variant === 'withAsideCard' && (
+    <section class={s.root}>
+      <div class={s.inner}>
+        <aside class={s.aside}>
+          {/* Image on top (per mockup) */}
+          {aside?.media?.src && (
+            <div class="ds-surface overflow-hidden rounded-[var(--r-xl)]">
+              <Image
+                src={aside.media.src}
+                alt={aside.media.alt ?? ''}
+                class="w-full object-cover"
+                widths={[360, 540, 720, 960]}
+                sizes="(min-width: 1280px) 384px, (min-width: 1024px) 33vw, 100vw"
+              />
+            </div>
+          )}
+          {/* Navigation card below image */}
+          {aside?.card && (
+            <div class="ds-surface p-5 grid gap-3">
+              <h3 class="font-semibold text-[var(--text-strong)] text-sm">{aside.card.title}</h3>
+              <ul class="grid gap-1" role="list">
+                {aside.card.items.map((item) => (
+                  <li>
+                    <a
+                      href={item.href}
+                      class="flex items-center gap-2 py-1.5 px-2 text-sm text-[var(--navy-700)] hover:text-[var(--navy-900)] hover:bg-[var(--n-50)] rounded-[var(--r-sm)] transition-colors"
+                    >
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        class="text-[var(--amber-500)]"
+                        aria-hidden="true"
+                      >
+                        <path d="M2 6h8M6 2l4 4-4 4" />
+                      </svg>
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              {aside.card.cta && (
+                <a
+                  href={aside.card.cta.href}
+                  class="ds-btn ds-btn-primary w-full justify-center text-sm mt-2"
+                >
+                  {aside.card.cta.label}
+                </a>
+              )}
+            </div>
+          )}
+        </aside>
+        <div class={s.main}>
+          <slot />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+{
+  variant === 'simple' && (
+    <section class={s.root}>
+      <div class={s.inner}>
+        <slot />
+      </div>
+    </section>
+  )
+}

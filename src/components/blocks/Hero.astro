@@ -1,0 +1,121 @@
+---
+import { type ImageMetadata } from '@/lib/images'
+import { Image } from 'astro:assets'
+
+interface CTA {
+  label: string
+  href: string
+}
+
+interface Props {
+  title?: string
+  subtitle?: string
+  image?: {
+    src: ImageMetadata
+    alt: string
+    position?: string
+  }
+  primaryAction?: CTA | null
+  secondaryAction?: CTA | null
+}
+
+const {
+  title = '',
+  subtitle = '',
+  image,
+  primaryAction = null,
+  secondaryAction = null,
+} = Astro.props
+
+const bgPosition = image?.position ?? 'center center'
+---
+
+<section
+  class="heroWithBg ds-hero min-h-[520px]"
+  style={!image?.src ? 'background-color: var(--navy-950);' : undefined}
+>
+  {
+    image?.src && (
+      <>
+        {/* Background image */}
+        <Image
+          src={image.src}
+          alt=""
+          aria-hidden="true"
+          class="heroWithBg__media"
+          style={`object-position: ${bgPosition};`}
+          widths={[640, 960, 1280, 1600, 1920]}
+          sizes="100vw"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+
+        {/* Overlay */}
+        <div class="heroWithBg__overlay" />
+      </>
+    )
+  }
+
+  {/* Content */}
+  <div class="heroWithBg__content ds-container py-14 md:py-16 flex flex-col gap-6 max-w-[720px]">
+    <h1 class="ds-h1 text-white">
+      {title}
+    </h1>
+
+    {subtitle && <p class="text-[20px] text-white/80">{subtitle}</p>}
+
+    {
+      (primaryAction || secondaryAction) && (
+        <div class="flex gap-4 flex-wrap">
+          {primaryAction && (
+            <a href={primaryAction.href} class="ds-btn ds-btn-primary">
+              {primaryAction.label}
+            </a>
+          )}
+
+          {secondaryAction && (
+            <a href={secondaryAction.href} class="ds-btn ds-btn-secondary">
+              {secondaryAction.label}
+            </a>
+          )}
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .heroWithBg {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .heroWithBg__media {
+    position: absolute;
+    inset: 0;
+
+    z-index: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+  }
+
+  .heroWithBg__overlay {
+    position: absolute;
+    inset: 0;
+
+    z-index: 1;
+
+    /* background: rgb(0 0 0 / 0.25); */
+
+    pointer-events: none;
+  }
+
+  .heroWithBg__content {
+    position: relative;
+    z-index: 2;
+  }
+</style>

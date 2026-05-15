@@ -1,0 +1,21 @@
+{
+  "name": "siteshooter",
+  "build": {
+    "dockerfile": "Containerfile",
+    "context": "../.."
+  },
+  "remoteUser": "vscode",
+  "updateRemoteUserUID": false,
+  "overrideCommand": true,
+  "runArgs": ["--userns=host"],
+  "workspaceFolder": "/workspaces/takethehelm",
+  "postCreateCommand": "corepack enable && pnpm install && pnpm exec playwright install chromium",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": ["astro-build.astro-vscode", "esbenp.prettier-vscode"]
+    }
+  }
+}

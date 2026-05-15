@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import QuickCards from '../../components/blocks/QuickCards.astro'
+import FactsRow from '../../components/blocks/FactsRow.astro'
+import Prose from '../../components/blocks/Prose.astro'
+import SplitCTA from '../../components/blocks/SplitCTA.astro'
+import Footer from '../../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Słownik pojęć lotniczych',
+  description: 'Krótkie definicje pojęć: kokpit, autopilot, ATC, checklisty i wiele innych.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Wiedza"
+    subtitle="Szybko, prosto i po ludzku"
+    image={images.backgrounds.bgClouds}
+    primaryAction={{
+      label: 'Technologia',
+      href: 'technologia/',
+    }}
+    secondaryAction={{
+      label: 'Ciekawostki',
+      href: 'wiedza/ciekawostki/',
+    }}
+  />
+  <QuickCards
+    cards={[
+      {
+        title: 'ATC',
+        subtitle: 'Kontrola ruchu lotniczego',
+        image: images.people.atc,
+        href: 'wiedza/slownik/#atc',
+        icon: 'radio',
+      },
+      {
+        title: 'Glass cockpit',
+        subtitle: 'Nowoczesny kokpit',
+        image: images.gallery.cockpitGlass,
+        href: 'wiedza/slownik/#glass',
+        icon: 'monitor',
+      },
+      {
+        title: 'Checklist',
+        subtitle: 'Lista kontrolna',
+        image: images.topic.career.pilotSkills,
+        href: 'wiedza/slownik/#checklist',
+        icon: 'list',
+      },
+      {
+        title: 'Autopilot',
+        subtitle: 'System wspierający lot',
+        image: images.topic.technology.autopilot,
+        href: 'wiedza/slownik/#autopilot',
+        icon: 'settings',
+      },
+    ]}
+  />
+  <FactsRow
+    title="Jak korzystać ze słownika?"
+    items={[
+      { icon: 'check', label: 'Definicje są krótkie i praktyczne' },
+      { icon: 'map', label: 'Słownik podlinkowuje strony, gdzie temat jest rozwinięty' },
+      { icon: 'cpu', label: 'Technologia wyjaśniona bez trudnych słów' },
+      { icon: 'helpCircle', label: 'Po każdym haśle przejdź do FAQ lub quizu, żeby utrwalić wiedzę' },
+    ]}
+  />
+  <Prose
+    variant="cards"
+    title="Słownik pojęć w praktyce"
+    lead="Krótko i konkretnie: co dane pojęcie oznacza dla lotu i pracy załogi."
+    sections={[
+      {
+        id: 'atc',
+        h: 'ATC (Air Traffic Control)',
+        p: 'Kontrola ruchu lotniczego, która porządkuje ruch w przestrzeni powietrznej i na lotniskach. Piloci otrzymują instrukcje dotyczące kursu, wysokości i procedur podejścia.',
+      },
+      {
+        id: 'glass',
+        h: 'Glass cockpit',
+        p: 'Nowoczesny kokpit z ekranami zamiast wielu klasycznych zegarów. Ułatwia szybki odczyt danych, ale wymaga dobrego rozumienia systemów i pracy zespołowej.',
+      },
+      {
+        id: 'checklist',
+        h: 'Checklist',
+        p: 'Lista kontrolna wykonywana przed, w trakcie i po locie. Pomaga utrzymać standard działania i zmniejszyć ryzyko pominięcia kluczowych kroków.',
+      },
+      {
+        id: 'autopilot',
+        h: 'Autopilot',
+        p: 'System wspierający utrzymanie parametrów lotu, np. kursu i wysokości. Nie zastępuje pilota: załoga nadzoruje automatykę i podejmuje wszystkie decyzje operacyjne.',
+      },
+      {
+        h: 'CRM (Crew Resource Management)',
+        p: 'Zestaw zasad współpracy w kokpicie: komunikacja, podział ról, cross-check i zarządzanie obciążeniem. To jeden z filarów bezpieczeństwa lotniczego.',
+      },
+      {
+        h: 'Alternatywne lotnisko',
+        p: 'Lotnisko zapasowe wybierane na etapie planowania. Gdy warunki na lotnisku docelowym się pogorszą, załoga ma przygotowaną bezpieczną alternatywę.',
+      },
+      {
+        h: 'STAR / SID',
+        p: 'To opublikowane procedury odlotu i dolotu. Pomagają utrzymać porządek ruchu i bezpieczne profile lotu przy dużym natężeniu operacji.',
+      },
+      {
+        h: 'Holding',
+        p: 'Wzorzec oczekiwania wykonywany zwykle przy opóźnieniach podejścia. Załoga krąży po wyznaczonej trasie i czeka na dalsze instrukcje ATC.',
+      },
+      {
+        h: 'Minimums',
+        p: 'Minimalne warunki pogodowe i operacyjne wymagane do podejścia i lądowania. Jeśli nie są spełnione, załoga wykonuje odejście lub leci na lotnisko zapasowe.',
+      },
+      {
+        h: 'MEL (Minimum Equipment List)',
+        p: 'Lista określająca, z jakimi usterkami samolot może legalnie i bezpiecznie wykonać lot oraz jakie warunki muszą być wtedy spełnione.',
+      },
+      {
+        h: 'Briefing',
+        p: 'Krótkie omówienie planu działania przed kluczowym etapem lotu. Ustala role, ryzyka i plan awaryjny, aby zespół działał spójnie.',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Chcesz zobaczyć te pojęcia w praktyce?"
+    subtitle="Wejdź do działu Technologia i zobacz, jak wygląda kokpit i systemy pokładowe."
+    image={images.topic.technology.cockpit}
+    action={{ label: 'Technologia w lotnictwie', href: 'technologia/' }}
+  />
+  <Footer />
+</BaseLayout>

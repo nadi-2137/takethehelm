@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import QuickCards from '../../components/blocks/QuickCards.astro'
+import Timeline from '../../components/blocks/Timeline.astro'
+import FactsRow from '../../components/blocks/FactsRow.astro'
+import SplitCTA from '../../components/blocks/SplitCTA.astro'
+import Prose from '../../components/blocks/Prose.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import Footer from '../../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Umiejętności pilotki',
+  description: 'Koncentracja, decyzje, praca w zespole — co naprawdę liczy się w kokpicie.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Kariera"
+    subtitle="To zawód z głową i sercem."
+    image={images.topic.career.becomePilot}
+    primaryAction={{
+      label: 'Jak zostać pilotką',
+      href: 'kariera/jak-zostac/',
+    }}
+    secondaryAction={{
+      label: 'Szkolenia lotnicze',
+      href: 'kariera/szkolenia/',
+    }}
+  />
+  <QuickCards
+    cards={[
+      {
+        title: 'Koncentracja',
+        subtitle: 'Uwaga na szczegóły',
+        image: images.topic.profession.workDay,
+        href: 'kariera/umiejetnosci/#koncentracja',
+        icon: 'target',
+      },
+      {
+        title: 'Decyzje',
+        subtitle: 'Szybko i spokojnie',
+        image: images.topic.technology.safety,
+        href: 'kariera/umiejetnosci/#decyzje',
+        icon: 'bolt',
+      },
+      {
+        title: 'Komunikacja',
+        subtitle: 'Załoga i ATC',
+        image: images.people.atc,
+        href: 'kariera/umiejetnosci/#komunikacja',
+        icon: 'radio',
+      },
+      {
+        title: 'Odporność na stres',
+        subtitle: 'Procedury pomagają',
+        image: images.topic.profession.responsibility,
+        href: 'kariera/umiejetnosci/#stres',
+        icon: 'shield',
+      },
+    ]}
+  />
+  <Timeline
+    variant="arrowSteps"
+    title="Jak te umiejętności się rozwija?"
+    steps={[
+      {
+        label: 'Nawyki i checklisty',
+      },
+      {
+        label: 'Ćwiczenia w symulatorze',
+      },
+      {
+        label: 'Loty z instruktorem',
+      },
+      {
+        label: 'Doświadczenie w załodze',
+      },
+    ]}
+    cta={{
+      label: 'Zobacz szkolenia',
+      href: 'kariera/szkolenia/',
+    }}
+  />
+  <FactsRow
+    title="3 rzeczy, które robią różnicę"
+    items={[
+      { icon: 'list', label: 'Checklisty — piloci nie „zgadują”, tylko sprawdzają' },
+      { icon: 'users', label: 'CRM — współpraca i komunikacja w kokpicie' },
+      { icon: 'world', label: 'Angielski — język lotnictwa to standard' },
+    ]}
+  />
+  <Prose
+    variant="cards"
+    title="Jak rozwijać kluczowe umiejętności?"
+    lead="Każdy obszar możesz trenować świadomie, krok po kroku. Najważniejsza jest regularność i praca na procedurach."
+    sections={[
+      {
+        id: 'koncentracja',
+        h: 'Koncentracja',
+        p: 'Koncentracja to nawyk budowany rytmem pracy i checklistami. Pomaga dzielenie lotu na etapy oraz krótkie punkty kontrolne.',
+      },
+      {
+        id: 'decyzje',
+        h: 'Decyzje',
+        p: 'Dobre decyzje wynikają z procedur i treningu scenariuszowego. Po każdym ćwiczeniu warto zapisać, co działało, a co poprawić.',
+      },
+      {
+        id: 'komunikacja',
+        h: 'Komunikacja',
+        p: 'Precyzyjna komunikacja z załogą i ATC buduje bezpieczeństwo. Trening frazeologii i potwierdzania komunikatów uspokaja pracę pod presją.',
+      },
+      {
+        id: 'stres',
+        h: 'Odporność na stres',
+        p: 'Stres maleje, gdy rośnie przewidywalność działania. Najlepszą tarczą są standardy, podział ról i szybki powrót do procedury.',
+      },
+    ]}
+    style={{
+      section:
+        'ds-surface border border-[var(--border-default)] rounded-[var(--r-lg)] p-5 md:p-6 grid gap-2 mb-4',
+    }}
+  />
+  <SplitCTA
+    title="Chcesz trenować jak pilot?"
+    subtitle="Najlepszy start to połączenie wiedzy, symulatora i praktyki. Zobacz, jak wygląda ten proces krok po kroku."
+    image={images.topic.people.womenInAviation}
+    action={{ label: 'Ścieżka kariery', href: 'kariera/jak-zostac/' }}
+  />
+  <FAQ
+    title="FAQ: umiejętności w praktyce"
+    items={[
+      {
+        q: 'Czy te umiejętności są „wrodzone”?',
+        a: 'Nie. Można je rozwijać systematycznie: przez checklisty, trening scenariuszowy, pracę z instruktorem i świadome podsumowywanie błędów.',
+      },
+      {
+        q: 'Jak trenować komunikację, jeśli dopiero zaczynam?',
+        a: 'Zacznij od krótkich schematów: frazeologia, potwierdzanie komunikatów i ćwiczenia w parze. To szybko buduje pewność i precyzję.',
+      },
+      {
+        q: 'Co zrobić, gdy stres obniża jakość decyzji?',
+        a: 'Wracaj do procedur i podziału ról. Im lepiej wytrenowany standard działania, tym mniejszy wpływ stresu na jakość decyzji.',
+      },
+      {
+        q: 'Która umiejętność daje największy efekt na starcie?',
+        a: 'Najczęściej systematyczność i dyscyplina proceduralna. To one „ciągną w górę” pozostałe obszary: koncentrację, komunikację i decyzyjność.',
+      },
+    ]}
+  />
+  <Footer />
+</BaseLayout>

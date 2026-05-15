@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import ImageCardGrid from '../../components/blocks/ImageCardGrid.astro'
+import FactsRow from '../../components/blocks/FactsRow.astro'
+import Prose from '../../components/blocks/Prose.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import SplitCTA from '../../components/blocks/SplitCTA.astro'
+import Footer from '../../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Bezpieczeństwo lotów',
+  description:
+    'Procedury, redundancja, checklisty — dlaczego lotnictwo jest jednym z najbezpieczniejszych środków transportu.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Technologia"
+    subtitle="Procedury zamiast improwizacji"
+    image={images.topic.technology.safety}
+    primaryAction={{
+      label: 'Odpowiedzialność pilota',
+      href: 'zawod/odpowiedzialnosc/',
+    }}
+    secondaryAction={{
+      label: 'Kokpit',
+      href: 'technologia/kokpit/',
+    }}
+  />
+  <ImageCardGrid
+    layout="grid4"
+    title="Co składa się na bezpieczeństwo?"
+    cards={[
+      {
+        title: 'Checklisty',
+        image: images.topic.career.pilotSkills,
+        href: 'zawod/odpowiedzialnosc/',
+        icon: 'list',
+      },
+      {
+        title: 'Redundancja',
+        image: images.gallery.cockpitGlass,
+        href: 'technologia/kokpit/',
+        icon: 'layers',
+      },
+      {
+        title: 'Trening',
+        image: images.topic.career.flightTraining,
+        href: 'kariera/szkolenia/',
+        icon: 'graduationCap',
+      },
+      {
+        title: 'Pogoda',
+        image: images.topic.technology.weatherRadar,
+        href: 'technologia/radar-pogodowy/',
+        icon: 'cloud',
+      },
+    ]}
+  />
+  <FactsRow
+    title="3 filary bezpieczeństwa"
+    items={[
+      { icon: 'check', label: 'Standardy i procedury — piloci działają według sprawdzonych zasad' },
+      { icon: 'cpu', label: 'Technologia i zapasowe systemy — awaria nie oznacza utraty kontroli' },
+      { icon: 'users', label: 'Praca zespołowa — załoga podejmuje decyzje wspólnie' },
+    ]}
+  />
+  <Prose
+    variant="cards"
+    title="Bezpieczeństwo to system codziennych decyzji"
+    lead="W lotnictwie bezpieczeństwo buduje się przed lotem, w trakcie operacji i po zakończeniu rejsu, analizując dane i wyciągając wnioski."
+    sections={[
+      {
+        h: 'Przygotowanie przed lotem',
+        p: 'Analiza pogody, planu lotu, zapasu paliwa i procedur lotniskowych pozwala załodze wejść w lot z gotowymi scenariuszami działania.',
+      },
+      {
+        h: 'Dyscyplina proceduralna',
+        p: 'Checklisty, standardowe komunikaty i podział ról zmniejszają wpływ presji czasu. Dzięki temu nawet w złożonych sytuacjach załoga działa przewidywalnie.',
+      },
+      {
+        h: 'Uczenie się na danych',
+        p: 'Incydenty i odchylenia są analizowane, a wnioski wracają do szkolenia i procedur. To właśnie ten cykl ciągłego doskonalenia buduje wysoki poziom bezpieczeństwa lotnictwa.',
+      },
+    ]}
+  />
+  <FAQ
+    title="FAQ: bezpieczeństwo lotów"
+    items={[
+      {
+        q: 'Czy bezpieczeństwo zależy bardziej od człowieka czy technologii?',
+        a: 'Od obu elementów naraz. Najlepsze wyniki daje połączenie nowoczesnych systemów, dobrego treningu i konsekwentnych procedur.',
+      },
+      {
+        q: 'Po co tyle checklist, skoro piloci są doświadczeni?',
+        a: 'Checklisty nie zastępują wiedzy, tylko ją wzmacniają. Utrzymują powtarzalność działań i ograniczają ryzyko pominięcia krytycznego kroku.',
+      },
+      {
+        q: 'Czy lotnictwo naprawdę uczy się na błędach?',
+        a: 'Tak. Kultura raportowania i analiza zdarzeń są fundamentem poprawiania standardów w całej branży.',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Bezpieczeństwo to także umiejętności"
+    subtitle="Koncentracja, komunikacja i odporność na stres — to kompetencje, które chronią w trudnych sytuacjach."
+    image={images.topic.profession.responsibility}
+    action={{ label: 'Umiejętności pilotki', href: 'kariera/umiejetnosci/' }}
+  />
+  <Footer />
+</BaseLayout>

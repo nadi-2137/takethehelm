@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Navbar from '../components/blocks/Navbar.astro'
+import Hero from '../components/blocks/Hero.astro'
+import QuickCards from '../components/blocks/QuickCards.astro'
+import Timeline from '../components/blocks/Timeline.astro'
+import ImageCardGrid from '../components/blocks/ImageCardGrid.astro'
+import SplitCTA from '../components/blocks/SplitCTA.astro'
+import FactsRow from '../components/blocks/FactsRow.astro'
+import Prose from '../components/blocks/Prose.astro'
+import FAQ from '../components/blocks/FAQ.astro'
+import Footer from '../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Własny kurs - Wyżej niż szklany sufit',
+  subtitle: 'Wyżej niż szklany sufit',
+  description:
+    'Własny kurs - Wyżej niż szklany sufit to konkursowa strona edukacyjna o zawodzie pilotki: ścieżce kariery, technologii lotniczej, bezpieczeństwie i inspirujących historiach kobiet w lotnictwie.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <Hero
+    image={images.site.home}
+    title={pageMeta.title}
+    subtitle={pageMeta.subtitle}
+    primaryAction={{
+      label: 'Poznaj zawód pilotki',
+      href: 'zawod/',
+    }}
+    secondaryAction={{
+      label: 'Jak zostać pilotką',
+      href: 'kariera/jak-zostac/',
+    }}
+  />
+  <QuickCards
+    cards={[
+      {
+        title: 'Zawód pilota',
+        subtitle: 'Dowiedz się więcej',
+        image: images.topic.profession.pilotJob,
+        imagePosition: 'center 20%',
+        href: 'zawod/',
+        icon: 'plane',
+      },
+      {
+        title: 'Kariera pilota',
+        subtitle: 'Ścieżka kariery',
+        image: images.topic.career.airlineCareer,
+        href: 'kariera/',
+        icon: 'briefcase',
+      },
+      {
+        title: 'Technologia',
+        subtitle: 'Nowoczesny kokpit',
+        image: images.topic.technology.cockpitPromoCard,
+        href: 'technologia/',
+        icon: 'cpu',
+      },
+      {
+        title: 'Ludzie lotnictwa',
+        subtitle: 'Kobiety w lotnictwie',
+        image: images.topic.people.womenInAviationCard,
+        imagePosition: 'center 15%',
+        href: 'ludzie/kobiety-w-lotnictwie/',
+        icon: 'users',
+      },
+    ]}
+  />
+  <Timeline
+    variant="arrowSteps"
+    title="Jak zostać pilotką lub pilotem?"
+    steps={[
+      {
+        label: 'Edukacja',
+      },
+      {
+        label: 'Szkolenie lotnicze',
+      },
+      {
+        label: 'Licencja pilota',
+      },
+      {
+        label: 'Praca w liniach lotniczych',
+      },
+    ]}
+    cta={{
+      label: 'Ścieżka kariery',
+      href: 'kariera/jak-zostac/',
+    }}
+  />
+  <ImageCardGrid
+    layout="grid4"
+    title="Technologia w lotnictwie"
+    cards={[
+      {
+        title: 'Autopilot',
+        image: images.topic.technology.autopilot,
+        href: 'technologia/autopilot/',
+        icon: 'settings',
+      },
+      {
+        title: 'Systemy nawigacyjne',
+        image: images.topic.technology.navigation,
+        href: 'technologia/nawigacja/',
+        icon: 'map',
+      },
+      {
+        title: 'Radar pogodowy',
+        image: images.topic.technology.weatherRadar,
+        href: 'technologia/radar-pogodowy/',
+        icon: 'cloud',
+      },
+      {
+        title: 'Bezpieczeństwo',
+        image: images.topic.technology.safety,
+        imagePosition: 'center 20%',
+        href: 'technologia/bezpieczenstwo/',
+        icon: 'shield',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Kobiety w lotnictwie"
+    subtitle="Coraz więcej kobiet siada za sterami samolotów pasażerskich. Poznaj inspirujące historie pilotek!"
+    image={images.topic.people.womenInAviation}
+    action={{ label: 'Zobacz więcej', href: 'ludzie/kobiety-w-lotnictwie/' }}
+  />
+  <FactsRow
+    title="Ciekawostki o lotnictwie"
+    items={[
+      { icon: 'altitude', label: 'Samoloty latają na wysokości 10–12 km' },
+      { icon: 'world', label: 'Lotnictwo łączy ludzi na całym świecie' },
+      { icon: 'speed', label: 'Prędkość lotu pasażerskiego to ok. 900 km/h' },
+    ]}
+  />
+  <Prose
+    variant="cards"
+    title="Jak najlepiej korzystać z tej strony"
+    lead="Jeśli chcesz przejść od inspiracji do konkretu, warto czytać serwis w logicznej kolejności."
+    sections={[
+      {
+        h: '1. Zawód',
+        p: 'Zacznij od zrozumienia, jak wygląda codzienna praca pilota, odpowiedzialność i podział ról w kokpicie.',
+      },
+      {
+        h: '2. Kariera',
+        p: 'Następnie przejdź do ścieżki wejścia do zawodu: edukacja, szkolenie, licencje i rozwój kompetencji.',
+      },
+      {
+        h: '3. Technologia i Wiedza',
+        p: 'Na końcu domknij obraz przez systemy pokładowe, bezpieczeństwo i szybkie utrwalenie pojęć w bazie wiedzy.',
+      },
+    ]}
+  />
+  <FAQ
+    title="FAQ na start"
+    items={[
+      {
+        q: 'Od czego zacząć, jeśli dopiero poznaję temat?',
+        a: 'Zacznij od działu Zawód, potem przejdź do Kariery i Technologii. Ta kolejność daje najszybsze zrozumienie tematu.',
+      },
+      {
+        q: 'Czy ta strona jest tylko dla osób, które chcą zostać pilotką?',
+        a: 'Nie. To kompendium także dla uczniów, studentów i osób, które chcą praktycznie zrozumieć lotnictwo.',
+      },
+      {
+        q: 'Gdzie znajdę krótkie wyjaśnienia pojęć?',
+        a: 'W dziale Wiedza: Słownik, FAQ, Mity i fakty oraz Quiz pomagają szybko uporządkować podstawy.',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Zobacz lotnictwo z bliska"
+    subtitle="Galeria samolotów, kokpitu i lotnisk — idealna do konkursowego efektu „wow”."
+    image={images.site.gallery}
+    action={{ label: 'Przejdź do galerii', href: 'galeria/' }}
+  />
+  <Footer />
+</BaseLayout>

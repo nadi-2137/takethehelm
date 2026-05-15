@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import ProfileCards from '../../components/blocks/ProfileCards.astro'
+import Prose from '../../components/blocks/Prose.astro'
+import FactsRow from '../../components/blocks/FactsRow.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import SplitCTA from '../../components/blocks/SplitCTA.astro'
+import Footer from '../../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Pionierki lotnictwa',
+  description:
+    'Pionierki, które zmieniały historię lotnictwa i otwierały drogę kolejnym pokoleniom.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Ludzie"
+    subtitle="Trzy historie kobiet, które realnie zmieniały to, jak myślimy o lataniu."
+    image={images.people.pioneer01}
+  />
+  <ProfileCards
+    title="Trzy postacie, które otwierały drogę"
+    cards={[
+      {
+        name: 'Amelia Earhart',
+        subtitle:
+          'Jedna z najbardziej rozpoznawalnych pionierek lotnictwa. Jako pierwsza kobieta samotnie przeleciała nad Atlantykiem (1932), stając się symbolem odwagi i niezależności.',
+        image: images.people.pioneer01,
+      },
+      {
+        name: 'Raymonde de Laroche',
+        subtitle:
+          'Francuska pilotka, uznawana za pierwszą kobietę na świecie z oficjalną licencją pilota (1910). Jej osiągnięcie było przełomem w czasach, gdy lotnictwo dopiero raczkowało.',
+        image: images.people.pioneer02,
+      },
+      {
+        name: 'Sabiha Gökçen',
+        subtitle:
+          'Jedna z pierwszych kobiet-pilotów wojskowych na świecie. Jej kariera pokazała, że kobiety mogą działać także w najbardziej wymagających rolach lotniczych.',
+        image: images.people.pioneer03,
+      },
+    ]}
+  />
+  <Prose
+    variant="cards"
+    title="Dlaczego historie pionierek są nadal ważne"
+    lead="To nie tylko opowieści historyczne. To konkretne przykłady kompetencji i postaw, które są aktualne także dziś."
+    sections={[
+      {
+        h: 'Przełamywanie barier',
+        p: 'Pionierki działały w czasach, gdy dostęp do lotnictwa był ograniczony. Ich osiągnięcia pokazały, że standardy można podnosić, a granice przesuwać dzięki konsekwencji.',
+      },
+      {
+        h: 'Znaczenie profesjonalizmu',
+        p: 'Każda z nich budowała pozycję przez przygotowanie i praktykę. Ten sam mechanizm obowiązuje obecnie: w lotnictwie liczą się umiejętności i odpowiedzialne decyzje.',
+      },
+      {
+        h: 'Inspiracja dla kolejnych pokoleń',
+        p: 'Widoczność takich postaci wzmacnia motywację młodych osób, które myślą o lotnictwie. To ważny element budowania różnorodnego i kompetentnego środowiska.',
+      },
+    ]}
+  />
+  <FactsRow
+    title="Co łączy pionierki i współczesne pilotki?"
+    items={[
+      { icon: 'target', label: 'Jasny cel i długoterminowa konsekwencja' },
+      { icon: 'graduationCap', label: 'Systematyczne uczenie się i trening' },
+      { icon: 'shield', label: 'Odpowiedzialność i kultura bezpieczeństwa' },
+    ]}
+  />
+  <FAQ
+    title="FAQ: pionierki lotnictwa"
+    items={[
+      {
+        q: 'Czy historie pionierek mają znaczenie dla dzisiejszych kandydatek?',
+        a: 'Tak. Pokazują, że nawet przy dużych barierach można budować karierę opartą na kompetencjach i determinacji.',
+      },
+      {
+        q: 'Czy dzisiaj wejście do lotnictwa jest łatwiejsze?',
+        a: 'Jest bardziej dostępne, ale nadal wymagające. Wysokie standardy szkolenia i odpowiedzialności pozostają fundamentem zawodu.',
+      },
+      {
+        q: 'Od czego zacząć, jeśli inspirują mnie te historie?',
+        a: 'Od planu działania: edukacja, język angielski, badania lotniczo-lekarskie, wybór ścieżki szkoleniowej i kontakt z praktykami.',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Co łączy te historie?"
+    subtitle="Każda z nich zaczynała w świecie pełnym barier. Łączy je konsekwencja, dyscyplina i gotowość do uczenia się — dokładnie te same kompetencje, które liczą się dziś w kokpicie."
+    image={images.topic.people.womenInAviation}
+    action={{ label: 'Kobiety w lotnictwie dziś', href: 'ludzie/kobiety-w-lotnictwie/' }}
+  />
+  <Footer />
+</BaseLayout>

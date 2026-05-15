@@ -1,0 +1,76 @@
+---
+interface Card {
+  title: string
+  subtitle?: string
+  href: string
+  icon?: string
+}
+
+interface Props {
+  style?: Record<string, string>
+  title?: string
+  cards?: Card[]
+}
+
+const { style, title = '', cards = [] } = Astro.props
+const defaultStyle = {
+  root: 'ds-section',
+  inner: 'ds-container',
+  title: 'ds-h2 mb-8',
+  grid: 'grid grid-cols-1 md:grid-cols-4 gap-6',
+  card: 'ds-surface ds-card-hover p-6',
+}
+const s = { ...defaultStyle, ...(style ?? {}) }
+const currentPath = Astro.url.pathname
+
+function resolveHref(href: string) {
+  if (href.startsWith('#')) return `${currentPath}${href}`
+  return href
+}
+
+const iconEmoji: Record<string, string> = {
+  badgeCheck: '🏅',
+  clock: '🕐',
+  shield: '🛡',
+  layers: '📚',
+  route: '🗺',
+  graduationCap: '🎓',
+  idCard: '🪪',
+  sparkles: '✨',
+}
+---
+
+<section class={s.root}>
+  <div class={s.inner}>
+    {title && <h2 class={s.title}>{title}</h2>}
+    <div class={s.grid}>
+      {
+        cards.map((card) => (
+          <a href={resolveHref(card.href)} class={`${s.card} flex flex-col gap-4`}>
+            <div class="w-11 h-11 rounded-[var(--r-md)] bg-[var(--navy-50)] flex items-center justify-center text-xl">
+              {card.icon ? (iconEmoji[card.icon] ?? '✈') : '✈'}
+            </div>
+            <div>
+              <h3 class="font-semibold text-[var(--text-strong)] mb-1">{card.title}</h3>
+              {card.subtitle && <p class="ds-muted text-sm">{card.subtitle}</p>}
+            </div>
+            <div class="mt-auto flex items-center gap-1 text-sm font-semibold text-[var(--amber-600)]">
+              Więcej
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path d="M2 7h10M7 3l4 4-4 4" />
+              </svg>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

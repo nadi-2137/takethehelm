@@ -1,0 +1,64 @@
+{
+  "terminal.integrated.defaultProfile.linux": "tmux-project",
+  "terminal.integrated.profiles.linux": {
+    "tmux-project": {
+      "path": "bash",
+      "args": ["-lc", "tmux new-session -A -s ${workspaceFolderBasename} -c ${workspaceFolder}"]
+    }
+  },
+
+  "terminal.integrated.automationProfile.linux": {
+    "path": "bash",
+    "args": ["-lc"]
+  },
+
+  "terminal.integrated.enablePersistentSessions": true,
+  "terminal.integrated.persistentSessionReviveProcess": "onExitAndWindowClose",
+
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+
+  // Astro / Tailwind
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "astro.content-intellisense": true,
+  "css.validate": false,
+
+  "json.schemas": [
+    {
+      "fileMatch": ["tsconfig*.json"],
+      "url": "https://json.schemastore.org/tsconfig"
+    }
+  ],
+  "nxConsole.nxCloudNotifications": "none",
+  "nxConsole.nxWorkspacePath": "",
+  "nxConsole.commonNxCommands": [
+    "run",
+    "run-many",
+    "affected",
+    "affected --graph",
+    "list",
+    "graph"
+  ],
+
+  "files.associations": {
+    "*.mdx": "mdx"
+  },
+
+  // CSpell - spell checking
+  "cSpell.enabled": true,
+  "cSpell.import": ["${workspaceFolder}/cspell.json"],
+  "cSpell.enabledFileTypes": {
+    "mdx": true,
+    "markdown": true,
+    "astro": true
+  },
+  "cSpell.diagnosticLevel": "Warning",
+  "cSpell.showStatus": true,
+  "cSpell.showAutocompleteSuggestions": true
+}

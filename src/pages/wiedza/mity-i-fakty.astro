@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import MythFactList from '../../components/blocks/MythFactList.astro'
+import Prose from '../../components/blocks/Prose.astro'
+import SplitCTA from '../../components/blocks/SplitCTA.astro'
+import Footer from '../../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Mity i fakty',
+  description: 'Najpopularniejsze mity o lotnictwie i ich proste wyjaśnienie.',
+}
+
+const mythFactItems = [
+  {
+    myth: 'Autopilot oznacza, że pilot jest zbędny.',
+    fact: 'Autopilot wspiera rutynę, ale decyzje i odpowiedzialność należą do załogi.',
+    href: 'technologia/autopilot/',
+  },
+  {
+    myth: 'Turbulencje oznaczają, że samolot jest w niebezpieczeństwie.',
+    fact: 'Turbulencje zwykle nie są groźne — są nieprzyjemne, ale przewidywane i obsługiwane procedurami.',
+    href: 'wiedza/faq/',
+  },
+  {
+    myth: 'Piloci improwizują w trudnych sytuacjach.',
+    fact: 'W lotnictwie dominują procedury i checklisty — to one prowadzą przez sytuacje trudne.',
+    href: 'zawod/odpowiedzialnosc/',
+  },
+  {
+    myth: 'Pogoda nie ma znaczenia przy nowoczesnych samolotach.',
+    fact: 'Ma ogromne znaczenie: wpływa na trasę, decyzje operacyjne i komfort.',
+    href: 'technologia/radar-pogodowy/',
+  },
+  {
+    myth: 'Żeby latać, trzeba „urodzić się z talentem”.',
+    fact: 'Kluczowe są systematyczne szkolenie, praktyka i rozwijanie kompetencji operacyjnych.',
+    href: 'kariera/jak-zostac/',
+  },
+  {
+    myth: 'Najważniejsze jest szybkie dotarcie na czas.',
+    fact: 'Priorytetem zawsze jest bezpieczeństwo. Punktualność ma znaczenie, ale nie ponad standardy operacyjne.',
+    href: 'technologia/bezpieczenstwo/',
+  },
+  {
+    myth: 'ATC tylko „kontroluje” pilotów i utrudnia lot.',
+    fact: 'ATC porządkuje ruch i wspiera separację statków powietrznych, co bezpośrednio poprawia bezpieczeństwo.',
+    href: 'wiedza/slownik/#atc',
+  },
+  {
+    myth: 'Awaria jednego systemu oznacza utratę kontroli nad lotem.',
+    fact: 'Samoloty mają redundancję systemów i procedury awaryjne, które pozwalają bezpiecznie kontynuować lub przerwać lot.',
+    href: 'technologia/bezpieczenstwo/',
+  },
+  {
+    myth: 'Latanie nocą jest zawsze bardziej niebezpieczne.',
+    fact: 'Załogi są do tego szkolone, a lot odbywa się według procedur i przy wsparciu nawigacji oraz ATC.',
+    href: 'technologia/nawigacja/',
+  },
+  {
+    myth: 'Nowoczesny kokpit wszystko zrobi sam.',
+    fact: 'Glass cockpit przyspiesza orientację, ale wymaga kompetencji, cross-checku i świadomego zarządzania automatyką.',
+    href: 'technologia/kokpit/',
+  },
+]
+
+const shuffledMythFactItems = [...mythFactItems].sort(() => Math.random() - 0.5)
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Wiedza"
+    subtitle="Szybkie „mit → fakt” + link do rozwinięcia."
+    image={images.topic.knowledge.factsAndMyths}
+  />
+  <MythFactList
+    title="Najczęstsze mity i ich wyjaśnienie"
+    items={shuffledMythFactItems}
+  />
+  <Prose
+    variant="cards"
+    title="Jak odróżniać mit od faktu?"
+    lead="W lotnictwie warto opierać się na procedurach, danych i praktyce operacyjnej, a nie na pojedynczych historiach z mediów."
+    sections={[
+      {
+        h: 'Sprawdzaj źródło',
+        p: 'Najbardziej wiarygodne są materiały edukacyjne, dokumentacja lotnicza i treści wyjaśniające kontekst, a nie sensacyjne skróty.',
+      },
+      {
+        h: 'Patrz na cały system',
+        p: 'Bezpieczeństwo to efekt współdziałania ludzi, technologii i procedur. Uproszczone tezy zwykle pomijają ten kluczowy element.',
+      },
+      {
+        h: 'Łącz teorię z praktyką',
+        p: 'Pojęcia takie jak CRM, checklisty czy redundancja najlepiej zrozumiesz, kiedy zobaczysz je na przykładach z pracy załogi.',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Sprawdź swoją wiedzę"
+    subtitle="Jeśli mity i fakty masz już opanowane — zrób quiz!"
+    image={images.topic.knowledge.factsAndMyths}
+    action={{ label: 'Quiz', href: 'wiedza/quiz/' }}
+  />
+  <Footer />
+</BaseLayout>

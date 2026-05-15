@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import FeatureSection from '../../components/blocks/FeatureSection.astro'
+import ImageCardGrid from '../../components/blocks/ImageCardGrid.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import Footer from '../../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Jak działa bezpieczeństwo w lotnictwie',
+  description:
+    'Procedury, redundancja, symulatory i praca zespołowa — jak buduje się bezpieczeństwo lotów.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Technologia"
+    subtitle="To nie jedna rzecz — to system: standardy + technologia + ludzie."
+    image={images.topic.technology.safety}
+    primaryAction={null}
+    secondaryAction={null}
+  />
+  <FeatureSection
+    title="3 filary bezpieczeństwa"
+    lead="Lotnictwo działa jak dobrze zaprojektowany system: człowiek i technologia wzajemnie się wspierają."
+    features={[
+      {
+        title: 'Procedury',
+        text: 'Checklisty i standardy prowadzą przez każdy etap lotu.',
+        icon: 'list',
+      },
+      {
+        title: 'Redundancja',
+        text: 'Systemy zapasowe i kontrola parametrów minimalizują ryzyko awarii.',
+        icon: 'layers',
+      },
+      {
+        title: 'Szkolenie',
+        text: 'Symulatory i trening uczą reakcji na sytuacje trudne.',
+        icon: 'graduationCap',
+      },
+    ]}
+  />
+  <ImageCardGrid
+    title="Powiązane tematy"
+    cards={[
+      {
+        title: 'Bezpieczeństwo lotów',
+        image: images.topic.technology.safety,
+        href: 'technologia/bezpieczenstwo/',
+        icon: 'shield',
+      },
+      {
+        title: 'Odpowiedzialność pilota',
+        image: images.topic.profession.responsibility,
+        href: 'zawod/odpowiedzialnosc/',
+        icon: 'shield',
+      },
+      {
+        title: 'Szkolenia',
+        image: images.topic.career.flightTraining,
+        href: 'kariera/szkolenia/',
+        icon: 'graduationCap',
+      },
+    ]}
+  />
+  <FAQ
+    title="FAQ: system bezpieczeństwa w praktyce"
+    items={[
+      {
+        q: 'Czy awaria oznacza utratę kontroli?',
+        a: 'Nie musi — dlatego istnieją systemy zapasowe i procedury.',
+      },
+      {
+        q: 'Dlaczego symulator jest ważny?',
+        a: 'Pozwala trenować rzadkie i trudne sytuacje bez ryzyka.',
+      },
+      {
+        q: 'Co najbardziej chroni w praktyce?',
+        a: 'Połączenie: procedury + wyszkolenie + praca zespołowa.',
+      },
+    ]}
+  />
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,105 @@
+---
+import { images } from '@/lib/images'
+
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import Checklist from '../../components/blocks/Checklist.astro'
+import Prose from '../../components/blocks/Prose.astro'
+import ImageCardGrid from '../../components/blocks/ImageCardGrid.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import Footer from '../../components/blocks/Footer.astro'
+
+export const pageMeta = {
+  title: 'Checklista kandydata',
+  description: 'Co przygotować i czego się uczyć, jeśli chcesz zostać pilotką.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Kariera"
+    subtitle="Prosty plan: co umieć, co przygotować i jak się nie pogubić."
+    image={images.topic.career.becomePilot}
+  />
+  <Checklist
+    title="Start (podstawy)"
+    items={[
+      'Angielski: czytanie i rozumienie poleceń.',
+      'Matematyka i fizyka: podstawy potrzebne w nauce.',
+      'Systematyczność: nawyki i plan pracy.',
+      'Zainteresowanie technologią i bezpieczeństwem.',
+    ]}
+  />
+  <Checklist
+    title="W trakcie nauki"
+    items={[
+      'Ucz się pojęć: ATC, checklisty, cockpit, autopilot.',
+      'Trenuj koncentrację i podejmowanie decyzji.',
+      'Czytaj o pogodzie i jej wpływie na lot.',
+      'Poznawaj etapy: teoria → loty → symulator → egzaminy.',
+    ]}
+  />
+  <Prose
+    variant="cards"
+    title="Jak używać tej checklisty, żeby działała?"
+    lead="Checklista ma pomagać w decyzjach i nawykach, nie być tylko listą do odhaczenia."
+    sections={[
+      {
+        h: 'Ustal rytm tygodniowy',
+        p: 'Wybierz 2-3 stałe bloki nauki tygodniowo. Regularność daje lepszy efekt niż jednorazowe, długie sesje.',
+      },
+      {
+        h: 'Mierz postęp małymi krokami',
+        p: 'Po każdym tygodniu zaznacz, co weszło w nawyk, a co wymaga powtórki. Dzięki temu szybciej wychwycisz słabe punkty.',
+      },
+      {
+        h: 'Łącz teorię z praktyką',
+        p: 'Nie ucz się pojęć w oderwaniu od kontekstu. Każdy temat podpinaj pod realny etap: briefing, lot, komunikacja, decyzje.',
+      },
+    ]}
+  />
+  <ImageCardGrid
+    title="Zobacz też"
+    cards={[
+      {
+        title: 'Jak zostać pilotką',
+        image: images.topic.career.becomePilotCard,
+        href: 'kariera/jak-zostac/',
+        icon: 'route',
+      },
+      {
+        title: 'Szkolenia lotnicze',
+        image: images.topic.career.flightTraining,
+        href: 'kariera/szkolenia/',
+        icon: 'graduationCap',
+      },
+      {
+        title: 'Licencje',
+        image: images.topic.career.pilotLicense,
+        href: 'kariera/licencje/',
+        icon: 'idCard',
+      },
+    ]}
+  />
+  <FAQ
+    title="FAQ: checklista kandydata"
+    items={[
+      {
+        q: 'Od czego zacząć, jeśli mam mało czasu?',
+        a: 'Od podstaw: angielski, systematyczny plan nauki i słownik pojęć. Nawet 3 krótkie sesje tygodniowo dają realny progres.',
+      },
+      {
+        q: 'Czy muszę ogarnąć wszystko od razu?',
+        a: 'Nie. Najlepiej iść etapami: fundamenty -> szkolenie -> licencje -> kompetencje operacyjne. Checklista ma właśnie porządkować kolejność.',
+      },
+      {
+        q: 'Jak nie stracić motywacji po przerwie?',
+        a: 'Wróć do prostego planu na 2 tygodnie i domknij małe cele. Szybki restart rytmu jest ważniejszy niż „idealny plan od jutra”.',
+      },
+    ]}
+  />
+  <Footer />
+</BaseLayout>

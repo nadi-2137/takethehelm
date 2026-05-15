@@ -1,0 +1,171 @@
+---
+import { images } from '@/lib/images'
+
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import Table from '../../components/blocks/Table.astro'
+import Checklist from '../../components/blocks/Checklist.astro'
+import Prose from '../../components/blocks/Prose.astro'
+import ImageCardGrid from '../../components/blocks/ImageCardGrid.astro'
+import SplitCTA from '../../components/blocks/SplitCTA.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import Footer from '../../components/blocks/Footer.astro'
+
+export const pageMeta = {
+  title: 'Licencje lotnicze',
+  description:
+    'PPL, CPL i ATPL w praktyce: kolejność, różnice, typowe pułapki i plan działania krok po kroku.',
+}
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Kariera"
+    subtitle="Bez skrótowego chaosu: co daje każda licencja, kiedy ją robić i jak zaplanować kolejne etapy."
+    image={images.topic.career.becomePilot}
+  />
+  <Table
+    title="Licencje w skrócie"
+    columns={['Licencja', 'Co pozwala?', 'Typowy cel', 'Na co uważać']}
+    rows={[
+      [
+        'PPL',
+        'Latanie rekreacyjne i budowanie podstawowych nawyków',
+        'Pierwszy krok i świadoma decyzja o dalszej ścieżce',
+        'Traktowanie PPL jako „końca drogi”, bez planu dalszego rozwoju',
+      ],
+      [
+        'CPL',
+        'Latanie zawodowe i wejście do pracy komercyjnej',
+        'Budowanie profilu kandydatki do pracy w lotnictwie',
+        'Skupienie tylko na formalnym zaliczeniu, bez jakości procedur i CRM',
+      ],
+      [
+        'ATPL',
+        'Ścieżka do lotnictwa liniowego i rozwoju do stanowisk seniorskich',
+        'Docelowy rozwój w liniach lotniczych',
+        'Niedoszacowanie wymagań teorii, języka i konsekwencji w treningu',
+      ],
+    ]}
+  />
+  <Checklist
+    title="Checklista: jak mądrze zaplanować ścieżkę licencyjną"
+    items={[
+      'Zdefiniuj cel końcowy: rekreacja, lotnictwo komercyjne czy docelowo linie lotnicze.',
+      'Rozpisz etapy na 12-24 miesiące: teoria, loty, egzaminy, budowanie nalotu.',
+      'Ustal tygodniowy rytm nauki: mniej zrywów, więcej regularności.',
+      'Na każdym etapie prowadź własną checklistę kompetencji, nie tylko „odhaczenia godzin”.',
+      'Po każdym bloku szkolenia rób podsumowanie: co już umiem, gdzie popełniam powtarzalne błędy.',
+      'Traktuj komunikację radiową i CRM jak kompetencje krytyczne, nie „dodatek”.',
+      'Włącz symulator do planu jako narzędzie utrwalania decyzji i procedur awaryjnych.',
+      'Ustal plan B na spadek tempa: jak wracasz do rytmu po przerwie.',
+    ]}
+  />
+  <Prose
+    variant="cards"
+    title="Co realnie oznaczają PPL, CPL i ATPL?"
+    lead="Licencje nie są tylko formalnością. To kolejne poziomy odpowiedzialności, jakości decyzji i dojrzałości operacyjnej."
+    sections={[
+      {
+        h: 'PPL: fundament, który robi różnicę później',
+        p: 'Na etapie PPL budujesz nawyki, które zostają na lata: dyscyplinę checklist, świadomość sytuacyjną i spokojną pracę z procedurą. Im lepiej przepracowany początek, tym mniej „łatanych braków” na kolejnych etapach.',
+      },
+      {
+        h: 'CPL: przejście z „umiem latać” do „umiem pracować”',
+        p: 'CPL to nie tylko większy poziom techniczny. To wejście w myślenie zawodowe: przewidywanie, konsekwencja, komunikacja i powtarzalna jakość działania pod presją czasu.',
+      },
+      {
+        h: 'ATPL: wysoka złożoność i standard linii',
+        p: 'ATPL wymaga bardzo dobrej organizacji nauki i cierpliwości. Duża część sukcesu to regularność, umiejętność pracy na materiałach teoretycznych i konsekwentne domykanie tematów bez „luk”, które wracają na egzaminach i w praktyce.',
+      },
+      {
+        h: 'Najczęstszy błąd kandydatów',
+        p: 'Skupienie na samym „papierze” zamiast na jakości kompetencji. Rekrutacja i późniejsza praca weryfikują nie tylko wpis w dokumentach, ale przede wszystkim sposób działania, komunikacji i podejmowania decyzji.',
+      },
+      {
+        h: 'Jak ocenić, czy idziesz w dobrą stronę?',
+        p: 'Dobry sygnał to rosnąca przewidywalność Twoich działań: mniej przypadkowości, więcej spokojnych decyzji opartych o procedurę. Jeśli po każdym etapie potrafisz nazwać swoje słabe punkty i plan poprawy, rozwijasz się właściwie.',
+      },
+    ]}
+  />
+  <Table
+    title="Plan etapowy: od pierwszych lotów do ścieżki liniowej"
+    columns={['Etap', 'Cel etapu', 'Efekt końcowy']}
+    rows={[
+      [
+        'Etap 1: decyzja i fundament',
+        'Poznać realia zawodu, zbudować rytm nauki i bazę teoretyczną',
+        'Świadomy plan drogi zamiast przypadkowych kroków',
+      ],
+      [
+        'Etap 2: PPL i nawyki operacyjne',
+        'Opanować podstawy latania, procedury i bezpieczeństwo',
+        'Solidna baza pod dalsze szkolenie',
+      ],
+      [
+        'Etap 3: rozwój do CPL',
+        'Przejść z poziomu rekreacyjnego na zawodowy',
+        'Gotowość do wejścia w środowisko pracy komercyjnej',
+      ],
+      [
+        'Etap 4: przygotowanie ATPL',
+        'Domknąć wymagającą teorię i dojrzałość operacyjną',
+        'Kompetencyjne wejście na ścieżkę lotnictwa liniowego',
+      ],
+    ]}
+  />
+  <ImageCardGrid
+    title="Co dalej po licencjach?"
+    cards={[
+      {
+        title: 'Szkolenia lotnicze',
+        image: images.topic.career.flightTraining,
+        href: 'kariera/szkolenia/',
+        icon: 'graduationCap',
+      },
+      {
+        title: 'Wymagane umiejętności',
+        image: images.topic.career.pilotSkills,
+        href: 'kariera/umiejetnosci/',
+        icon: 'sparkles',
+      },
+      {
+        title: 'Dzień pracy pilota',
+        image: images.topic.profession.workDay,
+        href: 'zawod/dzien-pracy/',
+        icon: 'calendar',
+      },
+    ]}
+  />
+  <SplitCTA
+    title="Najskuteczniejszy model nauki: teoria + praktyka + symulator"
+    subtitle="Licencja to efekt procesu. Najpewniejszy progres daje połączenie zrozumienia teorii, regularnego latania i treningu decyzji w symulatorze."
+    image={images.topic.people.womenInAviation}
+    action={{ label: 'Szkolenia lotnicze', href: 'kariera/szkolenia/' }}
+  />
+  <FAQ
+    title="FAQ: licencje i kolejne etapy"
+    items={[
+      {
+        q: 'Czy licencja to jedyny wymóg?',
+        a: 'Nie. Licencja jest formalnym etapem, ale o jakości kariery decydują również nawyki operacyjne, nalot, umiejętność pracy w zespole oraz konsekwencja w procedurach i bezpieczeństwie.',
+      },
+      {
+        q: 'Czy to trwa długo?',
+        a: 'To proces etapowy, a tempo zależy od celu, organizacji nauki i regularności. Największym wrogiem postępu są długie przerwy i nauka „zrywami”.',
+      },
+      {
+        q: 'Co jest kluczowe po drodze?',
+        a: 'Systematyczność i jakość treningu: świadome budowanie nalotu, praca na checklistach, dopracowanie komunikacji radiowej i regularny trening scenariuszy trudnych.',
+      },
+      {
+        q: 'Od czego zacząć, jeśli nie wiem czy to droga dla mnie?',
+        a: 'Najpierw poznaj realia pracy i ścieżkę krok po kroku, potem zaplanuj pierwszy etap nauki na 2-3 miesiące. Mały, konsekwentny start daje więcej niż duże deklaracje bez planu.',
+      },
+    ]}
+  />
+  <Footer />
+</BaseLayout>

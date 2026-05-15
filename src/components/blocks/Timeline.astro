@@ -1,0 +1,116 @@
+---
+interface Step {
+  label: string
+  desc?: string
+}
+
+interface Props {
+  variant: string
+  style?: Record<string, string>
+  title?: string
+  steps?: Step[]
+  cta?: { label: string; href: string }
+}
+
+const { variant, style, title = '', steps = [], cta } = Astro.props
+const styleByVariant: Record<string, Record<string, string>> = {
+  arrowSteps: {
+    root: 'ds-section',
+    inner: 'ds-container',
+    title: 'ds-h2 text-center mb-8',
+    steps: 'flex flex-col md:flex-row md:flex-wrap items-stretch justify-center gap-2',
+    step: 'px-6 py-4 rounded-[10px] text-white font-semibold bg-[var(--navy-700)]',
+    ctaWrap: 'flex justify-center mt-8',
+  },
+  verticalSteps: {
+    root: 'ds-section',
+    inner: 'ds-container max-w-[920px]',
+    title: 'ds-h2 mb-8',
+    steps: 'grid gap-4',
+    step: 'ds-surface p-5 flex gap-4 items-start',
+    bullet:
+      'w-9 h-9 rounded-full bg-[var(--navy-700)] text-white grid place-items-center font-semibold',
+    meta: 'grid gap-1',
+    label: 'font-semibold text-[var(--text-strong)]',
+    desc: 'ds-muted',
+  },
+}
+const s = { ...(styleByVariant[variant] ?? styleByVariant.arrowSteps), ...(style ?? {}) }
+---
+
+<section class={s.root}>
+  <div class={s.inner}>
+    {title && <h2 class={s.title}>{title}</h2>}
+
+    {
+      variant === 'arrowSteps' && (
+        <ol class={s.steps} role="list">
+          {steps.map((step, i) => (
+            <li class="flex items-center gap-2">
+              <div class="flex items-center gap-2">
+                <div class="bg-[var(--amber-500)] text-white font-semibold px-5 py-3 rounded-[var(--r-md)] text-sm shadow-md">
+                  {step.label}
+                </div>
+                {i < steps.length - 1 && (
+                  <svg
+                    class="text-[var(--navy-400)] shrink-0 hidden md:block"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M5 12h14M14 7l5 5-5 5"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
+      )
+    }
+
+    {
+      variant === 'verticalSteps' && (
+        <ol class={s.steps} role="list">
+          {steps.map((step, i) => (
+            <li class={s.step}>
+              <div class={s.bullet}>{i + 1}</div>
+              <div class={s.meta}>
+                <p class={s.label}>{step.label}</p>
+                {step.desc && <p class={s.desc}>{step.desc}</p>}
+              </div>
+            </li>
+          ))}
+        </ol>
+      )
+    }
+
+    {
+      cta && (
+        <div class={s.ctaWrap ?? 'flex justify-center mt-8'}>
+          <a href={cta.href} class="ds-btn ds-btn-primary">
+            {cta.label}
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
+          </a>
+        </div>
+      )
+    }
+  </div>
+</section>

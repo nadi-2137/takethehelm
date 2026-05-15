@@ -1,0 +1,197 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Navbar from '../../components/blocks/Navbar.astro'
+import PageHero from '../../components/blocks/PageHero.astro'
+import ArticleLayout from '../../components/blocks/ArticleLayout.astro'
+import Prose from '../../components/blocks/Prose.astro'
+import FactsRow from '../../components/blocks/FactsRow.astro'
+import ImageCardGrid from '../../components/blocks/ImageCardGrid.astro'
+import QuoteCallout from '../../components/blocks/QuoteCallout.astro'
+import Checklist from '../../components/blocks/Checklist.astro'
+import FAQ from '../../components/blocks/FAQ.astro'
+import Footer from '../../components/blocks/Footer.astro'
+import { images } from '@/lib/images'
+
+export const pageMeta = {
+  title: 'Odpowiedzialność pilota',
+  description: 'Bezpieczeństwo, decyzje, procedury i kultura pracy w lotnictwie.',
+}
+
+const articleData = {
+  content: [
+    {
+      type: 'Prose',
+      variant: 'article',
+      props: {
+        variant: 'cards',
+        style: {
+          root: 'ds-section pt-10 pb-10 md:pt-12 md:pb-12',
+        },
+        title: 'Co oznacza odpowiedzialność w lotnictwie?',
+        lead: 'To nie tylko sterowanie — to praca w systemie procedur, standardów i współpracy.',
+        sections: [
+          {
+            h: 'Procedury i checklisty',
+            p: 'Każdy etap lotu ma jasno opisane działania. Checklisty pomagają utrzymać jakość i ograniczyć błędy.',
+          },
+          {
+            h: 'Komunikacja',
+            p: 'Kontrola ruchu (ATC), drugi pilot, załoga pokładowa — liczy się jasność, precyzja i potwierdzanie informacji.',
+          },
+          {
+            h: 'Decyzje operacyjne',
+            p: 'Pogoda, alternatywy, paliwo, bezpieczeństwo — decyzje są ciągłe i podejmowane w oparciu o procedury.',
+          },
+          {
+            h: 'Kultura bezpieczeństwa',
+            p: 'W lotnictwie stawia się na uczenie się i doskonalenie — bo bezpieczeństwo to proces.',
+          },
+        ],
+      },
+    },
+    {
+      type: 'FactsRow',
+      variant: '3items',
+      props: {
+        style: {
+          root: 'ds-section pt-10 pb-10 md:pt-12 md:pb-12',
+        },
+        title: '3 priorytety w kokpicie',
+        items: [
+          {
+            icon: 'shield',
+            label: 'Safety first — bezpieczeństwo ponad wszystko',
+          },
+          {
+            icon: 'list',
+            label: 'Procedury i standardy — powtarzalność zamiast improwizacji',
+          },
+          {
+            icon: 'users',
+            label: 'Zespół — współpraca i komunikacja',
+          },
+        ],
+      },
+    },
+    {
+      type: 'ImageCardGrid',
+      variant: 'grid3',
+      props: {
+        style: {
+          root: 'ds-section pt-10 pb-10 md:pt-12 md:pb-12',
+        },
+        title: 'Zobacz też',
+        cards: [
+          {
+            title: 'Bezpieczeństwo lotów',
+            image: images.topic.technology.safety,
+            href: 'technologia/bezpieczenstwo/',
+            icon: 'shield',
+          },
+          {
+            title: 'Dzień pracy pilota',
+            image: images.topic.profession.pilotJob,
+            href: 'zawod/dzien-pracy/',
+            icon: 'calendar',
+          },
+          {
+            title: 'Systemy w kokpicie',
+            image: images.topic.technology.cockpit,
+            href: 'technologia/',
+            icon: 'cpu',
+          },
+        ],
+      },
+    },
+    {
+      type: 'QuoteCallout',
+      variant: 'pilot',
+      props: {
+        style: {
+          root: 'ds-section pt-10 pb-10 md:pt-12 md:pb-12',
+        },
+        quote: 'Bezpieczeństwo to efekt dobrych procedur i dobrych ludzi — razem.',
+        by: 'Zasada kultury bezpieczeństwa w lotnictwie',
+      },
+    },
+  ],
+}
+const articleContent = articleData.content
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description}>
+  <Navbar />
+  <PageHero
+    title={pageMeta.title}
+    kicker="Zawód"
+    subtitle="Decyzje podejmowane w kokpicie mają ogromny wpływ na bezpieczeństwo."
+    image={images.topic.profession.responsibility}
+  />
+  <ArticleLayout variant="simple">
+    <Prose {...articleContent[0].props as any} />
+    <FactsRow {...articleContent[1].props as any} />
+    <ImageCardGrid {...articleContent[2].props as any} />
+    <QuoteCallout {...articleContent[3].props as any} />
+  </ArticleLayout>
+  <Checklist
+    style={{
+      root: 'ds-section pt-10 pb-10 md:pt-12 md:pb-12',
+    }}
+    title="Checklista: bezpieczeństwo w praktyce"
+    items={[
+      'Trzymaj się procedur i checklist',
+      'Utrzymuj jasną komunikację (załoga + ATC)',
+      'Zawsze miej plan alternatywny',
+      'Monitoruj systemy i parametry lotu',
+      'Podejmuj decyzje w oparciu o standardy',
+      'Bezpieczeństwo > punktualność',
+    ]}
+  />
+  <Prose
+    variant="cards"
+    style={{
+      root: 'ds-section pt-10 pb-10 md:pt-12 md:pb-12',
+    }}
+    title="Case study: jedna decyzja, kilka konsekwencji"
+    lead="Krótki scenariusz pokazuje, jak w praktyce działa odpowiedzialność w kokpicie."
+    sections={[
+      {
+        h: 'Sytuacja',
+        p: 'Załoga zbliża się do lotniska docelowego, a pogoda szybko się pogarsza. Widzialność spada, a warunki przestają być stabilne.',
+      },
+      {
+        h: 'Analiza',
+        p: 'Piloci porównują aktualne parametry z minimami operacyjnymi, sprawdzają paliwo i dostępność lotnisk zapasowych. Jednocześnie utrzymują precyzyjną komunikację z ATC.',
+      },
+      {
+        h: 'Decyzja',
+        p: 'Załoga rezygnuje z ryzykownego podejścia i wybiera lotnisko alternatywne. Decyzja może wydłużyć podróż, ale minimalizuje ryzyko i utrzymuje standard bezpieczeństwa.',
+      },
+      {
+        h: 'Wniosek',
+        p: 'Odpowiedzialność to nie „bohaterski manewr”, tylko konsekwentna praca na procedurach. Profesjonalizm oznacza wybór najbezpieczniejszej opcji, nawet gdy jest mniej wygodna.',
+      },
+    ]}
+  />
+  <FAQ
+    style={{
+      root: 'ds-section pt-10 pb-10 md:pt-12 md:pb-12',
+    }}
+    title="FAQ: odpowiedzialność i decyzje"
+    items={[
+      {
+        q: 'Po co tyle procedur?',
+        a: 'Procedury ograniczają wpływ przypadku i stresu na decyzje. Dzięki nim załoga działa przewidywalnie, a bezpieczeństwo nie zależy od „dnia formy”, tylko od standardu pracy.',
+      },
+      {
+        q: 'Co jeśli pogoda się pogarsza?',
+        a: 'Załoga porównuje warunki z minimami operacyjnymi, analizuje paliwo i lotniska alternatywne, a następnie wybiera bezpieczny wariant: np. odejście, zmianę trasy lub przekierowanie.',
+      },
+      {
+        q: 'Czy bezpieczeństwo jest ważniejsze niż czas?',
+        a: 'Tak. Punktualność jest ważna biznesowo, ale nigdy nie może „przeważyć” nad bezpieczeństwem. W lotnictwie profesjonalna decyzja to decyzja zgodna ze standardem bezpieczeństwa.',
+      },
+    ]}
+  />
+  <Footer />
+</BaseLayout>

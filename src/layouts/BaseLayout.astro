@@ -1,0 +1,109 @@
+---
+import '../styles/global.css'
+import Disclaimer from '../components/blocks/Disclaimer.astro'
+
+interface Props {
+  title?: string
+  description?: string
+  url?: string
+  ogImage?: string
+  canonical?: string
+}
+
+const {
+  title = 'Własny kurs',
+  description = 'Własny kurs - Wyżej niż szklany sufit. Edukacyjna strona konkursowa o zawodzie pilotki, technologii lotniczej i ścieżce rozwoju do kokpitu.',
+  url = Astro.url.href,
+  ogImage: ogImageProp,
+  canonical,
+} = Astro.props
+
+function resolveOgImage(pathname: string): string {
+  if (pathname === '/') return 'images/og/og-home.png'
+  if (pathname.startsWith('/zawod')) return 'images/og/og-pilot.png'
+  if (pathname.startsWith('/kariera')) return 'images/og/og-career.png'
+  if (pathname.startsWith('/technologia')) return 'images/og/og-technology.png'
+  if (pathname.startsWith('/ludzie')) return 'images/og/og-women.png'
+  return 'images/og/og-home.png'
+}
+
+const ogImage = ogImageProp ?? resolveOgImage(Astro.url.pathname)
+const ogImageAbsolute = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.url).href
+const canonicalUrl = canonical ?? Astro.url.href
+const siteName = 'Własny kurs - Wyżej niż szklany sufit'
+const fullTitle =
+  title === siteName || title.includes('Wyżej niż szklany sufit')
+    ? title
+    : `${title} | ${siteName}`
+const siteOrigin = Astro.url.origin
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: siteName,
+    url: siteOrigin,
+    logo: `${siteOrigin}${import.meta.env.BASE_URL}brand/logo.png`,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: siteName,
+    url: siteOrigin,
+    inLanguage: 'pl-PL',
+  },
+]
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <base href={import.meta.env.BASE_URL} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+    <meta property="og:image" content={ogImageAbsolute} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="pl_PL" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageAbsolute} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
+    <meta name="msapplication-config" content="browserconfig.xml" />
+    <meta name="theme-color" content="#0a1628" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    <!-- Skip link for keyboard/screen-reader users -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:outline-none focus:shadow-lg"
+    >
+      Przejdź do treści
+    </a>
+
+    <slot />
+
+    <Disclaimer />
+  </body>
+</html>

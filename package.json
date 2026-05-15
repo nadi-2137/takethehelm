@@ -1,0 +1,44 @@
+{
+  "name": "takethehelm",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "ASTRO_BASE=/ astro dev",
+    "dev:subpath": "ASTRO_BASE=/takethehelm/ astro dev",
+    "build": "ASTRO_BASE=/takethehelm/ astro build",
+    "preview": "ASTRO_BASE=/takethehelm/ astro preview --host 127.0.0.1 --port 4325",
+    "screenshots:run": "node tools/screenshots/screenshot-pages.mjs",
+    "screenshots": "pnpm build && concurrently -k -s first \"pnpm preview\" \"wait-on http://127.0.0.1:4325/takethehelm/ && SCREENSHOT_BASE_URL=http://127.0.0.1:4325/takethehelm/ pnpm screenshots:run\"",
+    "siteshoots": "node tools/screenshots/siteshooter-devcontainer.mjs",
+    "og:generate": "node tools/og/generate-og.mjs",
+    "favicons:generate": "node tools/og/generate-favicons.mjs",
+    "format": "prettier --write .",
+    "spell": "cspell lint --no-progress \"src/**/*.{ts,astro}\" \"content/**/*.json\"",
+    "format:astro": "prettier --write \"**/*.astro\"",
+    "screenshots:audit": "node tools/screenshots/audit-pages.mjs",
+    "siteshoots:audit": "node tools/screenshots/siteshooter-audit-devcontainer.mjs"
+  },
+  "dependencies": {
+    "astro": "^5.4.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@astrojs/sitemap": "^3.7.2",
+    "@cspell/dict-pl_pl": "^3.0.6",
+    "@playwright/test": "^1.60.0",
+    "@tailwindcss/vite": "^4.2.0",
+    "concurrently": "^9.2.1",
+    "cspell": "^9.7.0",
+    "fast-xml-parser": "^5.8.0",
+    "prettier": "^3.4.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4.2.0",
+    "typescript": "^5.7.2",
+    "wait-on": "^9.0.10"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
